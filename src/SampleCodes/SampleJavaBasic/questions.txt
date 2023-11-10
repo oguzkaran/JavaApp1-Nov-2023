@@ -1,0 +1,33 @@
+/*----------------------------------------------------------------------------------------------------------------------
+	Aşağıdaki örnekte App sınıfının sqrt metodu çağrılır
+-----------------------------------------------------------------------------------------------------------------------*/
+package org.csystem.app;
+
+import java.util.Scanner;
+
+import static java.lang.Math.sqrt;
+
+class App {
+	public static void main(String [] args)
+	{
+		Scanner kb = new Scanner(System.in);
+
+		System.out.print("Bir sayı giriniz:");
+		double val = kb.nextDouble();
+
+		System.out.println(sqrt(val));
+
+	}
+
+	public static double sqrt(int val)
+	{
+		System.out.println("App.sqrt");
+
+		return Math.sqrt(val);
+	}
+}
+
+Yukarıdaki kod için aşağıdakilerden hangisi doğrudur?
+1. Sentaks hatası vardır. Nerede ve neden?
+2. Sentaks hatası yoktur. App.sqrt metodu çağrılır
+3. Sentaks hatası yoktur. Math.sqrt metodu çağrılır
