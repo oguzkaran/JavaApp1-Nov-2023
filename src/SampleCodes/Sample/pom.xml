@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>org.csystem</groupId>
-    <artifactId>GenericApp</artifactId>
+    <artifactId>SampleApp</artifactId>
     <version>11.0.0</version>
-    <name>GenericApp</name>
-    <description>Generic Application Provider</description>
+    <name>SampleApp</name>
+    <description>Sample Application For Learning</description>
 
     <repositories>
         <repository>
