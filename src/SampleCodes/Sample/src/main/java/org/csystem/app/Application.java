@@ -10,10 +10,9 @@ class Application {
     {
         Scanner kb = new Scanner(System.in);
 
-        System.out.print("Üç sayı giriniz:");
+        System.out.print("İki sayı giriniz:");
         int a = kb.nextInt();
         int b = kb.nextInt();
-        int c = kb.nextInt();
 
         System.out.printf("%d + %d = %d%n", a, b, a + b);
 
