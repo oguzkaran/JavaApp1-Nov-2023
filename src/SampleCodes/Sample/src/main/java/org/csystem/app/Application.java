@@ -15,6 +15,5 @@ class Application {
         int b = kb.nextInt();
 
         System.out.printf("%d + %d = %d%n", a, b, a + b);
-
     }
 }
