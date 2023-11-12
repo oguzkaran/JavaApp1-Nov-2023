@@ -11,6 +11,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <groupId>com.karandev</groupId>
     <artifactId>com-karandev-util-console</artifactId>
-    <version>14.3.1</version>
+    <version>11.0.0</version>
 </project>

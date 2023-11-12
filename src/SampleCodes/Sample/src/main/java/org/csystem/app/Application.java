@@ -3,18 +3,14 @@
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
-import java.util.Scanner;
+import com.karandev.io.util.console.Console;
 
 class Application {
     public static void run(String[] args)
     {
-        Scanner kb = new Scanner(System.in);
+        int a = Console.readInt("Birinci sayıyı giriniz:", "Hatalı giriş yaptınız!...");
+        int b = Console.readInt("İkinci sayıyı giriniz:", "Hatalı giriş yaptınız!...");
 
-        System.out.print("Üç sayı giriniz:");
-        int a = kb.nextInt();
-        int b = kb.nextInt();
-        int c = kb.nextInt();
-
-        System.out.printf("%d + %d + %d = %d%n", a, b, c, a + b + c);
+        Console.writeLine("%d + %d = %d", a, b, a + b);
     }
 }
