@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="DemoLibraryUsageMavenLocal" options="-parameters" />
+      <module name="DemoLibraryUsageMavenLocal" options="" />
       <module name="GenericApp" options="-parameters" />
     </option>
   </component>
