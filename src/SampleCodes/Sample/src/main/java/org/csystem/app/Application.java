@@ -20,15 +20,20 @@
     kullanımda kütüphanenin update edilmesi gibi durumlarını yönetmek zor olabilmektedir. Bu sebeple, bu kullanımda
     mvn uyarı vermektedir.
 
-    Maven bir kütüphanenin dependency'sini gördüğünde eğer 4. kullanım durumu yoksa aramayı belli bir sırada yapar.
+    Maven bir kütüphanenin dependency'sini gördüğünde eğer 4. kullanım durumu yoksa aramayı belli bir sırada yapar. Bu
+    sıra şu şekildedir:
+    - maven local repository
+    - maven central
+    - maven remote repositories
+
+    Eğer maven central'da veya maven remote repository'de bulursa yine maven local repository'ye indirir. Yani sonuçta
+    maven 4. kullanım hariç kütüphaneyi maven local repository'den kullanır
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
-
-import com.karandev.io.util.console.Console;
 
 class Application {
     public static void run(String[] args)
     {
-        Console.writeLine("Hello!...");
+
     }
 }

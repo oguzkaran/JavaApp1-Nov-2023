@@ -15,6 +15,7 @@
     <artifactId>SampleApp</artifactId>
     <version>11.0.0</version>
     <name>SampleApp</name>
+
     <description>Sample Application For Learning</description>
 
     <properties>
