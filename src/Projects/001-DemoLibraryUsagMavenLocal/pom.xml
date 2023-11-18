@@ -11,24 +11,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <repositories>
-        <repository>
-            <id>javaapp1-nov-2023-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp1-nov-2023-maven-repo/main</url>
-        </repository>
-
-        <repository>
-            <id>javaapp1-nov-2023-karandev-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp1-nov-2023-karandev-maven-repo/main</url>
-        </repository>
-    </repositories>
-
     <groupId>org.csystem</groupId>
-    <artifactId>SampleApp</artifactId>
+    <artifactId>DemoLibraryUsageMavenLocal</artifactId>
     <version>11.0.0</version>
-    <name>SampleApp</name>
-
-    <description>Sample Application For Learning</description>
+    <name>DemoLibraryUsageMavenLocal</name>
+    <description>Demo Project use library from Maven Local Repository</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

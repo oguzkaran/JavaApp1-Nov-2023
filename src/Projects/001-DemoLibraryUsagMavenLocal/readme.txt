@@ -1,0 +1,1 @@
+Alert: com-karandev-util-console-11.0.0 library must be in maven local repository
