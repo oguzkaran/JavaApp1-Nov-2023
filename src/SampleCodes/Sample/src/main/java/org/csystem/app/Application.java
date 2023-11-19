@@ -1,41 +1,64 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Genel olarak bir kütüphane maven içerisinden aşağıdaki durumlardan biri ya da birkaçından kullanılabilir:
-    1. Uygulama geliştirilirken kullanılan host makinenin içerisindeki maven local repository'den kullanılabilir.
-    Bu repository maven programı geçerli veya geçersiz ilk kez çalıştırıldığında genel olarak .m2 isimli bir
-    directory biçiminde yartılır. Bu directory'nin aslında default ismi ve default yeri değiştirilebilir. Ancak pratikte
-    özel durumlar dışında ismi ve yeri değiştirilmez. mvn programı install seçeneği ile doğrudan çalıştırıldığında
-    konfigürasyona göre ilgili kütüphane maven local repository'ye yüklenir.
+    Test İşlemleri:
+    Yazılımda test süreçleri ürün geliştirmenin önemli bir aşamasını oluşturmaktadır. Bazı yazaılımlarda, ürünün herşeyiyle
+    doğru olması kritik öneme sahip olabilmektedir. Bazı yazılımlarda hata toleransları olabilir. Gerektiğinde düzeltilebilir.
 
-    2. Apache firmasının sunduğu Maven Cnetral denilen bir server'dan kullanılabilir. Bu durumda ilgili kütüphanenin
-    bu server içerisinde install edilmesi gerekir. Maven central kullanımı ileride ele alınacaktır.
+    Eskiden yazılım geliştirmede test süreçleri lüks olarak değerlendiriliyordu. Bu nedenle yalnızca büyük firmalar test
+    bölümleri barındırıyorlardı. Ancak günümüzde yazılımda kalite (software quality) bilinci daha fazla artmış ve test
+    süreçleri daha bilinir ve kullanılır hale gelmiştir.
 
-    3. Özel olarak configure edilmiş ve kütüphanelerin uygun şekilde mvn tarafından install edildiği remote repository'lerden
-    kullanılabilir. Bu tarz bir repository oluşturmanın Java ve maven dışında da ayrıntıları vardır. Burada bu tarz
-    bir server'ı oluştrma ele alınmayacaktır. Github maven remote repsository oluşturmayı destekler. Burada github üzerinde
-    remote repository oluşturmayı ele alacağız ve kurs boyunca genel kütüphanelerimizi ... repository'leri içerisine
-    atıp oradan kullanacağız. Remote repository'ler <repositories> elemanı altında pom dosyasında belirtilir
+    Yazılımda test süreçleri için çeşitli stratejiler kullanılabilmektedir. Test işlemi en aşağı düzeyde programcının
+    kendi yazdığı kodları test etmesi ile başlar. Buna "birim testi (unit testing)" denir. Programcı genel olarak, yazmış
+    olduğu bir metodun doğru çalışıp çalışmadığını test eder (duruma göre "etmelidir"). İşte burada bir metot bir "birim (unit)"
+    olarak düşünülür. Bir yazılımda aslında parçalar bir araya getirilir. Yani metotlar çağrılarak yazılım geliştirilir. Bu bir
+    araya getirme işlemi sonucunda genellikle parçalar yeniden test edilir. Buna da "entegrasyon testi (integration testing)"
+    denilmektedir. Yazılımın önemli parçalarına "modül (module)" denir. Modüller de ayrı ayrı test edilebilir. Buna da
+    "modül testi (module testing)" denir. Nihayet ürün oluşturulur ve bir bütün olarak test edilir. Genellikle bu testlere
+    "kabul testleri (acceptance testing)" denir. Ürün bir bütün olarak önce kurum içerisinde test bölümleri tarafından
+    test edilir. Genellikle bu testlere "alfa testi (alpha testing)" denir. Sonra ürün seçilmiş bazı son kullanıcılara
+    dağıtılır ve gerçek hayat testine sokulur. Buna genellikle "beta testi (beta testing)" denir.
 
-    4. Projenin içerisinden ancak başka bir path'den kullanılabilir. Genelde bu kullanımda kütüphane, proje içerisinde
-    bir directory'ye konuşlandırılır ve dependency olarak <systemPath> içerisinde belirtilerek projeye dahil edilir. Bu
-    kullanımda kütüphanenin update edilmesi gibi durumlarını yönetmek zor olabilmektedir. Bu sebeple, bu kullanımda
-    mvn uyarı vermektedir.
+    Birim testi için pratikte şu 3 yaklaşımdan biri uygulanır:
+    - Hiç birim testi yapmamak: Bu durum yazılım geliştirmede tavsiye edilmese de bir takım özel sebeplerden dolayı firmalar
+    tarafından uygulanabilmektedir. Örneğin geliştirici ekibin sayı olarak azlığı, projenin deadline'ının kısa olması,
+    rakip firmalardan önce ürünü çıkarma kaygısı vb. durumlarda karşılaşılabilmektedir. Buradaki yaklaşım programcının
+    hiç test yapmaması değil, programcıdan bir test beklentisi olmaması ya da özellikle test yapmasının istenmemesi gibi
+    düşünülebilir. Şüphesiz programcı geliştirme sürecinde belirli ölçüde test yapacaktır.
 
-    Maven bir kütüphanenin dependency'sini gördüğünde eğer 4. kullanım durumu yoksa aramayı belli bir sırada yapar. Bu
-    sıra şu şekildedir:
-    - maven local repository
-    - maven central
-    - maven remote repositories
+    - Katı katıya birim testi yapmak: Bu durumda neredeyse her birim test edilir. Örneğin bir metodun basit ya da karmaşık
+    olmasına bakılmaksızın birim testi yapılır. Bu durumda zaman kaybı olmaması için birim testi yapan programcıların ayrı
+    olması ideal bir durumdur. Şüphesiz herhangi bir zaman kısıtı yoksa ya da zaman çok uzunsa da uygulanabilir.
 
-    Eğer maven central'da veya maven remote repository'de bulursa yine maven local repository'ye indirir. Yani sonuçta
-    maven 4. kullanım hariç kütüphaneyi maven local repository'den kullanır
+    - Gereken birimler için birim testi yapmak: Aslında görünürde en ideal durum budur. Görece basit birimler test edilmez ya da
+    detaylı olarak test edilmez. Bu durumda hangi birimlerin test edileceğinin, hangi birimlerin belirli ölçüde test edileceğinin,
+    hangi birimlerin test edilmeyeceğinin belirlenmesi önemlidir. Bu da geliştiriciler ve yöneticiler açısından tecrübe
+    gerektirebilir.
+
+    Birim testleri genel olarak iki şekilde yapılır: manuel birim testleri, bazı araçlar ile otomatik olarak yapılan birim
+    testleri.
+    Pratikte duruma göre ikisi de tercih edilebilse de otomatik araçlar ile yapılan testler belirli ölçüde testi yapan
+    programcının gereksiz kodları yazmasını engellediğinden daha çok tercih edilir. Hatta bazı firmalar kendi birim testi
+    araçlarını da yazarlar.
+
+    Java'da temel birim testi aracı "JUnit" olsa da Spring gibi popüler framework'lere ait olan ya da olmayan bir çok farklı
+    araç da söz konusudur. Birim testleri IDE programlar ve build araçları ile daha kullanışlı hale gelir. Aslında bu
+    araçların temel amacı birim testini yapan programcının test işlemini mümkün olduğunca otomatize etmektir. Bu araçlar
+    ile çoğıu durumda her zaman yazılması gereken kodlar programcıya bırakılmaz. Bu durumda programcı için önemli olan yani
+    odaklanması gereken test senaryolarını belirlemek ve yazmaktır. Bu senaryolar için her zaman genel olan durumlar
+    söylenemez. Test edilecek birimin ne olduğuna göre, nasıl test edileceğine göre vb. durumlar için değişiklik
+    gösterebilir.
+
+    Birim test araçlarının çoğunda kullanılan genel bazı terimler vardır: setup, teardown, input, expected, actual vb.
+
+    Anahtar Notlar: Test işlemlerinde karşılaştığımız önemli iki terim vardır: Verification & Validation (V&V).
+    Verification, yazılmış olan kodun doğru çalışmasıdır. Validation kodun doğru işi yapmasıdır.
 ----------------------------------------------------------------------------------------------------------------------*/
-package org.csystem.app;
 
-import com.karandev.io.util.console.Console;
+package org.csystem.app;
 
 class Application {
     public static void run(String[] args)
     {
-        Console.writeLine("Hello");
+
     }
 }

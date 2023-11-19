@@ -6,19 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="org-csystem-util" />
+        <module name="DemoLibraryUsageMavenLocal" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="GenericApp" target="17" />
-      <module name="GenericLib" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="DemoLibraryUsageMavenLocal" options="-parameters" />
       <module name="GenericApp" options="-parameters" />
-      <module name="GenericLib" options="-parameters" />
-      <module name="org-csystem-util" options="-parameters" />
     </option>
   </component>
 </project>
