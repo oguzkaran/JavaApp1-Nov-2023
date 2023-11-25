@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: NumberUtil.java
-	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 5th Nov 2023
+	AUTHOR		: JavaApp1-Nov-2023 Group
+	Last UPDATE	: 25th Nov 2023
 	
 	Utility class for numeric operations
 	
@@ -108,11 +108,11 @@ public final class NumberUtil {
         return total;
     }
 
-    public static int factorial(int n)
+    public static long factorial(int n)
     {
-        int result = 1;
+        long result = 1;
 
-        for (int i = 2; i <= n; ++i)
+        for (long i = 2; i <= n; ++i)
             result *= i;
 
         return result;
@@ -326,37 +326,6 @@ public final class NumberUtil {
         //...
 
         return str;
-    }
-
-    public static void printGoldbach(int val)
-    {
-        for (int a = val - 1; a >= 2; --a) {
-            int b = val - a;
-
-            if (isPrime(a) && isPrime(b) && a >= b)
-                System.out.printf("%d + %d = %d == %d%n", a, b, a + b, val);
-        }
-    }
-
-    public static void printPrimeFactors(int val)
-    {
-        if (val == 0)
-            return;
-
-        val = abs(val);
-
-        int a = 2;
-
-        while (val != 1) {
-            if (val % a == 0) {
-                System.out.printf("%d ", a);
-                val /= a;
-            }
-            else
-                ++a;
-        }
-
-        System.out.println();
     }
 
     public static int reverse(int val)
