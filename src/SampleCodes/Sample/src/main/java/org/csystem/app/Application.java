@@ -1,22 +1,31 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Sınıf Çalışması: org-csystem-util kütüphanesinin 12.0.0 sürümüne aşağıdaki aşağıdaki isPrime metodunu ve birim
-    test kodlarını ekleyiniz
-        public static boolean isPrime(BigInteger val);
+    Aşağıdaki örnekte aynı sayılar için isPrime metotlarının performanslarını gözlemleyiniz
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 import com.karandev.io.util.console.Console;
+import org.apache.commons.lang3.time.StopWatch;
+import org.csystem.util.numeric.NumberUtil;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 
 class Application {
     public static void run(String[] args)
     {
-        var bound = new BigDecimal(2 * Math.PI);
-        var inc = BigDecimal.valueOf(0.001);
+        var stopWatch = new StopWatch();
 
-        for (var i = new BigDecimal(-2 * Math.PI); i.compareTo(bound) < 0; i = i.add(inc))
-            Console.writeLine(i);
+        stopWatch.start();
+        Console.writeLine(NumberUtil.isPrime(710_584_055_392_819_667L));
+        stopWatch.stop();
+
+        Console.writeLine("%f seconds", stopWatch.getNanoTime() / 1_000_000_000.);
+
+        stopWatch.reset();
+        stopWatch.start();
+        Console.writeLine(NumberUtil.isPrime(BigInteger.valueOf(710_584_055_392_819_667L)));
+        stopWatch.stop();
+
+        Console.writeLine("%f seconds", stopWatch.getNanoTime() / 1_000_000_000.);
     }
 }
 

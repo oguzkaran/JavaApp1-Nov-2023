@@ -33,7 +33,7 @@ public class NumberUtilFactorialBigIntegerTest {
     }
 
     @Parameterized.Parameters
-    public static Collection<DataInfo> creatData()
+    public static Collection<DataInfo> createData()
     {
         return List.of(new DataInfo(3, BigInteger.valueOf(6)),
                 new DataInfo(5, BigInteger.valueOf(120)),
