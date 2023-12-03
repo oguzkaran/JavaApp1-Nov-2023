@@ -13,10 +13,10 @@ import static org.junit.Assert.assertEquals;
 
 @Ignore("Tested by Hüseyin Mercimek")
 @RunWith(Parameterized.class)
-public class NumberUtilsFactorialTest {
+public class NumberUtilFactorialTest {
     public IntLongDataInfo intLongDataInfo;
 
-    public NumberUtilsFactorialTest(IntLongDataInfo intLongDataInfo)
+    public NumberUtilFactorialTest(IntLongDataInfo intLongDataInfo)
     {
         this.intLongDataInfo = intLongDataInfo;
     }

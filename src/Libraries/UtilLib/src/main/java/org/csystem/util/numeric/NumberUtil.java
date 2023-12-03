@@ -120,9 +120,15 @@ public final class NumberUtil {
         return result;
     }
 
-    public static BigInteger factorialBigInteger(int a)
+    public static BigInteger factorialBigInteger(int n)
     {
-        //TODO:
+        var result = BigInteger.ONE;
+        var nVal = BigInteger.valueOf(n);
+
+        for (var i = BigInteger.TWO; i.compareTo(nVal) <= 0; i = i.add(BigInteger.ONE))
+            result = result.multiply(i);
+
+        return result;
     }
 
     public static int fibonacciNumber(int n)
@@ -254,6 +260,11 @@ public final class NumberUtil {
                 return false;
 
         return true;
+    }
+
+    public static boolean isPrime(BigInteger val)
+    {
+        //TODO:
     }
 
     public static boolean isPrimeX(long val)

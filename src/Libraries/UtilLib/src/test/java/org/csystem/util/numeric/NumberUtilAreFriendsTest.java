@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 @Ignore("Tested by Sinan Dönder")
 @RunWith(Parameterized.class)
-public class NumberUtilsAreFriendsTest {
+public class NumberUtilAreFriendsTest {
 
     public DataInfo data;
 
@@ -48,7 +48,7 @@ public class NumberUtilsAreFriendsTest {
         );
     }
 
-    public NumberUtilsAreFriendsTest(DataInfo data)
+    public NumberUtilAreFriendsTest(DataInfo data)
     {
         this.data = data;
     }

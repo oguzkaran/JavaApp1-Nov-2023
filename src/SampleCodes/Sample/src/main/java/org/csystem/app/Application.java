@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Sınıf Çalışması: org-csystem-util kütüphanesinin 12.0.0 sürümüne aşağıdaki factorial metodunu ve birim testi
-    kodlarını yazınız:
-        public static BigInteger factorialBigInteger(int a);
+    Sınıf Çalışması: org-csystem-util kütüphanesinin 12.0.0 sürümüne aşağıdaki aşağıdaki isPrime metodunu ve birim
+    test kodlarını ekleyiniz
+        public static boolean isPrime(BigInteger val);
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
