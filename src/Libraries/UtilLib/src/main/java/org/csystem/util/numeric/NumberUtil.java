@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: NumberUtil.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 26th Nov 2023
+	Last UPDATE	: 3rd Dec 2023
 	
 	Utility class for numeric operations
 	
@@ -9,6 +9,8 @@
 	All Right Free
 -------------------------------------------------------------*/
 package org.csystem.util.numeric;
+
+import java.math.BigInteger;
 
 import static java.lang.Math.*;
 
@@ -116,6 +118,11 @@ public final class NumberUtil {
             result *= i;
 
         return result;
+    }
+
+    public static BigInteger factorialBigInteger(int a)
+    {
+        //TODO:
     }
 
     public static int fibonacciNumber(int n)
