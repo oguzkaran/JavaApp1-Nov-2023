@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: NumberUtil.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 3rd Dec 2023
+	Last UPDATE	: 9th December 2023
 	
 	Utility class for numeric operations
 	
@@ -21,7 +21,7 @@ public final class NumberUtil {
     private static final BigInteger FIVE = BigInteger.valueOf(5);
     private static final BigInteger SEVEN = BigInteger.valueOf(7);
     private static final BigInteger ELEVEN = BigInteger.valueOf(11);
-
+    private static final BigInteger NINE = BigInteger.valueOf(9);
 
     static {
         ONES = new String[]{"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};
@@ -302,17 +302,69 @@ public final class NumberUtil {
         return result;
     }
 
+    /**
+     *
+     * @author Hüseyin Mercimek
+     */
+    public static boolean isPrimeX(BigInteger val)
+    {
+        boolean result ;
+
+        for(var sum = val; ( result = isPrime(sum)) && sum.compareTo(NINE) > 0; sum = sumDigits(sum))
+            ;
+        return result;
+    }
+
+
     public static boolean isSuperPrime(long val)
     {
         return isPrime(val) && isPrime(indexOfPrime(val));
     }
 
+    /**
+     *
+     * @author Berkay Yılmaz
+     */
+    public static boolean isSuperPrime(BigInteger val)
+    {
+        return isPrime(val) && isPrime(indexOfPrime(val));
+    }
+
+    public static BigInteger indexOfPrime(BigInteger val)
+    {
+        var i = BigInteger.ONE;
+        var a = BigInteger.TWO;
+
+        while (true) {
+            if (a.equals(val))
+                return i;
+            if (isPrime(a))
+                i = i.add(BigInteger.ONE);
+
+            a = a.add(BigInteger.ONE);
+        }
+    }
     public static int mid(int a, int b, int c)
     {
         if (a <= b && b <= c || c <= b && b <= a)
             return b;
 
         if (b <= a && a <= c || c <= a && a <= b)
+            return a;
+
+        return c;
+    }
+
+    /**
+     *
+     * @author Bera Bozgöz
+     */
+    public static BigInteger mid(BigInteger a, BigInteger b, BigInteger c)
+    {
+        if (a.compareTo(b) <= 0 && b.compareTo(c) <= 0 || c.compareTo(b) <= 0 && b.compareTo(a) <= 0)
+            return b;
+
+        if (b.compareTo(a) <= 0 && a.compareTo(c) <= 0 || c.compareTo(a) <= 0 && a.compareTo(b) <= 0)
             return a;
 
         return c;
@@ -389,6 +441,22 @@ public final class NumberUtil {
         return result;
     }
 
+    /**
+     *
+     * @author Yaşar Uğur Güleç
+     */
+    public static BigInteger reverse(BigInteger val)
+    {
+        var result = BigInteger.ZERO;
+
+        while (val.compareTo(BigInteger.ZERO) > 0) {
+            result = result.multiply(BigInteger.TEN).add(val.remainder(BigInteger.TEN));
+            val = val.divide(BigInteger.TEN);
+        }
+
+        return result;
+    }
+
     public static int sumDigits(long val)
     {
         var total = 0;
@@ -401,6 +469,43 @@ public final class NumberUtil {
         return abs(total);
     }
 
+    /**
+     *
+     * @author Hüseyin Mercimek
+     */
+    public static BigInteger sumDigits(BigInteger val)
+    {
+        var total = BigInteger.ZERO;
+
+        while(!val.equals(BigInteger.ZERO)) {
+            total = total.add(val.remainder(BigInteger.TEN));
+            val = val.divide(BigInteger.TEN);
+        }
+        return total;
+    }
+
+    /**
+     *
+     * @author Buğrahan Kısa
+     */
+
+    public static BigInteger sumFactors(BigInteger val)
+    {
+        var result = BigInteger.ONE;
+        var sqrtVal = val.sqrt();
+
+        for (var i = BigInteger.TWO; i.compareTo(sqrtVal) <= 0; i = i.add(BigInteger.TWO)) {
+            if (val.remainder(i).compareTo(BigInteger.ZERO) == 0) {
+                result = result.add(i);
+
+                BigInteger divideResult = val.divide(i);
+                if (i.compareTo(divideResult) != 0)
+                    result = result.add(divideResult);
+            }
+        }
+
+        return result;
+    }
     public static int sumFactors(long val)
     {
         var result = 1;
