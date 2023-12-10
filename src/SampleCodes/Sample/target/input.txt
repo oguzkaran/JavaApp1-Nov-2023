@@ -1,0 +1,5 @@
+ankara
+istanbul
+izmir
+bursa
+zonguldak
