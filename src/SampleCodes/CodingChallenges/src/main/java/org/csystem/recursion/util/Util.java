@@ -14,6 +14,25 @@ public class Util {
         return result;
     }
 
+    public static int fibonacciNumber(int n)
+    {
+        if (n <= 0)
+            return -1;
+
+        if (n == 2)
+            return n - 1;
+
+        int prev1 = 1, prev2 = 0, result = 0;
+
+        for (var i = 2; i < n; ++i) {
+            result = prev1 + prev2;
+            prev2 = prev1;
+            prev1 = result;
+        }
+
+        return result;
+    }
+
     public static int gcd(int a, int b)
     {
         var min = Math.min(Math.abs(a), Math.abs(b));
@@ -39,5 +58,42 @@ public class Util {
         }
 
         return String.valueOf(chars);
+    }
+
+    public static void writeCollatz(int val)
+    {
+        //TODO:
+    }
+
+    public static void writeNumber(int val)
+    {
+        if (val == 0) {
+            System.out.write('0');
+            return;
+        }
+
+        char [] s = new char[11];
+        int i;
+        var isNegative = false;
+
+        if (val < 0) {
+            isNegative = true;
+            val = -val;
+        }
+
+        for (i = 0; val != 0; ++i, val /= 10)
+            s[i] = (char)(val % 10 + '0');
+
+        if (isNegative)
+            s[i++] = '-';
+
+        for (--i; i >= 0; --i)
+            System.out.write(s[i]);
+    }
+
+    public static void writeReverse(String s)
+    {
+        for (var i = s.length() - 1; i >= 0; --i)
+            System.out.print(s.charAt(i));
     }
 }
