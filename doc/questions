@@ -1,0 +1,18 @@
+class Sample {
+    public static void foo(long a)
+    {
+        Console.writeLine("foo, long");
+    }
+
+    public static void foo(int...a)
+    {
+        Console.writeLine("foo, int...");
+    }
+}
+
+Sample.foo(10);
+Çağrısı için aşağıdakilerden hangisi doğrudur?
+1. Ambiguity error
+2. int parametreli foo çağrılır
+3. int... parametreli foo çağrılır
+4. Hiç biri
