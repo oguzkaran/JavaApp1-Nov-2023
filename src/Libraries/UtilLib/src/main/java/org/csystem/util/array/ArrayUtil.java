@@ -202,7 +202,7 @@ public final class ArrayUtil {
         return partitionIndex;
     }
 
-    public static void print(int n, int [] a)
+    public static void print(int n, int[] a)
     {
         String fmt = String.format("%%0%dd ", n);
 
@@ -212,7 +212,7 @@ public final class ArrayUtil {
         System.out.println();
     }
 
-    public static void print(int [] a)
+    public static void print(int[] a)
     {
         print(a, " ", "\n");
     }
