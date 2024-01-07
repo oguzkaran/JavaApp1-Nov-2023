@@ -46,7 +46,7 @@ public class BitwiseUtilToBinaryStrIntTest {
     @Test
     public void test()
     {
-        assertEquals(data.s, BitwiseUtil.toBinaryStr(data.a));
+        assertEquals(data.s, BitwiseUtil.toBitsStr(data.a));
     }
 
 }

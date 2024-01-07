@@ -21,6 +21,30 @@ public class BitwiseUtil {
     {
         return val & ~(1L << n);
     }
+    public static int clearBitsCount(int val)
+    {
+        return Integer.SIZE - setBitsCount(val);
+    }
+
+    public static int clearBitsCount(long val)
+    {
+        return Long.SIZE - setBitsCount(val);
+    }
+
+    public static int clearBitsCount(short val)
+    {
+        return Short.SIZE - setBitsCount(val);
+    }
+
+    public static int clearBitsCount(byte val)
+    {
+        return Byte.SIZE - setBitsCount(val);
+    }
+
+    public static int clearBitsCount(char val)
+    {
+        return Character.SIZE - setBitsCount(val);
+    }
 
     public static boolean isClear(int val, int n)
     {
@@ -61,6 +85,30 @@ public class BitwiseUtil {
     {
         return clearBit(val, n);
     }
+    public static int resetBitsCount(int val)
+    {
+        return clearBitsCount(val);
+    }
+
+    public static int resetBitsCount(long val)
+    {
+        return clearBitsCount(val);
+    }
+
+    public static int resetBitsCount(short val)
+    {
+        return clearBitsCount(val);
+    }
+
+    public static int resetBitsCount(byte val)
+    {
+        return clearBitsCount(val);
+    }
+
+    public static int resetBitsCount(char val)
+    {
+        return clearBitsCount(val);
+    }
 
     public static int setBit(int val, int n)
     {
@@ -72,20 +120,110 @@ public class BitwiseUtil {
         return val | 1L << n;
     }
 
-    public static String toBinaryStr(int val)
+    public static int setBitsCount(int val)
     {
-        var str = Integer.toBinaryString(val);
-        var size = Integer.SIZE - str.length();
+        var count = 0;
 
-        return size == 0 ? str : String.format("%0" + size +"d", 0) + str;
+        for (var i = 0; i < Integer.SIZE; ++i)
+            if (isSet(val, i))
+                ++count;
+
+        return count;
     }
 
-    public static String toBinaryStr(long val)
+    public static int setBitsCount(long val)
     {
-        var str = Long.toBinaryString(val);
-        var size = Long.SIZE - str.length();
+        var count = 0;
 
-        return size == 0 ? str : String.format("%0" + size +"d", 0) + str;
+        for (var i = 0; i < Long.SIZE; ++i)
+            if (isSet(val, i))
+                ++count;
+
+        return count;
+    }
+
+
+    public static int setBitsCount(short val)
+    {
+        var count = 0;
+
+        for (var i = 0; i < Short.SIZE; ++i)
+            if (isSet(val, i))
+                ++count;
+
+        return count;
+    }
+
+    public static int setBitsCount(byte val)
+    {
+        var count = 0;
+
+        for (var i = 0; i < Byte.SIZE; ++i)
+            if (isSet(val, i))
+                ++count;
+
+        return count;
+    }
+
+    public static int setBitsCount(char val)
+    {
+        var count = 0;
+
+        for (var i = 0; i < Character.SIZE; ++i)
+            if (isSet(val, i))
+                ++count;
+
+        return count;
+    }
+
+    public static String toBitsStr(int val)
+    {
+        var sb = new StringBuilder(Integer.SIZE);
+
+        for (var i = Integer.SIZE - 1; i >= 0; --i)
+            sb.append(isSet(val, i) ? '1' : '0');
+
+        return sb.toString();
+    }
+
+    public static String toBitsStr(long val)
+    {
+        var sb = new StringBuilder(Long.SIZE);
+
+        for (var i = Long.SIZE - 1; i >= 0; --i)
+            sb.append(isSet(val, i) ? '1' : '0');
+
+        return sb.toString();
+    }
+
+    public static String toBitsStr(short val)
+    {
+        var sb = new StringBuilder(Short.SIZE);
+
+        for (var i = Short.SIZE - 1; i >= 0; --i)
+            sb.append(isSet(val, i) ? '1' : '0');
+
+        return sb.toString();
+    }
+
+    public static String toBitsStr(byte val)
+    {
+        var sb = new StringBuilder(Byte.SIZE);
+
+        for (var i = Byte.SIZE - 1; i >= 0; --i)
+            sb.append(isSet(val, i) ? '1' : '0');
+
+        return sb.toString();
+    }
+
+    public static String toBitsStr(char val)
+    {
+        var sb = new StringBuilder(Character.SIZE);
+
+        for (var i = Character.SIZE - 1; i >= 0; --i)
+            sb.append(isSet(val, i) ? '1' : '0');
+
+        return sb.toString();
     }
 
     public static int toggleBit(int val, int n)
