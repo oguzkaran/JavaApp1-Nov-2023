@@ -11,6 +11,9 @@
 package org.csystem.bitwise;
 
 public class BitwiseUtil {
+    private BitwiseUtil()
+    {
+    }
 
     public static int clearBit(int val, int n)
     {
@@ -46,6 +49,50 @@ public class BitwiseUtil {
         return Character.SIZE - setBitsCount(val);
     }
 
+    public static int highestSetBitIndex(int val)
+    {
+        for (var i = Integer.SIZE - 1; i >= 0; --i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
+    }
+
+    public static int highestSetBitIndex(long val)
+    {
+        for (var i = Long.SIZE - 1; i >= 0; --i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
+    }
+
+    public static int highestSetBitIndex(short val)
+    {
+        for (var i = Short.SIZE - 1; i >= 0; --i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
+    }
+
+    public static int highestSetBitIndex(byte val)
+    {
+        for (var i = Byte.SIZE - 1; i >= 0; --i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
+    }
+
+    public static int highestSetBitIndex(char val)
+    {
+        for (var i = Character.SIZE - 1; i >= 0; --i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
+    }
     public static int [] indicesOfSetBits(int val)
     {
         var indices = new int[setBitsCount(val)];
@@ -134,6 +181,51 @@ public class BitwiseUtil {
     public static boolean isSet(long val, int n)
     {
         return (val & 1L << n) != 0;
+    }
+
+    public static int lowestSetBitIndex(int val)
+    {
+        for (var i = 0; i < Integer.SIZE; ++i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
+    }
+
+    public static int lowestSetBitIndex(long val)
+    {
+        for (var i = 0; i < Long.SIZE; ++i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
+    }
+
+    public static int lowestSetBitIndex(short val)
+    {
+        for (var i = 0; i < Short.SIZE; ++i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
+    }
+
+    public static int lowestSetBitIndex(byte val)
+    {
+        for (var i = 0; i < Byte.SIZE; ++i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
+    }
+
+    public static int lowestSetBitIndex(char val)
+    {
+        for (var i = 0; i < Character.SIZE; ++i)
+            if (isSet(val, i))
+                return i;
+
+        return -1;
     }
 
     public static int resetBit(int val, int n)
