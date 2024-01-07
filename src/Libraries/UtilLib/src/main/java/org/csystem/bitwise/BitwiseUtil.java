@@ -46,6 +46,66 @@ public class BitwiseUtil {
         return Character.SIZE - setBitsCount(val);
     }
 
+    public static int [] indicesOfSetBits(int val)
+    {
+        var indices = new int[setBitsCount(val)];
+        var index = 0;
+
+        for (var i = 0; i < Integer.SIZE; ++i)
+            if (isSet(val, i))
+                indices[index++] = i;
+
+        return indices;
+    }
+
+    public static int [] indicesOfSetBits(long val)
+    {
+        var indices = new int[setBitsCount(val)];
+        var index = 0;
+
+        for (var i = 0; i < Long.SIZE; ++i)
+            if (isSet(val, i))
+                indices[index++] = i;
+
+        return indices;
+    }
+
+    public static int [] indicesOfSetBits(short val)
+    {
+        var indices = new int[setBitsCount(val)];
+        var index = 0;
+
+        for (var i = 0; i < Short.SIZE; ++i)
+            if (isSet(val, i))
+                indices[index++] = i;
+
+        return indices;
+    }
+
+    public static int [] indicesOfSetBits(byte val)
+    {
+        var indices = new int[setBitsCount(val)];
+        var index = 0;
+
+        for (var i = 0; i < Byte.SIZE; ++i)
+            if (isSet(val, i))
+                indices[index++] = i;
+
+        return indices;
+    }
+
+    public static int [] indicesOfSetBits(char val)
+    {
+        var indices = new int[setBitsCount(val)];
+        var index = 0;
+
+        for (var i = 0; i < Character.SIZE; ++i)
+            if (isSet(val, i))
+                indices[index++] = i;
+
+        return indices;
+    }
+
     public static boolean isClear(int val, int n)
     {
         return !isSet(val, n);
