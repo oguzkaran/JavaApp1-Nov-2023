@@ -1,6 +1,5 @@
 package org.csystem.util.bitwise;
 
-import org.csystem.bitwise.BitwiseUtil;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;

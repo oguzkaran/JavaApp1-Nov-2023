@@ -19,17 +19,15 @@ class Application {
     public static void run(String[] args)
     {
         while (true) {
-            var day = Console.readInt("Input day:");
-            var month = Console.readInt("Input month:");
-            var year = Console.readInt("Input year:");
+            var month = Console.readInt("Input expiry month:");
+            var year = Console.readInt("Input expiry year:");
+            var expiryDate = new GregorianCalendar(year, month - 1, 1);
 
-            var birthDate = new GregorianCalendar(year, month - 1, day);
-
-            Console.writeLine("%02d/%02d/%04d ",
-                    birthDate.get(DAY_OF_MONTH), birthDate.get(MONTH) + 1, birthDate.get(YEAR));
-
-            if (day == 0 && month == 0 && year == 0)
-                break;
+            expiryDate.set(DAY_OF_MONTH, expiryDate.getActualMaximum(DAY_OF_MONTH));
+            if (new GregorianCalendar().after(expiryDate))
+                Console.writeLine("KArtın son kullanma tarihi geçmiştir");
+            else
+                Console.writeLine("KArtın son kullanma tarihi geçmemiştir");
         }
     }
 }
