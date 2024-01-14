@@ -12,9 +12,9 @@
     </parent>
 
     <groupId>org.csystem</groupId>
-    <artifactId>LibraryWithCalendar</artifactId>
+    <artifactId>BirthDateAppLib</artifactId>
     <version>11.0.1</version>
-    <name>LibraryWithCalendar</name>
+    <name>BirthDateAppLib</name>
 
     <repositories>
         <repository>
