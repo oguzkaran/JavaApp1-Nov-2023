@@ -1,31 +1,76 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Nested class'ın ait olduğu sınıf, nested class'ın private bölümüne erişebilir
+    Aşağıdaki demo örneği inceleyiniz
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
-
-import org.csystem.util.console.Console;
 
 class Application {
     public static void run(String[] args)
     {
-        A.foo(10);
+        var xml = new XML.Builder()
+                .setTag("maven")
+                .setValue("test")
+                .build();
+
+        //...
     }
 }
 
-class A {
+class XML {
+    private String m_tag;
+    private String m_attribute;
+    private String m_attrValue;
+    private String m_value;
     //...
-    public static void foo(int a)
-    {
-        Console.writeLine("A.foo");
 
-        B.foo(a);
-    }
+    public static class Builder {
+        private final XML m_xml;
 
-    public static class B {
-        //...
-        private static void foo(int a)
+        public Builder()
         {
-            Console.writeLine("B.foo");
+            m_xml = new XML("", "", "", "");
+        }
+
+        public Builder setTag(String tag)
+        {
+            m_xml.m_tag = tag;
+
+            return this;
+        }
+
+        public Builder setAttribute(String attribute)
+        {
+            m_xml.m_attribute = attribute;
+
+            return this;
+        }
+
+        public Builder setAttributeValue(String value)
+        {
+            m_xml.m_attrValue = value;
+
+            return this;
+        }
+
+        public Builder setValue(String value)
+        {
+            m_xml.m_value = value;
+
+            return this;
+        }
+
+        public XML build()
+        {
+            return m_xml;
         }
     }
+
+    private XML(String tag, String attribute, String attValue, String value)
+    {
+        m_tag = tag;
+        m_value = value;
+        m_attribute = attribute;
+        m_attrValue = attValue;
+    }
+
+    //...
 }
