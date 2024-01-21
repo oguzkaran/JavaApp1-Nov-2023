@@ -1,30 +1,31 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Yakalanan bir yerel değişken veya parametre değişkeninin değeri faaliyet alanı (scope) boyunca değiştirilemez. Bu
-    anlamda değişken "effectively final" olarak ele alınır. Effectively final kavramı Java 8 ile dile eklenmiştir. Bu
-    anlamda Java 8'den önce yakalanan bir değişkenin final olarak bildirilmesi zorunluluğu vardır.
+    Nested class'ın ait olduğu sınıf, nested class'ın private bölümüne erişebilir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
-import com.karandev.io.util.console.Console;
+import org.csystem.util.console.Console;
 
 class Application {
     public static void run(String[] args)
     {
-        Sample.foo(Console.readInt("Bir sayı giriniz:"));
+        A.foo(10);
     }
 }
-class Sample {
-    public static void foo(int val)
+
+class A {
+    //...
+    public static void foo(int a)
     {
-        class Util {
-            public boolean isEven()
-            {
-                return val++ % 2 == 0; //error
-            }
+        Console.writeLine("A.foo");
+
+        B.foo(a);
+    }
+
+    public static class B {
+        //...
+        private static void foo(int a)
+        {
+            Console.writeLine("B.foo");
         }
-
-        var util = new Util();
-
-        Console.writeLine(util.isEven() ? "Çift" : "Tek");
     }
 }
