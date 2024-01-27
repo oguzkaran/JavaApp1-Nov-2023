@@ -1,76 +1,69 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki demo örneği inceleyiniz
+    Aslında inner class içerisinde ait olduğu sınıf türünden bir referans veri elemanı bulunur ve nesne yaratılması
+    sırasında bu referansa ilgili adres yani inner class'ın yaratılmasında kullanılan ait olduğu sınıf türünden nesnenin
+    adresi geçilir. Bu durum tipik olarak inner class'ın her ctor'una +1 tane parametre ekleyerek yapılabilir. O
+    parametrenin türü ait olduğu sınıf türünden referanstır. Aşağıda A sınıf bildiriminin ve nesne yaratılmasının
+    yaklaşık karşılığı gösterilmiştir:
+    Bildirimin aşağı seviyedeki yaklaşık karşılığı:
+
+    class A {
+        //...
+        public void foo()
+        {
+            Console.writeLine("A.foo");
+        }
+
+        public static class B {
+            private final A m_a;
+            //...
+            public B(A a) //Default ctor'un yaklaşık karşılığı
+            {
+                m_a = a;
+            }
+
+            public void foo()
+            {
+                Console.writeLine("B.foo");
+                m_a.foo();
+            }
+        }
+    }
+
+    Nesne yaratılmasının aşağı seviyedeki yaklaşık karşılığı:
+    var a = new A();
+    var b = new A.B(a);
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
+
+import org.csystem.util.console.Console;
 
 class Application {
     public static void run(String[] args)
     {
-        var xml = new XML.Builder()
-                .setTag("maven")
-                .setValue("test")
-                .build();
+        while (true) {
+            var a = new A();
 
-        //...
+            //...
+            a.foo();
+            //...
+        }
     }
 }
 
-class XML {
-    private String m_tag;
-    private String m_attribute;
-    private String m_attrValue;
-    private String m_value;
+class A {
+    private B m_b;
     //...
-
-    public static class Builder {
-        private final XML m_xml;
-
-        public Builder()
-        {
-            m_xml = new XML("", "", "", "");
-        }
-
-        public Builder setTag(String tag)
-        {
-            m_xml.m_tag = tag;
-
-            return this;
-        }
-
-        public Builder setAttribute(String attribute)
-        {
-            m_xml.m_attribute = attribute;
-
-            return this;
-        }
-
-        public Builder setAttributeValue(String value)
-        {
-            m_xml.m_attrValue = value;
-
-            return this;
-        }
-
-        public Builder setValue(String value)
-        {
-            m_xml.m_value = value;
-
-            return this;
-        }
-
-        public XML build()
-        {
-            return m_xml;
-        }
-    }
-
-    private XML(String tag, String attribute, String attValue, String value)
+    public void foo()
     {
-        m_tag = tag;
-        m_value = value;
-        m_attribute = attribute;
-        m_attrValue = attValue;
+        Console.writeLine("A.foo");
+        m_b = new B();
     }
 
-    //...
+    public class B {
+        //...
+        public void foo()
+        {
+            Console.writeLine("B.foo");
+        }
+    }
 }
