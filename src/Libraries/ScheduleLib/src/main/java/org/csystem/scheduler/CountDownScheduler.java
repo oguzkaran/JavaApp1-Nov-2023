@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-public abstract class CountDownTimer {
+public abstract class CountDownScheduler {
     private final Timer m_timer;
     private final long m_millisInFuture;
     private final long m_countDownInterval;
@@ -27,12 +27,12 @@ public abstract class CountDownTimer {
         };
     }
 
-    protected CountDownTimer(long durationInFuture, long countDownInterval, TimeUnit timeUnit)
+    protected CountDownScheduler(long durationInFuture, long countDownInterval, TimeUnit timeUnit)
     {
         this(timeUnit.toMillis(durationInFuture), timeUnit.toMillis(countDownInterval));
     }
 
-    protected CountDownTimer(long millisInFuture, long countDownInterval)
+    protected CountDownScheduler(long millisInFuture, long countDownInterval)
     {
         m_timer = new Timer();
         m_millisInFuture = millisInFuture;
