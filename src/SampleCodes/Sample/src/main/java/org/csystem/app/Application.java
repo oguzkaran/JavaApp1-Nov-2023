@@ -4,30 +4,23 @@
 package org.csystem.app;
 
 import com.karandev.io.util.console.Console;
-import org.csystem.scheduler.CountDownSchedulerEx;
+import org.csystem.scheduler.timeout.Alarm;
 
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.TimerTask;
 
 class Application {
     public static void run(String[] args)
     {
-        new CountDownSchedulerEx(10, 1, TimeUnit.SECONDS) {
-            public void onStart()
-            {
-                Console.writeLine("Count down started!...");
-            }
+        var alarm = Alarm.of(LocalDateTime.now().plusSeconds(10));
 
-            public void onTick(long remainingMilliseconds)
+        alarm.start(new TimerTask() {
+            public void run()
             {
-                Console.write("%s\r", (remainingMilliseconds + 1000) / 1000);
+                Console.writeLine("Wake up!...");
             }
-
-            public void onFinish()
-            {
-                Console.write(0);
-                Console.writeLine("\nFinished");
-            }
-        }.startScheduler();
+        });
     }
 }
 
