@@ -5,22 +5,15 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.TimerTask;
 
 @Ignore
 public class AlarmTest {
     @Test
     public void test()
     {
-        var alarm = Alarm.of(LocalDateTime.now().plusMinutes(1));
+        var alarm = Alarm.of(LocalDateTime.now().plusSeconds(10));
 
-        alarm.start(new TimerTask() {
-
-            public void run()
-            {
-                Console.writeLine("Alarm!....");
-            }
-        });
+        alarm.start(() -> Console.writeLine("Alarm!...."));
 
         Console.readChar();
     }
