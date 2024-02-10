@@ -10,28 +10,28 @@
 -------------------------------------------------------------*/
 package org.csystem.scheduler.timeout;
 
+import org.csystem.scheduler.Scheduler;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Timer;
 import java.util.TimerTask;
 
 public class Alarm {
     private LocalDateTime m_dateTime;
-    private Timer m_timer;
+    private Scheduler m_scheduler;
     private boolean m_repeat;
 
-    private TimerTask createTimerTask(Runnable runnable)
+    private Runnable createTask(Runnable runnable)
     {
         return new TimerTask() {
             public void run()
             {
                 runnable.run();
                 if (m_repeat) {
-                    m_timer = new Timer();
+                    m_scheduler = Scheduler.of();
                     m_dateTime = m_dateTime.plusDays(1);
-                    m_timer.schedule(createTimerTask(runnable), ChronoUnit.MILLIS.between(LocalDateTime.now(), m_dateTime));
+                    m_scheduler.schedule(createTask(runnable), m_dateTime);
                 }
             }
         };
@@ -40,7 +40,7 @@ public class Alarm {
     private Alarm(LocalDateTime dateTime)
     {
         m_dateTime = dateTime;
-        m_timer = new Timer();
+        m_scheduler = Scheduler.of();
     }
 
     public static Alarm of(LocalTime time)
@@ -69,11 +69,11 @@ public class Alarm {
 
     public void start(Runnable runnable)
     {
-        m_timer.schedule(createTimerTask(runnable), ChronoUnit.MILLIS.between(LocalDateTime.now(), m_dateTime));
+        m_scheduler.schedule(createTask(runnable), m_dateTime);
     }
 
     public void cancel()
     {
-        m_timer.cancel();
+        m_scheduler.cancel();
     }
 }
