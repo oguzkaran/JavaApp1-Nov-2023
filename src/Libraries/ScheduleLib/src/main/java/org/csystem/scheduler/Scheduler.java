@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: Scheduler.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 4th Feb 2024
+	Last UPDATE	: 10th Feb 2024
 
 	Scheduler class
 
@@ -10,41 +10,72 @@
 -------------------------------------------------------------*/
 package org.csystem.scheduler;
 
+import java.time.LocalDateTime;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class Scheduler {
-    public Scheduler(long interval, TimeUnit timeUnit)
+    private final Timer m_timer;
+    private final long m_delay;
+    private final long m_interval;
+
+    private static TimerTask createTimerTask(Runnable task)
     {
-        throw new UnsupportedOperationException("Not implemented yet!...");
+        return new TimerTask() {
+            public void run()
+            {
+                task.run();
+            }
+        };
     }
 
-    public Scheduler(long intervalInMillis)
+    private Scheduler(long delayInMillis, long intervalInMillis)
     {
-        throw new UnsupportedOperationException("Not implemented yet!...");
+        m_timer = new Timer();
+        m_delay = delayInMillis;
+        m_interval = intervalInMillis;
     }
 
-    public Scheduler(long delay, long interval, TimeUnit timeUnit)
+    public static Scheduler of(long interval, TimeUnit timeUnit)
     {
-        throw new UnsupportedOperationException("Not implemented yet!...");
+        return of(0, interval, timeUnit);
     }
 
-    public Scheduler(long delayInMillis, long intervalInMillis)
+    public static Scheduler of(long intervalInMillis)
     {
-        throw new UnsupportedOperationException("Not implemented yet!...");
+        return of(0, intervalInMillis);
+    }
+
+    public static Scheduler of(long delay, long interval, TimeUnit timeUnit)
+    {
+        return of(timeUnit.toMillis(delay), timeUnit.toMillis(interval));
+    }
+
+    public static Scheduler of(long delayInMillis, long intervalInMillis)
+    {
+        return new Scheduler(delayInMillis, intervalInMillis);
     }
 
     public final void schedule(Runnable task)
     {
+        m_timer.scheduleAtFixedRate(createTimerTask(task), m_delay, m_interval);
+    }
+
+    public final void schedule(Runnable task, Runnable canceltask)
+    {
         throw new UnsupportedOperationException("Not implemented yet!...");
     }
 
-    public final void start()
+    public final void schedule(Runnable task, LocalDateTime dateTime)
     {
         throw new UnsupportedOperationException("Not implemented yet!...");
     }
 
     public final void cancel()
     {
-        throw new UnsupportedOperationException("Not implemented yet!...");
+        m_timer.cancel();
     }
+
+    //...
 }

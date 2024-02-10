@@ -31,6 +31,7 @@ public class Alarm {
 
                 runnable.run();
                 m_timer.cancel();
+
                 if (m_repeat) {
                     m_timer = new Timer();
                     m_dateTime = m_dateTime.plusDays(1);
