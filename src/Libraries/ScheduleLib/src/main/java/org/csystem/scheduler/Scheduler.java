@@ -11,6 +11,7 @@
 package org.csystem.scheduler;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +20,7 @@ public class Scheduler {
     private final Timer m_timer;
     private final long m_delay;
     private final long m_interval;
+    private Runnable m_cancelTask;
 
     private static TimerTask createTimerTask(Runnable task)
     {
@@ -28,6 +30,10 @@ public class Scheduler {
                 task.run();
             }
         };
+    }
+    public static Scheduler of()
+    {
+        return new Scheduler(0, 0);
     }
 
     private Scheduler(long delayInMillis, long intervalInMillis)
@@ -62,19 +68,22 @@ public class Scheduler {
         m_timer.scheduleAtFixedRate(createTimerTask(task), m_delay, m_interval);
     }
 
-    public final void schedule(Runnable task, Runnable canceltask)
+    public final void schedule(Runnable task, Runnable cancelTask)
     {
-        throw new UnsupportedOperationException("Not implemented yet!...");
+        m_cancelTask = cancelTask;
+        schedule(task);
     }
 
     public final void schedule(Runnable task, LocalDateTime dateTime)
     {
-        throw new UnsupportedOperationException("Not implemented yet!...");
+        m_timer.schedule(createTimerTask(task), ChronoUnit.MILLIS.between(LocalDateTime.now(), dateTime));
     }
 
     public final void cancel()
     {
         m_timer.cancel();
+        if (m_cancelTask != null)
+            m_cancelTask.run();
     }
 
     //...

@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: Alarm.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 4th Feb 2024
+	Last UPDATE	: 10th Feb 2024
 
 	Alarm class
 
@@ -13,6 +13,7 @@ package org.csystem.scheduler.timeout;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,16 +27,11 @@ public class Alarm {
         return new TimerTask() {
             public void run()
             {
-                if (LocalDateTime.now().isBefore(m_dateTime))
-                    return;
-
                 runnable.run();
-                m_timer.cancel();
-
                 if (m_repeat) {
                     m_timer = new Timer();
                     m_dateTime = m_dateTime.plusDays(1);
-                    m_timer.scheduleAtFixedRate(createTimerTask(runnable), 0, 1000);
+                    m_timer.schedule(createTimerTask(runnable), ChronoUnit.MILLIS.between(LocalDateTime.now(), m_dateTime));
                 }
             }
         };
@@ -73,7 +69,7 @@ public class Alarm {
 
     public void start(Runnable runnable)
     {
-        m_timer.scheduleAtFixedRate(createTimerTask(runnable), 0, 1000);
+        m_timer.schedule(createTimerTask(runnable), ChronoUnit.MILLIS.between(LocalDateTime.now(), m_dateTime));
     }
 
     public void cancel()
