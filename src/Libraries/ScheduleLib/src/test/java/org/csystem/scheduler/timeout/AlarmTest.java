@@ -8,12 +8,17 @@ import java.time.LocalDateTime;
 
 @Ignore
 public class AlarmTest {
+    private void alarmCallback()
+    {
+        Console.writeLine("Alarm!....");
+    }
+
     @Test
     public void test()
     {
         var alarm = Alarm.of(LocalDateTime.now().plusSeconds(10));
 
-        alarm.start(() -> Console.writeLine("Alarm!...."));
+        alarm.start(this::alarmCallback);
 
         Console.readChar();
     }
