@@ -1,7 +1,7 @@
 package org.csystem.recursion.util;
 
 public class RecursionUtil {
-    public static int fibonacciNumberRecur(int n)
+    private static int fibonacciNumberRecur(int n)
     {
         return n <= 2 ? n - 1 : fibonacciNumberRecur(n - 1) + fibonacciNumberRecur(n - 2);
     }

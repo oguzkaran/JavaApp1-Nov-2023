@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized;
 import java.util.Collection;
 import java.util.List;
 
-@Ignore
+@Ignore("Written by Buğrahan Kısa")
 @RunWith(Parameterized.class)
 public class NumberUtilSumFactorsTest {
     public LongIntDataInfo dataInfo;

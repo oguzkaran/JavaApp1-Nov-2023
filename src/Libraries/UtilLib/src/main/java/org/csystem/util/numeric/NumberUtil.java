@@ -15,6 +15,7 @@ import java.math.BigInteger;
 import static java.lang.Math.*;
 
 public final class NumberUtil {
+    private static final boolean DEBUG = false;
     private static final String [] ONES;
     private static final String [] TENS;
     private static final BigInteger THREE = BigInteger.valueOf(3);
@@ -46,6 +47,12 @@ public final class NumberUtil {
 
     private static String numberToText3DigitsTR(int a, int b, int c)
     {
+        if (DEBUG) {
+            assert a >= 0 : String.format("a must be greater than zero:%d", a);
+            assert b >= 0 : String.format("b must be greater than zero:%d", b);
+            assert c >= 0 : String.format("c must be greater than zero:%d", c);
+        }
+
         var sb = new StringBuilder();
 
         if (a != 0) {
