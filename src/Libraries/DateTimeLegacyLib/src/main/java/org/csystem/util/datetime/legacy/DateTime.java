@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 
 import static java.util.Calendar.*;
 
+@Deprecated(since = "11.1.0", forRemoval = true)
 public final class DateTime implements Serializable, Comparable<DateTime> {
     @Serial
     private static final long serialVersionUID = 1L;

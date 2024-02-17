@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import javax.xml.crypto.Data;
 import java.util.Collection;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class NumberUtilNumberToTextTRTest {
         this.data = data;
     }
 
-    @Test
+    @Test()
     public void test()
     {
         assertEquals(data.expected, NumberUtil.numberToTextTR(data.a));

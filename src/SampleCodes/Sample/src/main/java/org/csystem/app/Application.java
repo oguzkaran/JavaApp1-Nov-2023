@@ -1,28 +1,64 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Java'da test işlemlerinde kullanılabilen "assert statement" bulunmaktadır. assert deyiminin genel biçimi şu şekildedir:
-        assert <boolean türden ifade> [: <void olmayan bir ifade>]
-    Akış assert deyimine geldiğinde boolean türden ifade hesaplanır, eğer true ise akış devam eder, false ise AssertinError
-    türünden exception fırlatılır ve tipik olarak akış sonlanır. Eğer optional olan void olmayan ifade varsa o ifadenin
-    değeri de stderr'ye basılır
-
-    assert kullanımı için JVM'e -ea veya -enableAssertions seçeneği verilmelidir. Eğer bu seçeneklerden biri verilmezse
-    assert deyimleri gözmezden gelinir. assert deyimleri derleme sırasında var olduğundan seçenekler verilmemiş olsa bile
-    byte code içerisinde bulunurlar. Öyleyse programcının, ürün aşamasında assert deyimlerinin byte kodda olmayacağı
-    biçimde yazması gerekir. Şüphesiz assert deyimlerini yorum satırlarına almak ya da koddan kaldırmak profesyonel bir
-    çözüm değildir. Bu durumda programcı sabit görevi göre bir flag veri elemanı ile bu kodları devreye sokabilir ya da
-    derleme aşamasında arakoda eklenmemesini sağlayabilir. UtilLib içerisindeki numberToText3DigitsTR private metodunda
-    bu yöntem kullanılmıştır. Anımsanacağı gibi derleyici akışın bir noktaya kesin gelmeyeceğini anlarsa ya error verir
-    ya da ilgili kodu byte code'a eklemez. Ayrıca sabit ifadesi (constant expression) ile değer verilmiş final bir değişken
-    arakodda sabit görevi görür. Yani örneğin onun için bellekte (heap ya da stack) bir ayrılması gerekmez. Örnekte
-    DEBUG sabitine false değeri verildiğinde akış hiç bir şekilde assert deyimlerine gelemeyeceğinden derleyici assert
-    deyimlerini byte code'a eklemez. Bu durumda test işleminden sonra DEBUG false değerine çekilerek nihayi ürün elde
-    edilir. assert deyimleri özellikle private metotların testlerinde tercih edilebilir.
+    Deprectaed annotation'ı ile deprecated olan bir sentaktik eleman işaretlenebilir. Bu annotation bir RUNTIME
+    annotation'ı olmasına karşın build aşamasında derleyiciler ve kod analizi araçları gibi araçlar tarafından da bakılır.
+    Genel olarak derleyiciler ve static kod analizi araçları Deprecated işaretlenmiş sentaktik elemanlar için uyarı
+    mesajları verirler. Programcı bir deprecated eleman için bu annotation'ı kesinlikle kullanmalı ve dökumante etmelidir.
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 class Application {
     public static void run(String[] args)
     {
 
     }
+}
+
+@YourAnnotation()
+class Sample {
+    @TheirAnnotation
+    private int m_value;
+
+    @YourAnnotation
+    @MyAnnotation(value = 10, message = "This is a test")
+    @OurAnnotation({"xxxx", "yyy"})
+    public void foo(@TheirAnnotation int a)
+    {
+        //...
+    }
+
+    @YourAnnotation(45)
+    @MyAnnotation(20)
+    @OurAnnotation("this is another test")
+
+    public void bar()
+    {
+        //...
+    }
+}
+
+@Retention(RetentionPolicy.CLASS)
+@Target({ElementType.LOCAL_VARIABLE, ElementType.PARAMETER, ElementType.FIELD})
+@interface TheirAnnotation {
+
+}
+
+@Retention(RetentionPolicy.CLASS)
+@interface OurAnnotation {
+    String [] value();
+}
+
+@Retention(RetentionPolicy.SOURCE)
+@interface YourAnnotation {
+    int value() default 0;
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnnotation {
+    String message() default  "";
+    int value();
 }

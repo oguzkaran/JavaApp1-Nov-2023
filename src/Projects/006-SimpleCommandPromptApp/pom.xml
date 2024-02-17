@@ -7,14 +7,26 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version>
+        <version>3.2.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>org.csystem</groupId>
-    <artifactId>org-csystem-util-datetime-legacy</artifactId>
-    <version>11.1.0</version>
-    <name>org-csystem-util</name>
+    <artifactId>CommandPromptApp</artifactId>
+    <version>11.0.0</version>
+    <name>CommandPromptApp</name>
+
+    <repositories>
+        <repository>
+            <id>javaapp1-nov-2023-maven-repo</id>
+            <url>https://raw.github.com/oguzkaran/javaapp1-nov-2023-maven-repo/main</url>
+        </repository>
+
+        <repository>
+            <id>javaapp1-nov-2023-karandev-maven-repo</id>
+            <url>https://raw.github.com/oguzkaran/javaapp1-nov-2023-karandev-maven-repo/main</url>
+        </repository>
+    </repositories>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -24,20 +36,19 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
+            <groupId>com.karandev</groupId>
+            <artifactId>com-karandev-util-console</artifactId>
+            <version>11.0.0</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
+
 </project>
