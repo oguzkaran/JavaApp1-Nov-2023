@@ -18,9 +18,20 @@ class Application {
 
     public static void run(String[] args)
     {
-        var day = Console.readInt("Gün bilgisini giriniz:", "Hatalı giriş yaptınız!...");
-        var month = Console.readInt("Ay bilgisini giriniz:", "Hatalı giriş yaptınız!...");
-        var year = Console.readInt("Yıl bilgisini giriniz:", "Hatalı giriş yaptınız!...");
+        int day = 0, month = 0, year = 0;
+
+        if (args.length != 3 && args.length != 0)  {
+            Console.Error.writeLine("Geçersiz kullanım!...");
+            System.exit(1);
+        }
+        try {
+            day = args.length == 3 ? Integer.parseInt(args[0]) : Console.readInt("Gün bilgisini giriniz:", "Hatalı giriş yaptınız!...");
+            month = args.length == 3 ? Integer.parseInt(args[1]) : Console.readInt("Ay bilgisini giriniz:", "Hatalı giriş yaptınız!...");
+            year = args.length == 3 ? Integer.parseInt(args[2]) : Console.readInt("Yıl bilgisini giriniz:", "Hatalı giriş yaptınız!...");
+        }
+        catch (NumberFormatException ignore) {
+            Console.Error.writeLine("Invalid arguments!...");
+        }
 
         printBirthDayMessage(new BirthDateOperations(day, month, year));
     }

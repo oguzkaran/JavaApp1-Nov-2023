@@ -5,7 +5,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Ignore
 public class SchedulerTimeoutTest {

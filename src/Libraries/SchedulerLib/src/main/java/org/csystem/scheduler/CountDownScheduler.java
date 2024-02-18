@@ -23,6 +23,8 @@ public abstract class CountDownScheduler {
     {
         return new TimerTask() {
             long duration;
+
+            @Override
             public void run()
             {
                 if (duration >= m_millisInFuture) {

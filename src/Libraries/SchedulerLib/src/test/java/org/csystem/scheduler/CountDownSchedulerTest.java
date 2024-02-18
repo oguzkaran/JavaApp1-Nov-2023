@@ -13,12 +13,14 @@ public class CountDownSchedulerTest {
     public void test() throws InterruptedException
     {
         new CountDownScheduler(10000, 1000) {
+            @Override
             public void onTick(long remainingMilliseconds)
             {
                 Console.writeLine(remainingMilliseconds / 1000);
                 --m_expected;
             }
 
+            @Override
             public void onFinish()
             {
                 Assert.assertEquals(0, m_expected);

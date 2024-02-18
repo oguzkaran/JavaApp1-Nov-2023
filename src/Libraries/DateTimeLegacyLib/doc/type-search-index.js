@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.csystem.util.datetime.legacy","l":"DateTime"},{"p":"org.csystem.util.datetime.legacy","l":"DateTimeException"},{"p":"org.csystem.util.datetime.legacy","l":"DayOfWeek"},{"p":"org.csystem.util.datetime.legacy","l":"Month"}];updateSearchResults();

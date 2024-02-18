@@ -40,7 +40,7 @@
         <dependency>
             <groupId>com.karandev</groupId>
             <artifactId>com-karandev-util-console</artifactId>
-            <version>11.0.0</version>
+            <version>11.1.0</version>
         </dependency>
 
         <dependency>
@@ -51,7 +51,7 @@
         <dependency>
             <groupId>org.csystem</groupId>
             <artifactId>org-csystem-util-datetime-legacy</artifactId>
-            <version>11.0.0</version>
+            <version>11.1.0</version>
         </dependency>
 
         <dependency>

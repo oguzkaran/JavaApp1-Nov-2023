@@ -25,6 +25,7 @@ public class Alarm {
     private Runnable createTask(Runnable runnable)
     {
         return new TimerTask() {
+            @Override
             public void run()
             {
                 runnable.run();

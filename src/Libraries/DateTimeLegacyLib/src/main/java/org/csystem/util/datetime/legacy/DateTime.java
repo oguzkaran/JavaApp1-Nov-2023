@@ -7,6 +7,11 @@ import java.util.GregorianCalendar;
 
 import static java.util.Calendar.*;
 
+/**
+ * That class is used for DateTime operations which simplifies Calendar and GregorianCalendar class
+ * @deprecated This class is not needed since Java 8. You can use Java 8 date time api instead of that class
+ * */
+
 @Deprecated(since = "11.1.0", forRemoval = true)
 public final class DateTime implements Serializable, Comparable<DateTime> {
     @Serial
