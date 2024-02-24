@@ -1,20 +1,18 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki demo örneği inceleyiniz
+
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
-import org.csystem.app.demo.Singleton;
+import com.karandev.io.util.console.CommandPrompt;
 
 class Application {
     public static void run(String[] args)
     {
-
-        try {
-            var cls = Singleton.class;
-
-            
-        }
-
-
+        CommandPrompt.createBuilder()
+                .registerObject(new CommandsInfo())
+                .setPrompt("csd")
+                .setWrongNumberOfArgumentsErrorMessage("Invalid usage")
+                .create().run();
     }
 }
+
