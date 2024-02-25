@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------
 	FILE        : CommandPrompt.java
 	AUTHOR      : Oğuz Karan
-	LAST UPDATE : 24.02.2024
+	LAST UPDATE : 25.02.2024
 
 	General CommandPrompt class of REPL Framework
 
@@ -13,9 +13,11 @@ package com.karandev.io.util.console;
 import com.karandev.io.util.console.annotation.Command;
 import com.karandev.io.util.console.annotation.ErrorCommand;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public final class CommandPrompt {
     private Object m_regObject;
@@ -99,12 +101,42 @@ public final class CommandPrompt {
         return true;
     }
 
-    private void runCommands(String [] cmdInfo)
+    private void runCommands(String [] cmdInfo) throws InvocationTargetException, IllegalAccessException
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        var params = Arrays.copyOfRange(cmdInfo, 1, cmdInfo.length);
+        var flag = false;
+        var argsFlag = false;
+
+        for (var commandInfo : m_commandInfo)
+            if (commandInfo.commandText.equals(cmdInfo[0])) {
+                flag = true;
+                argsFlag = true;
+
+                if (commandInfo.argCount != params.length) {
+                    argsFlag = false;
+                    continue;
+                }
+
+                commandInfo.method.setAccessible(true);
+                commandInfo.method.invoke(m_regObject, (Object[]) params);
+                commandInfo.method.setAccessible(false);
+                break;
+            }
+
+        if (!flag) {
+            if (m_errorCommandMethod != null) {
+                m_errorCommandMethod.setAccessible(true);
+                m_errorCommandMethod.invoke(m_regObject);
+                m_errorCommandMethod.setAccessible(false);
+            }
+            else
+                Console.Error.writeLine(m_invalidCommand);
+        }
+        else if (!argsFlag)
+            Console.Error.writeLine(m_wrongNumberOfArgumentsMessage);
     }
 
-    private void register(Command [] commands, Method method)
+    private void registerCommands(Command [] commands, Method method)
     {
         for (var command : commands) {
             var value = command.value();
@@ -134,7 +166,7 @@ public final class CommandPrompt {
                     m_errorCommandMethod = method;
                 continue;
             }
-            register(commands, method);
+            registerCommands(commands, method);
         }
     }
 
@@ -145,6 +177,11 @@ public final class CommandPrompt {
     public static Builder createBuilder()
     {
         return new Builder();
+    }
+
+    public void setPrompt(String prompt)
+    {
+        m_prompt = prompt;
     }
 
     public void run()
