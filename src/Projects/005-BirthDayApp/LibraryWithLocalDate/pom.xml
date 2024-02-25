@@ -5,34 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>org.csystem</groupId>
+        <artifactId>BirthDayApplication</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.csystem</groupId>
     <artifactId>BirthDateAppLib</artifactId>
     <version>11.0.2</version>
-    <name>BirthDateAppLib</name>
-
-    <repositories>
-        <repository>
-            <id>javaapp1-nov-2023-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp1-nov-2023-maven-repo/main</url>
-        </repository>
-
-        <repository>
-            <id>javaapp1-nov-2023-karandev-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp1-nov-2023-karandev-maven-repo/main</url>
-        </repository>
-    </repositories>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <name>BirthDateAppLibLocalDate</name>
 
     <dependencies>
         <dependency>
