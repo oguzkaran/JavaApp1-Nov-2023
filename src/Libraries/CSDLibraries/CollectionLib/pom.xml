@@ -12,9 +12,9 @@
     </parent>
 
     <groupId>org.csystem</groupId>
-    <artifactId>org-csystem-util</artifactId>
-    <version>12.0.0</version>
-    <name>org-csystem-util</name>
+    <artifactId>org-csystem-range</artifactId>
+    <version>11.0.0</version>
+    <name>org-csystem-range</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
