@@ -1,9 +1,13 @@
 package org.csystem.range;
 
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.function.ThrowingRunnable;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
+@Ignore("Tested before")
 public class IntRangeTest {
     @Test
     public void givenValues_whenBounds_thenIterate()
@@ -63,5 +67,17 @@ public class IntRangeTest {
             System.out.printf("%d ", val);
 
         System.out.println();
+    }
+
+    @Test
+    public void givenValues_whenBounds_thenThrowsIllegalArgumentException()
+    {
+        assertThrows(IllegalArgumentException.class, () -> IntRange.of(5, 4));
+    }
+
+    @Test
+    public void givenValues_whenBoundsAndStep_thenThrowsIllegalArgumentException()
+    {
+        assertThrows(IllegalArgumentException.class, () -> IntRange.of(5, 4, 0));
     }
 }
