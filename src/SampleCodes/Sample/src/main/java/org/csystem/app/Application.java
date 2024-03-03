@@ -1,66 +1,34 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    for-each döngü deyimi aslında yapay bir döngü deyimidir. Programcı for-each döngü deyimini yazdığında derleyici
-    tarafından bir kod üretilir. Bir sınıfın for-each döngü deyimi ile dolaşılabilmesi için (iterable) yine Java 5 ile
-    eklenen Iterable<T> arayüzünü desteklemesi gerekir. Aksi durumda error oluşur.
+    Optional Sınıfları: Programlamada sıklıkla karşımıza çıkan bir durum vardır: Bir koşul sağlandığında bir bilgiye
+    elde etmek isteriz. Örneğin, T.C. Kimlik numarasına bir kişinin bilgilerini veren bir metot yazacak olalım. Bu metot
+    parametre olarak aldığı kimlik numarasında bir kişi olmadığı durumda ne dönecektir? Şüphesiz, böylesi bir metot muhtemel
+    bir sınıf türünden referansa geri dönecektir. Bu durumda bulunamadığı koşulda null adrese geri dönülebilir. Ancak
+    null adrese geri dönülmesi metodu çağrıran programcı açısından farkedilmeden kullanımda NullPointerException
+    oluşumuna da yol açabilecektir. Yine örneğin bir metot exception fırlatmadan yazıyı sayıya çevirmek isterse, geri dönüş
+    değeri olarak ne dönecektir? Eğer int türüne geri dönerse geçersiz değer için hangi değere geri dönecektir? Şüphesiz,
+    bu metot Integer referansına geri dönebilir ve dönüştürülememesi durumunda null değere geri döner. Bu da görece olarak
+    okunabilir olmaz. Üstelik yine null adres döndürülmiş olur. Yine örneğin, bir kişinin adı, ikinci adı ve soyadı
+    bilgileri tutulduğunda ikinci adı olmayan kişiler için bu bilgi null olarak veya boş string tutulabilir. Bu da
+    yine iyi bir tasarım değldir.
 
-    Anahtar Notlar: Bir veri yapısına ait elemanların, veri  yapısı içerisinde nasıl tutulduktan bağımsız olarak
-    dolaşılabilmesi için kullanılan tasarım kalıbına (degin pattern) "iterator" denir. Yani aslında veriler bir iterator
-    yardımıyla tutulur. Iterator ile her adımda mantıksal bir sonraki veriye erişilir. Böylelikle programcı verilerin
-    nasıl tutulduğundan bağımsız dolaşılan kodlar yazabilir.
+    Programlamada böylesi durumlar genel adı "nullable type" olan (buradaki null terimi null adres anlamında değildir.
+    Olmama kavramını temsil eder) "optional" sınıfları kullanılabilir. Java 8 ile birlikte 4 tane optional sınıfı JavaSE'ye
+    eklenmiştir: Optional<T>, OptionalInt, OptionalDouble, OptionalLong.
 
-    Anahtar Notlar: Diziler sentaks olarak for-each döngü deyimi ile kullanılabilir. Bu anlamda diziler Iterable<T>
-    arayüzünü destekleyen türler değildir.
-
-    Iterable arayüzünün iterator isimli bir tane abstract metodu vardır. Bu metot Iterator<T> arayüz referansına geri
-    döner. Bu arayüzün Java 8'den önce 3 tane, Java 8 ile birlikte 2 tane abstract metodu bulunmaktadır. Java 8'den önce
-    remove isimli metot da abstract bir metottu, Java 8 ile birlikte default metot kavramı eklendiği için bu metot
-    UnsupportedOperationException fırlatacak şekilde default metot yapılmıştır. Duruma göre programcı override edebilir.
-    Java 8 ile eklenen ve yine default olan forEachRemaining metodu ileride ele alınacaktır. Java Language Specification'a
-    göre bir türe ilişkin referans ile (dizi türü hariç) for-each döngü deyimi kullanıldığında aşağıdaki metotların
-    çağrılacağı şekilde yaklaşık bir kod üretilir. Demo örnekteki for-each döngü deyimi için:
-
-        Iterator<String> iter = texts.iterator();
-        String s;
-
-        while (iter.hasNext()) {
-            s = iter.next();
-            Console.writeLine(s);
-        }
-
-    Şüphesiz bu döngü çeşitli şekillerde de yazılabilir. Yine şüphesiz programcının böyle bir döngü için for-each
-    kullanması gerekir ancak for-each'in bu yapısını da bilmesi gerekir.
+    Optional sınıflarının empty metotları, boş bir optional oluşturmak için kullanılır. Optional sınıflarının ctor'ları
+    private'dır. Optinal sınıflarının of metotları ile dolu bir optional ilgili değer verilerek yaratılabilir. Optional
+    sınıflarının getXXX metotları ile ilgili optional nesnesi içerisindeki veri elde edilebilir. Boş bir optional
+    nesnesi için getXXX metotları NoSuchElementException fırlatırlar. Optional sınıflarının isPresent isimli metodu
+    ile nesnenin dolu olup olmadığı test edilebilir. Optional sınıflarının isEmpty isimli metodu ile nesnenin boş olup
+    olmadığı test edilebilir. Optional sınıfları içerisinde java.util.function paketi içerisindeki arayüzleri callback
+    olarak olan çeşitli metotlar da bulunur.
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
-
-import org.csystem.util.console.Console;
-import org.csystem.util.string.StringUtil;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 
 class Application {
     public static void run(String[] args)
     {
-        var texts = new ArrayList<String>();
-        var random = new Random();
-        int n = random.nextInt(Console.readInt("Input min value:"), Console.readInt("Input bound value:"));
 
-        while (n-- > 0)
-            texts.add(StringUtil.generateRandomTextEN(random, random.nextInt(5, 11)));
-
-        for (var s : texts)
-            Console.writeLine(s);
-
-        Console.writeLine("--------------------------------");
-
-        Iterator<String> iter = texts.iterator();
-        String s;
-
-        while (iter.hasNext()) {
-            s = iter.next();
-            Console.writeLine(s);
-        }
     }
 }
 
