@@ -18,7 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="GenericApp" options="-parameters" />
       <module name="GenericLib" options="-parameters" />
-      <module name="org-csystem-util" options="-parameters" />
+      <module name="org-csystem-util" options="" />
     </option>
   </component>
 </project>
