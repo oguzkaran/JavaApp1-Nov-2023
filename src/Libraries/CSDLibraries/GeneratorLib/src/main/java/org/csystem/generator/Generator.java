@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: Generator.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 3rd Mar 2024
+	Last UPDATE	: 9th Mar 2024
 
 	Generic iterable generator class
 
@@ -12,6 +12,7 @@ package org.csystem.generator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
@@ -20,6 +21,15 @@ public class Generator<T> extends BaseGenerator<T> {
     protected Predicate<T> predicate;
     protected Generator()
     {
+    }
+
+    public Optional<T> findFirst(Predicate<T> predicate)
+    {
+        for (var t : this)
+            if (predicate.test(t))
+                return Optional.of(t);
+
+        return Optional.empty();
     }
 
     @Override

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.csystem.generator.random.RandomIntGeneratorTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.063 s -- in org.csystem.generator.random.RandomIntGeneratorTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.078 s -- in org.csystem.generator.random.RandomIntGeneratorTest
