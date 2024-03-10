@@ -10,9 +10,10 @@
 ----------------------------------------------------------------*/
 package org.csystem.collection;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.function.IntFunction;
 
-public class CSDArrayList<E> {
+public class CSDArrayList<E> implements List<E> {
     private static final int DEFAULT_CAPACITY = 10;
     private E [] m_elements;
     private int m_index;
@@ -61,6 +62,7 @@ public class CSDArrayList<E> {
         m_elements = (E[])new Object[initialCapacity];
     }
 
+    @Override
     public boolean add(E e)
     {
         enlargeCapacityIfNecessary();
@@ -69,6 +71,7 @@ public class CSDArrayList<E> {
         return true;
     }
 
+    @Override
     public void add(int index, E e)
     {
         enlargeCapacityIfNecessary();
@@ -82,6 +85,7 @@ public class CSDArrayList<E> {
         return m_elements.length;
     }
 
+    @Override
     public void clear()
     {
         for (int i = 0; i < m_index; ++i)
@@ -90,12 +94,14 @@ public class CSDArrayList<E> {
         m_index = 0;
     }
 
+
     public void ensureCapacity(int minCapacity)
     {
         if (minCapacity > m_elements.length)
             changeCapacity(Math.max(m_elements.length * 2, minCapacity));
     }
 
+    @Override
     public E get(int index)
     {
         checkIndex(index);
@@ -103,6 +109,7 @@ public class CSDArrayList<E> {
         return m_elements[index];
     }
 
+    @Override
     public E remove(int index)
     {
         checkIndex(index);
@@ -116,6 +123,37 @@ public class CSDArrayList<E> {
         return old;
     }
 
+    @Override
+    public int indexOf(Object o)
+    {
+        return 0;
+    }
+
+    @Override
+    public int lastIndexOf(Object o)
+    {
+        return 0;
+    }
+
+    @Override
+    public ListIterator<E> listIterator()
+    {
+        return null;
+    }
+
+    @Override
+    public ListIterator<E> listIterator(int index)
+    {
+        return null;
+    }
+
+    @Override
+    public List<E> subList(int fromIndex, int toIndex)
+    {
+        return null;
+    }
+
+    @Override
     public E set(int index, E e)
     {
         checkIndex(index);
@@ -126,9 +164,40 @@ public class CSDArrayList<E> {
         return old;
     }
 
+    @Override
     public int size()
     {
         return m_index;
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        throw new UnsupportedOperationException("TODO:");
+    }
+
+    @Override
+    public boolean contains(Object o)
+    {
+        throw new UnsupportedOperationException("TODO:");
+    }
+
+    @Override
+    public Iterator<E> iterator()
+    {
+        throw new UnsupportedOperationException("TODO:");
+    }
+
+    @Override
+    public Object[] toArray()
+    {
+        throw new UnsupportedOperationException("Unsupported!..:");
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a)
+    {
+        throw new UnsupportedOperationException("Unsupported!..:");
     }
 
     public void trimToSize()
@@ -137,6 +206,7 @@ public class CSDArrayList<E> {
              changeCapacity(m_index);
     }
 
+    @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder("[");
@@ -145,5 +215,47 @@ public class CSDArrayList<E> {
             sb.append(m_elements[i]).append(", ");
 
         return (m_index != 0 ? sb.substring(0, sb.length() - 2) : sb.toString()) + "]" ;
+    }
+
+    @Override
+    public <T> T[] toArray(IntFunction<T[]> generator)
+    {
+        throw new UnsupportedOperationException("Unsupported!..:");
+    }
+
+    @Override
+    public boolean remove(Object o)
+    {
+        throw new UnsupportedOperationException("Unsupported!..:");
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c)
+    {
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends E> c)
+    {
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends E> c)
+    {
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c)
+    {
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c)
+    {
+        throw new UnsupportedOperationException("Unsupported!..:");
     }
 }
