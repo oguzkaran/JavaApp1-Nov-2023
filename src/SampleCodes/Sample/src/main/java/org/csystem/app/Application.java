@@ -1,31 +1,36 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Collection<T> arayüzü: Bu arayüz Iterable<T> arayüzünden türetilmiştir. 
+    Aşağıdaki demo örnekte Treeset<E> collection'ı içerisindeki elemanlar ArrayList<E> collectiın'ına addAll metoduyla
+    eklenmiştir. TreeSet<E> collection sınıfı ileride ele alınacaktır. Demo örnekte collection'lar arasındaki veri transferinib
+    polimorfik olduğuna odaklanınız
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 import com.karandev.io.util.console.Console;
-import org.csystem.generator.random.RandomIntGenerator;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.TreeSet;
 
 class Application {
     public static void run(String[] args)
     {
+        var random = new Random();
+        var numberSet = new TreeSet<Integer>();
+        var numberList = new ArrayList<>();
+
         while (true) {
-            var count = Console.readInt("Input count:");
-            if (count <= 0)
+            int val = random.nextInt(-100, 100);
+            if (val == 0)
                 break;
 
-            var min = Console.readInt("Input origin:");
-            var bound = Console.readInt("Input bound:");
-            var generator = RandomIntGenerator.of(new Random(), min, bound, count);
-            var iter = generator.iterator();
-
-            if (iter.hasNext()) iter.next();
-            if (iter.hasNext()) iter.next();
-
-            iter.forEachRemaining(val -> Console.write("%d ", val));
-            Console.writeLine();
+            numberSet.add(val);
         }
+
+        numberList.add(1000);
+        numberList.addAll(numberSet);
+
+        numberList.forEach(val -> Console.write("%d ", val));
+        Console.writeLine();
+        numberSet.forEach(val -> Console.write("%d ", val));
     }
 }
