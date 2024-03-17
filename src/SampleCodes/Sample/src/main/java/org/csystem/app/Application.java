@@ -1,50 +1,31 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki demo örneği inceleyiniz
+    Aşağıdaki demo örneği inceleyimiz
+    ~/src/Libraries/CSDLibraries/MathLib kütüphanesini inceleyiniz
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 import com.karandev.io.util.console.Console;
-import org.apache.commons.lang3.time.StopWatch;
+import org.csystem.app.fraction.FractionFactory;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Collections;
+import java.util.NoSuchElementException;
 
 class Application {
     public static void run(String[] args)
     {
-        var arrayList = new ArrayList<>();
-        var linkedList = new LinkedList<>();
+        var factory = new FractionFactory();
+        var fractions = factory.createRandomFractionsUntilZero(-10, 10);
 
-        var stopWatch = new StopWatch();
-        stopWatch.start();
-        for (var i = 0; i < 1_000_000; ++i)
-            arrayList.add(i * 10);
+        fractions.forEach(Console::writeLine);
+        Console.writeLine("-----------------------------------------");
+        try {
+            var minFraction = Collections.min(fractions);
+            var maxFraction = Collections.max(fractions);
 
-        stopWatch.stop();
-
-        Console.writeLine("Time of add operation in nanoseconds of ArrayList<E> is %d", stopWatch.getNanoTime());
-
-        stopWatch = new StopWatch();
-        stopWatch.start();
-        for (var i = 0; i < 1_000_000; ++i)
-            linkedList.add(i * 10);
-
-        stopWatch.stop();
-
-        Console.writeLine("Time of add operation in nanoseconds of LinkedList<E> is %d", stopWatch.getNanoTime());
-
-        stopWatch = new StopWatch();
-        stopWatch.start();
-        arrayList.get(900_000);
-        stopWatch.stop();
-
-        Console.writeLine("Time of get operation in nanoseconds of ArrayList<E> is %d", stopWatch.getNanoTime());
-
-        stopWatch = new StopWatch();
-        stopWatch.start();
-        linkedList.get(900_000);
-        stopWatch.stop();
-
-        Console.writeLine("Time of get operation in nanoseconds of LinkedList<E> is %d", stopWatch.getNanoTime());
-    }
+            Console.writeLine("Minimum:%s%nMaximum:%s", minFraction, maxFraction);
+        }
+        catch (NoSuchElementException ignore) {
+            Console.writeLine("No fraction generated!...");
+        }
+     }
 }
