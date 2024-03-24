@@ -1,5 +1,0 @@
-# Created at 2024-03-17T16:30:55.045
-Boot Manifest-JAR contains absolute paths in classpath 'D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\MathLib\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-

@@ -1,4 +1,3 @@
-
 /*-------------------------------------------------------------
 	FILE		: PointCommon.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
