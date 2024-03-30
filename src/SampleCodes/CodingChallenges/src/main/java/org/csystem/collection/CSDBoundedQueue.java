@@ -23,6 +23,11 @@ public class CSDBoundedQueue<E> {
         m_elems = new ArrayDeque<>(m_size = n);
     }
 
+    public boolean empty()
+    {
+        return m_elems.isEmpty();
+    }
+
     public void add(E e)
     {
         if (m_elems.size() == m_size)
@@ -40,8 +45,6 @@ public class CSDBoundedQueue<E> {
 
         return true;
     }
-
-
     public E remove()
     {
         return m_elems.removeFirst();
@@ -52,12 +55,10 @@ public class CSDBoundedQueue<E> {
         return m_elems.pollFirst();
     }
 
-
     public E element()
     {
         return m_elems.getFirst();
     }
-
 
     public E peek()
     {

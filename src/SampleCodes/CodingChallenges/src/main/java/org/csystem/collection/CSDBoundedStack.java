@@ -13,6 +13,7 @@ package org.csystem.collection;
 import org.csystem.collection.exception.FullStackException;
 
 import java.util.EmptyStackException;
+import java.util.Objects;
 
 public class CSDBoundedStack<E> {
     private static final boolean DEBUG = false;
@@ -65,16 +66,9 @@ public class CSDBoundedStack<E> {
 
     public int search(E e)
     {
-        if (e == null) {
-            for (var i = m_top - 1; i >= 0; --i)
-                if (m_elems[i] == null)
-                    return m_top - i;
-        }
-        else {
-            for (var i = m_top - 1; i >= 0; --i)
-                if (e.equals(m_elems[i]))
-                    return m_top - i;
-        }
+        for (var i = m_top - 1; i >= 0; --i)
+            if (Objects.equals(e, m_elems[i]))
+                return m_top - i;
 
         return -1;
     }
