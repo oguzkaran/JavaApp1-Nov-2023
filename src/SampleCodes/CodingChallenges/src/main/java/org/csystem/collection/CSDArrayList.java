@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------
 	FILE		: CSDArrayList.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	LAST UPDATE	: 10th Mar 2024
+	LAST UPDATE	: 30th Mar 2024
 
 	CSDArrayList class
 
@@ -126,31 +126,31 @@ public class CSDArrayList<E> implements List<E> {
     @Override
     public int indexOf(Object o)
     {
-        return 0;
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public int lastIndexOf(Object o)
     {
-        return 0;
+        throw new UnsupportedOperationException("TODO");
     }
 
     @Override
     public ListIterator<E> listIterator()
     {
-        return null;
+        throw new UnsupportedOperationException("Unsupported");
     }
 
     @Override
     public ListIterator<E> listIterator(int index)
     {
-        return null;
+        throw new UnsupportedOperationException("Unsupported");
     }
 
     @Override
     public List<E> subList(int fromIndex, int toIndex)
     {
-        return null;
+        throw new UnsupportedOperationException("Unsupported");
     }
 
     @Override

@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------
 	FILE		: CSDBoundedStack.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	LAST UPDATE	: 17th Mar 2024
+	LAST UPDATE	: 30th Mar 2024
 
 	CSDBoundedStack class
 
@@ -10,34 +10,72 @@
 ----------------------------------------------------------------*/
 package org.csystem.collection;
 
+import org.csystem.collection.exception.FullStackException;
+
+import java.util.EmptyStackException;
+
 public class CSDBoundedStack<E> {
+    private static final boolean DEBUG = false;
+    private final E [] m_elems;
+    private int m_top;
+
+    @SuppressWarnings("unchecked")
     public CSDBoundedStack(int n)
     {
-        throw new UnsupportedOperationException("TODO");
+        m_elems = (E[])new Object[n];
     }
 
     public boolean empty()
     {
-        throw new UnsupportedOperationException("TODO");
+        return m_top == 0;
     }
 
     public E push(E e)
     {
-        throw new UnsupportedOperationException("TODO");
+        if (DEBUG)
+            assert m_top <= m_elems.length: "Invalid modification for top index";
+
+        if (m_top == m_elems.length)
+            throw new FullStackException();
+
+        m_elems[m_top++] = e;
+
+        return e;
     }
 
     public E pop()
     {
-        throw new UnsupportedOperationException("TODO");
+        if (empty())
+            throw new EmptyStackException();
+
+        var e = m_elems[--m_top];
+
+        m_elems[m_top] = null;
+
+        return e;
     }
 
     public E peek()
     {
-        throw new UnsupportedOperationException("TODO");
+        if (empty())
+            throw new EmptyStackException();
+
+        return m_elems[m_top - 1];
     }
 
     public int search(E e)
     {
-        throw new UnsupportedOperationException("TODO");
+        if (e == null) {
+            for (var i = m_top - 1; i >= 0; --i)
+                if (m_elems[i] == null)
+                    return m_top - i;
+        }
+        else {
+            for (var i = m_top - 1; i >= 0; --i)
+                if (e.equals(m_elems[i]))
+                    return m_top - i;
+        }
+
+        return -1;
     }
 }
