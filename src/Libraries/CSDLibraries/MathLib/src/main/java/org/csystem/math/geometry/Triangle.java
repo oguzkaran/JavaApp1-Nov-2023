@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: Triangle.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 24th March 2024
+	Last UPDATE	: 20th April 2024
 
 	Triangle class that represents a triangle
 
@@ -102,6 +102,12 @@ public class Triangle {
     public boolean equals(Object obj)
     {
         throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public int hashCode()
+    {
+        throw new UnsupportedOperationException("TODO:");
     }
 
     @Override

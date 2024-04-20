@@ -1,28 +1,24 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki demo Örnekte TreeSet<T> içerisindeki elemanlar azalan sırada tutulmaktadır
+    Sınıf Çalışması: Parametresi ile aldığı bir yazının tüm karakterlerinin farklı olup olmadığını test eden areAllUnique
+    isimli metodu UtilLib içerisindeki StringUtil sınıfına ekleyiniz
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 import com.karandev.io.util.console.Console;
-import org.csystem.random.lottery.NumericLottery;
+import org.csystem.app.fraction.ComplexFactory;
+import org.csystem.math.Complex;
 
-import java.util.Random;
-
-import static org.csystem.util.array.ArrayUtil.print;
+import java.util.HashSet;
 
 class Application {
     public static void run(String[] args)
     {
-        var random = new Random();
-        var lottery = new NumericLottery(random);
+        var factory = new ComplexFactory();
+        var set = new HashSet<Complex>();
 
-        while (true) {
-            var n = Console.readInt("Kaç tane kupon oynamak istersiniz:");
+        while (set.add(factory.createRandomComplexNumber(-10, 10)))
+            ;
 
-            if (n <= 0)
-                break;
-
-            print(2, lottery.getNumbers(n));
-        }
+        set.forEach(Console::writeLine);
     }
 }

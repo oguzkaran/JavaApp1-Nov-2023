@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: Line.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 24th March 2024
+	Last UPDATE	: 20th April 2024
 
 	Line class that represents a line
 
@@ -84,6 +84,12 @@ public class Line {
     public boolean equals(Object obj)
     {
         throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public int hashCode()
+    {
+        throw new UnsupportedOperationException("TODO:");
     }
 
     @Override

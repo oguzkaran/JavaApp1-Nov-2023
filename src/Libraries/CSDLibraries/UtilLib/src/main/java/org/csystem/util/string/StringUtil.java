@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: StringUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 8th Nov 2023
+	Last UPDATE	: 20th April 2023
 
 	Utility class for string operations
 
@@ -32,6 +32,12 @@ public final class StringUtil {
 
     private StringUtil()
     {}
+
+    public static boolean areAllUnique(String str)
+    {
+        throw new UnsupportedOperationException("TODO");
+    }
+
     public static String capitalize(String s)
     {
         return s.isEmpty() ? "" : Character.toUpperCase(s.charAt(0)) + s.substring(1).toLowerCase();

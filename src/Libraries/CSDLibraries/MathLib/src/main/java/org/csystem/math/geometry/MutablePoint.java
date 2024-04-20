@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: MutablePoint.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 17th Mar 2024
+	Last UPDATE	: 20th April 2024
 	
 	MutablePoint class that represents a point in cartesian
 	plane
@@ -99,6 +99,13 @@ public final class MutablePoint {
 	public boolean equals(Object other)
 	{
 		return other instanceof MutablePoint p && PointCommon.equals(m_x, m_y, p.m_x, p.m_y);
+	}
+
+
+	@Override
+	public int hashCode()
+	{
+		return PointCommon.hashCode(m_x, m_y);
 	}
 
 	@Override

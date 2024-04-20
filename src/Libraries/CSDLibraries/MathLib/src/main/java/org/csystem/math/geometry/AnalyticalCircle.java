@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: AnalyticalCircle.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 17th Mar 2024
+	Last UPDATE	: 20th April 2024
 
 	AnalyticalCircle class that represents a circle
 	in cartesian plane
@@ -10,6 +10,8 @@
 	All Right Free
 -------------------------------------------------------------*/
 package org.csystem.math.geometry;
+
+import java.util.Objects;
 
 public class AnalyticalCircle extends Circle {
     private static final double DELTA = 0.000001;
@@ -86,6 +88,12 @@ public class AnalyticalCircle extends Circle {
     public boolean equals(Object other)
     {
         return other instanceof AnalyticalCircle ac && super.equals(ac) && m_center.equals(ac.m_center);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash((Circle)this, m_center);
     }
 
     @Override

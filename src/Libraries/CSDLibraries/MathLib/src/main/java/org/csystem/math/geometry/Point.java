@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: Point.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 17th Mar 2024
+	Last UPDATE	: 20th April 2024
 	
 	Immutable Point class that represents a point in cartesian
 	plane
@@ -10,6 +10,8 @@
 	All Right Free
 -------------------------------------------------------------*/
 package org.csystem.math.geometry;
+
+import java.util.Objects;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -79,6 +81,12 @@ public final class Point {
 	public boolean equals(Object other)
 	{
 		return other instanceof Point p && PointCommon.equals(m_x, m_y, p.m_x, p.m_y);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return PointCommon.hashCode(m_x, m_y);
 	}
 
 	@Override
