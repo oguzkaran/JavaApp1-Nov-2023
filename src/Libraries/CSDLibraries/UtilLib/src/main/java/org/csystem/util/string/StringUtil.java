@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: StringUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 20th April 2023
+	Last UPDATE	: 21st April 2023
 
 	Utility class for string operations
 
@@ -11,6 +11,7 @@
 package org.csystem.util.string;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.random.RandomGenerator;
 
 public final class StringUtil {
@@ -35,7 +36,12 @@ public final class StringUtil {
 
     public static boolean areAllUnique(String str)
     {
-        throw new UnsupportedOperationException("TODO");
+        var set = new HashSet<Character>();
+
+        for (var i = 0; i  < str.length(); ++i)
+            set.add(str.charAt(i));
+
+        return set.size() == str.length();
     }
 
     public static String capitalize(String s)
