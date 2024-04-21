@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------
-	FILE		: OterableUtil.java
+	FILE		: IterableUtil.java
 	AUTHOR		: Java-Mar-2023 Group
 	Last UPDATE	: 21st April 2024
 
