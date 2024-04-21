@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: ArrayUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 29th Oct 2023
+	Last UPDATE	: 21st April 2024
 
 	Utility class for array operations
 
@@ -11,6 +11,9 @@
 package org.csystem.util.array;
 
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.random.RandomGenerator;
 
 public final class ArrayUtil {
@@ -19,7 +22,6 @@ public final class ArrayUtil {
 
     private static void bubbleSortAscending(int [] a)
     {
-
         for (int i = 0; i < a.length - 1; ++i)
             for (int k = 0; k < a.length - 1 - i; ++k)
                 if (a[k + 1] < a[k])
@@ -65,7 +67,6 @@ public final class ArrayUtil {
             a[i] = max;
         }
     }
-
     public static void addBy(int [] a, int val)
     {
         for (int i = 0; i < a.length; ++i)
@@ -76,6 +77,30 @@ public final class ArrayUtil {
     {
         for (int [] array : a)
             addBy(array, val);
+    }
+
+    public static <T> boolean areAllUnique(T [] a)
+    {
+        var set = new HashSet<T>();
+
+        Collections.addAll(set, a);
+
+        return set.size() == a.length;
+    }
+
+    public static boolean areAllUnique(int [] a)
+    {
+        return Arrays.stream(a).distinct().count() == a.length;
+    }
+
+    public static boolean areAllUnique(long [] a)
+    {
+        return Arrays.stream(a).distinct().count() == a.length;
+    }
+
+    public static boolean areAllUnique(double [] a)
+    {
+        return Arrays.stream(a).distinct().count() == a.length;
     }
 
     public static void bubbleSort(int [] a)
