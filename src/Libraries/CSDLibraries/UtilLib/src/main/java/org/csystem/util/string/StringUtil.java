@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: StringUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 21st April 2023
+	Last UPDATE	: 27th April 2023
 
 	Utility class for string operations
 
@@ -42,6 +42,11 @@ public final class StringUtil {
             set.add(str.charAt(i));
 
         return set.size() == str.length();
+    }
+
+    public static boolean areAnagram(CharSequence s1, CharSequence s2)
+    {
+        throw new UnsupportedOperationException("Not yet implemented!...");
     }
 
     public static String capitalize(String s)

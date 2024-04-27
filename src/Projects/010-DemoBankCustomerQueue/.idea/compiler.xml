@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="GenericApp" />
+        <module name="BankCusytomerQueueApp" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="BankCusytomerQueueApp" options="-parameters" />
       <module name="GenericApp" options="-parameters" />
     </option>
   </component>

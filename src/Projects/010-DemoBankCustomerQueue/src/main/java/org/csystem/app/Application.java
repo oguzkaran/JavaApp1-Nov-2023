@@ -34,9 +34,12 @@ class Application {
                 {
                     Customer c;
 
+                    Console.writeLine("----------------------------------------");
                     Console.writeLine("Order of Customers:");
                     while ((c = priorityQueue.poll()) != null)
                         Console.writeLine(c);
+
+                    Console.writeLine("----------------------------------------");
                 }
             }.start();
         }
