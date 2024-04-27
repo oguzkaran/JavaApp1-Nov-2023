@@ -11,8 +11,10 @@
 package org.csystem.util.string;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.random.RandomGenerator;
+import java.util.stream.IntStream;
 
 public final class StringUtil {
     private static final String LETTERS_EN;
@@ -46,7 +48,38 @@ public final class StringUtil {
 
     public static boolean areAnagram(CharSequence s1, CharSequence s2)
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        int len1 = s1.length();
+        int len2 = s2.length();
+
+        if (len1 != len2)
+            return false;
+
+        var map = new HashMap<Character, Integer>();
+
+        for (var i = 0; i < len1; ++i) {
+            var ch = s1.charAt(i);
+
+            if (!map.containsKey(ch))
+                map.put(ch, 1);
+            else
+                map.put(ch, map.get(ch) + 1);
+        }
+
+        for (var i = 0; i < len2; ++i) {
+            var ch = s2.charAt(i);
+            int count;
+
+            if (!map.containsKey(ch) || (count = map.get(ch)) == 0)
+                return false;
+
+            map.put(ch, count - 1);
+        }
+
+        for (var v : map.values())
+            if (v != 0)
+                return false;
+
+        return true;
     }
 
     public static String capitalize(String s)
