@@ -19,7 +19,7 @@ public class StringUtilAreAllUniqueTest {
         String str;
         boolean expected;
 
-        public DataInfo(String str, boolean expected)
+        DataInfo(String str, boolean expected)
         {
             this.str = str;
             this.expected = expected;
