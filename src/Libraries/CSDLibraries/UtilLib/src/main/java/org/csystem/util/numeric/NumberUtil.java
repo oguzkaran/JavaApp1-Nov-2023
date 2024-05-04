@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: NumberUtil.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 3rd February 2024
+	Last UPDATE	: 4th May 2024
 	
 	Utility class for numeric operations
 	
@@ -14,6 +14,8 @@ import java.math.BigInteger;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 import static java.lang.Math.*;
 
@@ -128,12 +130,7 @@ public final class NumberUtil {
 
     public static long factorial(int n)
     {
-        var result = 1L;
-
-        for (var i = 2L; i <= n; ++i)
-            result *= i;
-
-        return result;
+        return LongStream.rangeClosed(2, n).reduce(1, (r, i) -> r * i);
     }
 
     public static BigInteger factorialBigInteger(int n)
