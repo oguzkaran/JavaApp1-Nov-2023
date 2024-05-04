@@ -35,6 +35,11 @@ public final class StaffFactory {
     private StaffFactory()
     {}
 
+    public static StaffFactory loadFromTextFile(String path) throws IOException
+    {
+        return loadFromTextFile(Path.of(path));
+    }
+
     public static StaffFactory loadFromTextFile(Path path) throws IOException
     {
         var result = new StaffFactory();

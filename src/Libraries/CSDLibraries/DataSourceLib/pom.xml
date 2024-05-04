@@ -11,7 +11,7 @@
 
 	<groupId>org.csystem</groupId>
 	<artifactId>org-csystem-util-datasource</artifactId>
-	<version>11.0.0</version>
+	<version>11.1.0</version>
 	<name>org-csystem-util-datasource</name>
 
 	<repositories>

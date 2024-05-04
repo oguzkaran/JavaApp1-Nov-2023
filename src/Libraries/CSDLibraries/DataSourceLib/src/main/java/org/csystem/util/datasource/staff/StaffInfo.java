@@ -10,11 +10,8 @@ public class StaffInfo {
     private int m_id;
     private String m_name;
     private LocalDate m_birthDate;
-
     private LocalDate m_entryDate;
-
     private LocalDate m_systemEntryDate;
-
     private DayOfWeek m_restDay;
 
     public int getId()

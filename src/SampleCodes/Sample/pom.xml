@@ -70,8 +70,8 @@
 
         <dependency>
             <groupId>org.csystem</groupId>
-            <artifactId>org-system-util-datasource</artifactId>
-            <version>11.0.0</version>
+            <artifactId>org-csystem-util-datasource</artifactId>
+            <version>11.1.0</version>
         </dependency>
 
         <dependency>
