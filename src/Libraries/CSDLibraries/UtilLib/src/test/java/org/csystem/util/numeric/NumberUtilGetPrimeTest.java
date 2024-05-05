@@ -17,11 +17,17 @@ public class NumberUtilGetPrimeTest {
 
     public IntLongDataInfo dataInfo;
 
-
     @Parameterized.Parameters
     public static Collection<IntLongDataInfo> createData()
     {
-        return List.of(new IntLongDataInfo(1, 2),new IntLongDataInfo(4, 7), new IntLongDataInfo(962, 7577), new IntLongDataInfo(17569, 194933));
+        return List.of(
+                new IntLongDataInfo(1, 2),
+                new IntLongDataInfo(2, 3),
+                new IntLongDataInfo(3, 5),
+                new IntLongDataInfo(4, 7),
+                new IntLongDataInfo(962, 7577),
+                new IntLongDataInfo(17569, 194933)
+        );
     }
 
     public NumberUtilGetPrimeTest(IntLongDataInfo dataInfo)

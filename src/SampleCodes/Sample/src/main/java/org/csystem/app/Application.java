@@ -1,17 +1,49 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Stream arayüzlerinin findFirst metotları ilgili Stream'in ilk elemanına geri döner. Stream boş olabileceği için
-    bu metotların geri dönüş değerleriilgili optional sınıfı türündendir
+    Aşağıdaki demo örnekte stokta bulunmayan ilk ürünün bilgileri listelenmiştir. Tüm ürünler stokta ise uygun mesaj
+    verilmiştir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 import com.karandev.io.util.console.Console;
+import org.csystem.util.datasource.factory.ProductFactory;
 
-import java.util.stream.IntStream;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
+import static com.karandev.io.util.console.CommandLineArgs.checkLengthEquals;
 
 class Application {
+    private static void dataExistsCallback(ProductFactory factory)
+    {
+        var products = factory.PRODUCTS;
+
+        products.stream()
+                .filter(p -> p.getStock() <= 0)
+                .findFirst()
+                .ifPresentOrElse(Console::writeLine, () -> Console.writeLine("All products are in stock!..."));
+    }
+
+    private static void dataNotExistsCallback()
+    {
+        Console.writeLine("No product exists'...");
+    }
+
     public static void run(String[] args)
     {
-        IntStream.range(0, 26).forEach(i -> Console.write((char)('A' + i)));
-        IntStream.range(0, 26).forEach(i -> Console.write((char)('a' + i)));
+        try {
+            checkLengthEquals(1, args.length, "wrong number of arguments!...");
+
+            ProductFactory.loadFromTextFile(args[0])
+                    .ifPresentOrElse(Application::dataExistsCallback, Application::dataNotExistsCallback);
+        }
+        catch (DateTimeParseException ignore) {
+            Console.Error.writeLine("Invalid date value(s)!...");
+        }
+        catch (IOException ex) {
+            Console.Error.writeLine("IO problem occurred:%s", ex.getMessage());
+        }
+        catch (Throwable ex) {
+            Console.Error.writeLine("Problem occurred :%s", ex.getMessage());
+        }
     }
 }

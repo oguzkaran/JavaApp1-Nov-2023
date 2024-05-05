@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: NumberUtil.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 4th May 2024
+	Last UPDATE	: 5"     th May 2024
 	
 	Utility class for numeric operations
 	
@@ -16,6 +16,7 @@ import java.util.OptionalInt;
 import java.util.OptionalLong;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 import static java.lang.Math.*;
 
@@ -123,13 +124,10 @@ public final class NumberUtil {
 
     public static BigInteger factorialBigInteger(int n)
     {
-        var result = BigInteger.ONE;
         var nVal = BigInteger.valueOf(n);
 
-        for (var i = BigInteger.TWO; i.compareTo(nVal) <= 0; i = i.add(BigInteger.ONE))
-            result = result.multiply(i);
-
-        return result;
+        return Stream.iterate(BigInteger.TWO, i -> i.compareTo(nVal) <= 0, i -> i.add(BigInteger.ONE))
+                .reduce(BigInteger.ONE, BigInteger::multiply);
     }
 
     public static int fibonacciNumber(int n)
@@ -153,50 +151,18 @@ public final class NumberUtil {
     public static int getDigitsPowSum(int val)
     {
         var n = countDigits(val);
-        var result = 0;
 
-        while (val != 0) {
-            result += (int)pow(val % 10, n);
-            val /= 10;
-        }
-
-        return result;
+        return IntStream.iterate(val, v -> v != 0, v -> v / 10).reduce(0, (r, v) -> r + (int)pow(v % 10, n));
     }
 
     public static long getPrime(int n)
     {
-        var count = 0;
-        var val = 2;
-
-        while (true) {
-            if (isPrime(val))
-                ++count;
-
-            if (count == n)
-                break;
-
-            ++val;
-        }
-
-        return val;
+        return LongStream.iterate(2, v -> v + 1)
+                .filter(NumberUtil::isPrime)
+                .limit(n)
+                .max().getAsLong();
     }
 
-    public static int hardyRamanujanCount(int n)
-    {
-        var count = 0;
-
-        EXIT_LOOP:
-        for (var a = 1; a * a * a < n; ++a)
-            for (var b = a + 1; a * a * a + b * b * b <= n; ++b)
-                if (a * a * a + b * b * b == n) {
-                    if (++count == 2)
-                        break EXIT_LOOP;
-
-                    ++a;
-                }
-
-        return count;
-    }
 
     public static int indexOfPrime(long val)
     {
@@ -217,21 +183,6 @@ public final class NumberUtil {
     public static boolean isArmstrong(int val)
     {
         return val >= 0 && getDigitsPowSum(val) == val;
-    }
-
-    public static boolean isDecimalHarshad(int val)
-    {
-        return val > 0 && val % sumDigits(val) == 0;
-    }
-
-    public static boolean isFactorian(int n)
-    {
-        return n > 0 && digitsFactorialSum(n) == n;
-    }
-
-    public static boolean isHardyRamanujan(int n)
-    {
-        return n > 0 && hardyRamanujanCount(n) == 2;
     }
 
     public static boolean isPerfect(int val)
@@ -261,11 +212,8 @@ public final class NumberUtil {
         if (val % 7 == 0)
             return val == 7;
 
-        for (var i = 11L; i * i <= val; i += 2)
-            if (val % i == 0)
-                return false;
-
-        return true;
+        return LongStream.iterate(11, i -> i * i <= val, i -> i + 2)
+                .noneMatch(i -> val % i == 0);
     }
 
     public static boolean isPrime(BigInteger val)
