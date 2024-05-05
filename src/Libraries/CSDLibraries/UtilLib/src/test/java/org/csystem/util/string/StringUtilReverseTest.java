@@ -1,6 +1,6 @@
 package org.csystem.util.string;
 
-import esen.alideniz.string.StringUtil;
+
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import org.junit.runners.Parameterized;
 import java.util.Collection;
 import java.util.List;
 
-@Ignore
+@Ignore("Written by Ali Deniz Esen")
 @RunWith(Parameterized.class)
 public class StringUtilReverseTest {
 

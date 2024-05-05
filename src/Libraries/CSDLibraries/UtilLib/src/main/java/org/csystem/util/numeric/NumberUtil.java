@@ -88,12 +88,7 @@ public final class NumberUtil {
 
     public static int calculateDigitalRoot(int val)
     {
-        var root = abs(val);
-
-        while ((root = sumDigits(root)) > 9)
-            ;
-
-        return root;
+        return IntStream.iterate(abs(val), NumberUtil::sumDigits).filter(v -> v <= 9).findFirst().getAsInt();
     }
 
     public static int countDigits(long val)
@@ -118,14 +113,7 @@ public final class NumberUtil {
 
     public static long digitsFactorialSum(int n)
     {
-        var total = 0L;
-
-        while (n != 0) {
-            total += factorial(n % 10);
-            n /= 10;
-        }
-
-        return total;
+        return LongStream.iterate(abs(n), v -> v != 0, v -> v / 10).reduce(0, (r, v) -> r + factorial((int)(v % 10)));
     }
 
     public static long factorial(int n)

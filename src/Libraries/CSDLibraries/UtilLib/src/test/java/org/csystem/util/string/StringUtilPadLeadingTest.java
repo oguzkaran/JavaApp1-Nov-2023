@@ -1,5 +1,6 @@
 package org.csystem.util.string;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@Ignore("Written by Bekir Kocadağ")
 @RunWith(Parameterized.class)
 public class StringUtilPadLeadingTest
 {

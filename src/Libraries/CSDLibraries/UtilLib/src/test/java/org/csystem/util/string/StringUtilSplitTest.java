@@ -8,7 +8,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.List;
 
-@Ignore
+@Ignore("Written by Ali Deniz Esen")
 @RunWith(Parameterized.class)
 public class StringUtilSplitTest {
     public DataInfo m_dataInfo;
@@ -43,7 +43,7 @@ public class StringUtilSplitTest {
     }
     @Test
     public void givenString_returnStringArray(){
-        Assert.assertEquals(StringUtil.split(m_dataInfo.s,m_dataInfo.separators,m_dataInfo.removeEmpties) ,m_dataInfo.expected);
+        Assert.assertArrayEquals(StringUtil.split(m_dataInfo.s,m_dataInfo.separators,m_dataInfo.removeEmpties) ,m_dataInfo.expected);
     }
 
 }

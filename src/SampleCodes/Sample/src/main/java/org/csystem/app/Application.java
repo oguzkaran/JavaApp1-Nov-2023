@@ -1,5 +1,6 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki demo örneği inceleyiniz
+    Stream arayüzlerinin findFirst metotları ilgili Stream'in ilk elemanına geri döner. Stream boş olabileceği için
+    bu metotların geri dönüş değerleriilgili optional sınıfı türündendir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
@@ -7,23 +8,10 @@ import com.karandev.io.util.console.Console;
 
 import java.util.stream.IntStream;
 
-import static com.karandev.io.util.console.CommandLineArgs.checkLengthEquals;
-
 class Application {
     public static void run(String[] args)
     {
-        try {
-            checkLengthEquals(2, args.length, "wrong number of arguments!...");
-            IntStream.rangeClosed(Integer.parseInt(args[0]), Integer.parseInt(args[1]))
-                    .forEach(i -> Console.write("%d ", i));
-
-            Console.writeLine();
-        }
-        catch (NumberFormatException ignore) {
-            Console.Error.writeLine("Invalid values!...");
-        }
-        catch (Throwable ex) {
-            Console.Error.writeLine("Problem occurred :%s", ex.getMessage());
-        }
+        IntStream.range(0, 26).forEach(i -> Console.write((char)('A' + i)));
+        IntStream.range(0, 26).forEach(i -> Console.write((char)('a' + i)));
     }
 }

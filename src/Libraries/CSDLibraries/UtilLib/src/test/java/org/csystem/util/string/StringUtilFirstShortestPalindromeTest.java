@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-@Ignore
+@Ignore("Mahmut Gazi Çabalar")
 @RunWith(Parameterized.class)
 public class StringUtilFirstShortestPalindromeTest {
     DataInfo data;

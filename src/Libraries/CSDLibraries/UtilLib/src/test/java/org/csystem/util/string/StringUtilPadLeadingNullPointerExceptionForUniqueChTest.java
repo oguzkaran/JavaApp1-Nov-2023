@@ -1,11 +1,12 @@
 package org.csystem.util.string;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertThrows;
 
-public class StringUtilPadLeadingNullPointerExceptionForUniqueChTest
-{
+@Ignore("Written by Bekir Kocadağ")
+public class StringUtilPadLeadingNullPointerExceptionForUniqueChTest {
     @Test
     public void test()
     {

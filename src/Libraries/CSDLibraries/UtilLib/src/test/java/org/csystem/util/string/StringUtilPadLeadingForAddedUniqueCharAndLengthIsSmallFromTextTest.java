@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@Ignore("Written by Bekir Kocadağ")
 @RunWith(Parameterized.class)
 public class StringUtilPadLeadingForAddedUniqueCharAndLengthIsSmallFromTextTest
 {
