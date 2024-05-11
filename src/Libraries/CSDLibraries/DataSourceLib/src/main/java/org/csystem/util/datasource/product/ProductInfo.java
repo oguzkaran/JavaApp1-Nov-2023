@@ -2,7 +2,7 @@ package org.csystem.util.datasource.product;
 
 import java.math.BigDecimal;
 
-public class ProductInfo implements Comparable<ProductInfo>, Cloneable {
+public class ProductInfo implements Comparable<ProductInfo> {
     private int m_id;
     private String m_name = "";
     private int m_stock;
@@ -98,16 +98,5 @@ public class ProductInfo implements Comparable<ProductInfo>, Cloneable {
     public int compareTo(ProductInfo other)
     {
         return m_price.compareTo(other.m_price);
-    }
-
-    @Override
-    public Object clone()
-    {
-        return new ProductInfo()
-                .setId(m_id)
-                .setName(m_name)
-                .setStock(m_stock)
-                .setCost(m_cost)
-                .setPrice(m_price);
     }
 }

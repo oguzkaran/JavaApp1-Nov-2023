@@ -32,6 +32,11 @@ public class NumberFactory {
         }
     }
 
+    public static NumberFactory loadFromTextFile(String path) throws IOException
+    {
+        return loadFromTextFile(Path.of(path));
+    }
+
     public int [] getNumbers()
     {
         return Arrays.copyOf(m_numbers, m_numbers.length);

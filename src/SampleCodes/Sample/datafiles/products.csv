@@ -7,7 +7,7 @@ Kod,Ad,Miktar,Maliyet,Satış
 6,"Split Peas - Yellow, Dry",740,835.99,1064.83
 7,Cornflakes,499,957.2,3422.08
 8,Lid - 3oz Med Rec,319,468.3,2824.83
-9,Cheese - Bocconcini,662,967.29,1165.58
+9,Cheese - Bocconcini,-6,967.29,1165.58
 10,Flower - Commercial Spider,382,534.05,3972.93
 11,Propel Sport Drink,293,702.16,2364.25
 12,Wasabi Powder,389,607.36,3373.66
@@ -65,7 +65,7 @@ Kod,Ad,Miktar,Maliyet,Satış
 64,Compound - Rum,129,531.09,2087.52
 65,Appetizer - Cheese Bites,279,334.26,3034.17
 66,Shark - Loin,761,565.97,1359.67
-67,Lemonade - Pineapple Passion,321,329.51,976.13
+67,Lemonade - Pineapple Passion,-45,329.51,976.13
 68,Bagel - Ched Chs Presliced,988,384.64,3400.17
 69,Coffee - Decaffeinato Coffee,917,870.96,2361.48
 70,Dry Ice,966,441.87,2159.22
@@ -229,6 +229,7 @@ Kod,Ad,Miktar,Maliyet,Satış
 228,Huck Towels White,183,502.29,1215.41
 229,"Trout - Hot Smkd, Dbl Fillet",64,384.14,1418.2
 230,Wine - Chianti Classico Riserva,635,346.01,1997.58
+67,Orange,-45,329.51,976.13
 231,Spinach - Spinach Leaf,876,741.93,1149.2
 232,Sobe - Berry Energy,717,192.3,3830.53
 233,Plasticforkblack,63,831.66,3581.84

@@ -1,7 +1,7 @@
 package org.csystem.random.lottery;
 
-import java.util.TreeSet;
 import java.util.random.RandomGenerator;
+import java.util.stream.IntStream;
 
 public class NumericLottery {
     private final RandomGenerator m_randomGenerator;
@@ -13,26 +13,14 @@ public class NumericLottery {
 
     public int [] getNumbers()
     {
-        var numbers = new int [6];
-        var set = new TreeSet<Integer>();
-
-        while (set.size() != 6)
-            set.add(m_randomGenerator.nextInt(1, 50));
-
-        var i = 0;
-
-        for (var val : set)
-            numbers[i++] = val;
-
-        return numbers;
+        return IntStream.generate(() -> m_randomGenerator.nextInt(1, 50)).distinct().limit(6).sorted().toArray();
     }
 
     public int [][] getNumbers(int count)
     {
         int [][] numbers = new int[count][];
 
-        for (int i = 0; i < count; ++i)
-            numbers[i] = getNumbers();
+        IntStream.range(0, count).forEach(i -> numbers[i] = getNumbers());
 
         return numbers;
     }

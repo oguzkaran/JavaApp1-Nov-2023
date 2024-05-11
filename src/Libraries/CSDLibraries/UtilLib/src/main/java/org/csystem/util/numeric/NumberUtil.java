@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: NumberUtil.java
 	AUTHOR		: JavaApp1-Nov-2023 Group
-	Last UPDATE	: 5"     th May 2024
+	Last UPDATE	: 11th May 2024
 	
 	Utility class for numeric operations
 	
@@ -216,6 +216,11 @@ public final class NumberUtil {
                 .noneMatch(i -> val % i == 0);
     }
 
+    public static boolean isNotPrime(long val)
+    {
+        return !isPrime(val);
+    }
+
     public static boolean isPrime(BigInteger val)
     {
         if (val.compareTo(BigInteger.ONE) <= 0)
@@ -238,6 +243,11 @@ public final class NumberUtil {
                  return false;
 
         return true;
+    }
+
+    public static boolean isNotPrime(BigInteger val)
+    {
+        return !isPrime(val);
     }
 
     public static boolean isPrimeX(long val)
