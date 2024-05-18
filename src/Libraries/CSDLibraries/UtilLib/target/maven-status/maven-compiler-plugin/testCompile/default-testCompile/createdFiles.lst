@@ -107,6 +107,7 @@ org\csystem\util\numeric\data\NumberUtilNumberToTextTRTest.class
 org\csystem\util\numeric\NumberUtilSumFactorsTest.class
 org\csystem\util\string\StringUtilPadLeadingNullPointerExceptionForUniqueChTest.class
 org\csystem\util\bitwise\BitwiseUtilIsSetLongTest$DataInfo.class
+org\csystem\util\collection\CollectionUtilToModifiableSetTests.class
 org\csystem\util\collection\CollectionUtilUtilAreAllUniqueTest$DataInfo.class
 org\csystem\util\numeric\NumberUtilFibonacciTest.class
 org\csystem\util\collection\CollectionUtilUtilAreAllUniqueTest.class

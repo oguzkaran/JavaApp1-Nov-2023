@@ -10,10 +10,9 @@
 -------------------------------------------------------------*/
 package org.csystem.util.collection;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class CollectionUtil {
@@ -56,13 +55,35 @@ public final class CollectionUtil {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    public static <T> List<T> toModifiableList(Stream<T> stream)
+    public static <T> List<T> toModifiableList(Stream<? extends T> stream)
     {
         return toModifiableList(stream.toList());
     }
 
-    public static <T> List<T> toModifiableList(List<T> list)
+    public static <T> List<T> toModifiableList(List<? extends T> list)
     {
         return new ArrayList<>(list);
+    }
+
+    public static <T,K,U> Map<K,U> toModifiableMap(Stream<? extends T> stream,
+                                                     Function<? super T,? extends K> keyMapper,
+                                                     Function<? super T,? extends U> valueMapper)
+    {
+        return toModifiableMap(stream.collect(Collectors.toMap(keyMapper, valueMapper)));
+    }
+
+    public static <K,V> Map<K,V> toModifiableMap(Map<K, V> map)
+    {
+        return new HashMap<>(map);
+    }
+
+    public static <T> Set<T> toModifiableSet(Stream<? extends T> stream)
+    {
+        return toModifiableSet(stream.collect(Collectors.toSet()));
+    }
+
+    public static <T> Set<T> toModifiableSet(Set<? extends T> set)
+    {
+        return new HashSet<>(set);
     }
 }

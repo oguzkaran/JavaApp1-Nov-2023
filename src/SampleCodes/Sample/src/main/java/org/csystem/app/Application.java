@@ -1,36 +1,24 @@
 /*----------------------------------------------------------------------------------------------------------------------
-    Aşağıdaki demo örneği inceleyiniz
+    Aşağıdaki demo örnekte klavyeden sıfır girilene kadar alınan int türden sayılara ilişkin çeşitli istatistiksel bilgiler elde
+    edilmiştir
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
 import com.karandev.io.util.console.Console;
-import org.csystem.util.collection.CollectionUtil;
-import org.csystem.util.datasource.factory.NameFactory;
 
-import static com.karandev.io.util.console.CommandLineArgs.checkLengthEquals;
+import java.util.stream.IntStream;
 
 class Application {
     public static void run(String[] args)
     {
-        checkLengthEquals(2, args.length, "wrong number of arguments!...");
+        var result =  IntStream.generate(() -> Console.readInt("Bir sayı giriniz:"))
+                .takeWhile(v -> v != 0)
+                .summaryStatistics();
 
-        try {
-            var factory = NameFactory.loadFromTextFile(args[0]);
-            var text = args[1].toLowerCase();
-
-            var names = factory.NAMES.stream()
-                    .map(String::toLowerCase)
-                    .filter(s -> s.contains(text))
-                    .toList();
-
-            names.forEach(Console::writeLine);
-            names = CollectionUtil.toModifiableList(names);
-            names.add("ali");
-            names.forEach(Console::writeLine);
-        }
-        catch (Throwable ex) {
-            Console.Error.writeLine("Problem occurred:%s", ex.getClass().getName());
-        }
+        if (result.getCount() != 0)
+            Console.writeLine("Rapor:%nToplam:%d%nOrtalama:%f%nGirilen sayı miktarı:%d%nEn büyük sayı:%d%nEn küçük sayı:%d",
+                    result.getSum(), result.getAverage(), result.getCount(), result.getMax(), result.getMax());
+        else
+            Console.writeLine("Hiç sayı girmediniz!...");
     }
 }
-

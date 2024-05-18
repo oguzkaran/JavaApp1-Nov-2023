@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.csystem.util.collection.CollectionUtilToModifiableListTests
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.145 s -- in org.csystem.util.collection.CollectionUtilToModifiableListTests
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.040 s -- in org.csystem.util.collection.CollectionUtilToModifiableListTests

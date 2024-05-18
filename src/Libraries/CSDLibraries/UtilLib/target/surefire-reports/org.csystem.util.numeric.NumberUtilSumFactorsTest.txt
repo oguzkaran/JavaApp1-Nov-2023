@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.csystem.util.numeric.NumberUtilSumFactorsTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 0, Skipped: 9, Time elapsed: 0.002 s -- in org.csystem.util.numeric.NumberUtilSumFactorsTest
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 9, Time elapsed: 0.008 s -- in org.csystem.util.numeric.NumberUtilSumFactorsTest

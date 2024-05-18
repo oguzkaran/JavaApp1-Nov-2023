@@ -48,6 +48,7 @@ D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\ja
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\numeric\data\LongIntDataInfo.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\numeric\NumberUtilIsPowerOfTwoTest.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\string\StringUtilPadLeading2Test.java
+D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\collection\CollectionUtilToModifiableSetTests.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\bitwise\BitwiseUtilIndicesOfSetBitsIntTest.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\bitwise\BitwiseUtilIsSetLongTest.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\bitwise\BitwiseUtilSetBitIntTest.java
