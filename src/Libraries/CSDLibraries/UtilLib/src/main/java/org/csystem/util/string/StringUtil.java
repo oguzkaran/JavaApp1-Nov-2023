@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: StringUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 28th April 2023
+	Last UPDATE	: 18th May 2024
 
 	Utility class for string operations
 
@@ -138,7 +138,7 @@ public final class StringUtil {
 
     public static String [] generateRandomTexts(RandomGenerator randomGenerator, int count, int min, int bound, String sourceText)
     {
-        String [] str = new String[count];
+        var str = new String[count];
 
         for (int i = 0; i < count; ++i)
             str[i] = generateRandomText(randomGenerator, randomGenerator.nextInt(min, bound), sourceText);

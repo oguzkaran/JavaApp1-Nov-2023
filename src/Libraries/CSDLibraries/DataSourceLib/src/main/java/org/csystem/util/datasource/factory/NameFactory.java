@@ -28,5 +28,10 @@ public class NameFactory {
         }
     }
 
+    public static NameFactory loadFromTextFile(String path) throws IOException
+    {
+        return loadFromTextFile(Path.of(path));
+    }
+
     //...
 }

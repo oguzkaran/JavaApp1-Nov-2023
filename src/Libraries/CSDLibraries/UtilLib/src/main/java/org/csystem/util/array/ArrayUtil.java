@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: ArrayUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 11th May 2024
+	Last UPDATE	: 18th May 2024
 
 	Utility class for array operations
 
@@ -12,6 +12,7 @@ package org.csystem.util.array;
 
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 import java.util.random.RandomGenerator;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
@@ -112,20 +113,6 @@ public final class ArrayUtil {
             bubbleSortAscending(a);
     }
 
-    public static void drawHistogram(int [] data, int n, char ch)
-    {
-        int maxVal = max(data);
-
-        for (int val : data) {
-            int count = (int)Math.floor(val * n / (double)maxVal);
-
-            while (count-- > 0)
-                System.out.print(ch);
-
-            System.out.println();
-        }
-    }
-
     public static void fillRandomArray(RandomGenerator randomGenerator, int [][] a, int min, int bound)
     {
         for (int i = 0; i < a.length; ++i)
@@ -137,6 +124,11 @@ public final class ArrayUtil {
     {
         for (int i = 0; i < a.length; ++i)
             a[i] = randomGenerator.nextInt(min, bound);
+    }
+
+    public static <T> void forEach(T [] a, Consumer<? super T> consumer)
+    {
+        Arrays.stream(a).forEach(consumer);
     }
 
     public static int [] generateRandomArray(RandomGenerator randomGenerator, int count, int min, int bound)
@@ -156,10 +148,9 @@ public final class ArrayUtil {
 
     public static int [] histogramData(int [] a, int n)
     {
-        int [] counts = new int[n + 1];
+        var counts = new int[n + 1];
 
-        for (int val : a)
-            ++counts[val];
+        Arrays.stream(a).forEach(v -> ++counts[v]);
 
         return counts;
     }
@@ -171,19 +162,17 @@ public final class ArrayUtil {
 
     public static int min(int [] a)
     {
-        return Arrays.stream(a).max().getAsInt();
+        return Arrays.stream(a).min().getAsInt();
     }
 
     public static void multiplyBy(int [] a, int val)
     {
-        for (int i = 0; i < a.length; ++i)
-            a[i] *= val;
+        IntStream.range(0, a.length).forEach(i -> a[i] *= val);
     }
 
     public static void multiplyBy(int [][] a, int val)
     {
-        for (int[] array : a)
-            multiplyBy(array, val);
+        Arrays.stream(a).forEach(array -> multiplyBy(array, val));
     }
 
     public static int partitionByThresholdGreater(int [] a, int threshold)
@@ -237,22 +226,18 @@ public final class ArrayUtil {
 
     public static void print(int [] a, String sep, String end)
     {
-        for (int val : a)
-            System.out.printf("%d%s", val, sep);
-
+        Arrays.stream(a).forEach(v -> System.out.printf("%d%s", v, sep));
         System.out.print(end);
     }
 
     public static void print(double [] a)
     {
-        for (double val : a)
-            System.out.printf("%f%n", val);
+        Arrays.stream(a).forEach(v -> System.out.printf("%f%n", v));
     }
 
     public static void print(long [] a)
     {
-        for (long val : a)
-            System.out.printf("%d%n", val);
+        Arrays.stream(a).forEach(v -> System.out.printf("%d%n", v));
     }
 
     public static void print(int [][] a)
@@ -262,8 +247,7 @@ public final class ArrayUtil {
 
     public static void print(int n, int [][] a)
     {
-        for (int[] array : a)
-            print(n, array);
+        Arrays.stream(a).forEach(array -> print(n, array));
     }
 
     public static void print(String [] str)
@@ -273,9 +257,7 @@ public final class ArrayUtil {
 
     public static void print(String [] str, String sep, String end)
     {
-        for (String s : str)
-            System.out.printf("%s%s", s, sep);
-
+        Arrays.stream(str).forEach(s -> System.out.printf("%s%s", s, sep));
         System.out.print(end);
     }
 
@@ -322,12 +304,7 @@ public final class ArrayUtil {
 
     public static int sum(int [] a)
     {
-        int total = 0;
-
-        for (int val : a)
-            total += val;
-
-        return total;
+        return Arrays.stream(a).sum();
     }
 
     public static void swap(int [] a, int i, int k)

@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: MatrixUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 29th Oct 2023
+	Last UPDATE	: 18th May 2024
 
 	Utility class for matrix operations
 
@@ -12,6 +12,7 @@ package org.csystem.util.matrix;
 
 import org.csystem.util.array.ArrayUtil;
 
+import java.util.Arrays;
 import java.util.random.RandomGenerator;
 
 
@@ -52,13 +53,7 @@ public final class MatrixUtil {
 
     public static boolean isMatrix(int [][] a)
     {
-        int n = a[0].length;
-
-        for (int i = 1; i < a.length; ++i)
-            if (a[i].length != n)
-                return false;
-
-        return true;
+        return Arrays.stream(a).noneMatch(array -> array.length != a[0].length);
     }
 
     public static boolean isSquareMatrix(int [][] a)
