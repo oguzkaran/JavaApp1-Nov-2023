@@ -41,6 +41,7 @@ D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\ja
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\array\ArrayUtilAreAllUniqueGenericTest.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\string\StringUtilPadLeadingNullPointerExceptionForDefaultChTest.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\bitwise\BitwiseUtilToBinaryStrLongTest.java
+D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\collection\CollectionUtilToModifiableListTests.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\numeric\NumberUtilDigitsFactorialSumTest.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\bitwise\BitwiseUtilClearBitIntTest.java
 D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\UtilLib\src\test\java\org\csystem\util\bitwise\BitwiseUtilLowestSetBitIndexIntTest.java

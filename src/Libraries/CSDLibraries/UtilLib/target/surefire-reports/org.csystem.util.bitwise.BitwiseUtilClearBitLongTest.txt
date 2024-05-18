@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.csystem.util.bitwise.BitwiseUtilClearBitLongTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.017 s -- in org.csystem.util.bitwise.BitwiseUtilClearBitLongTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.002 s -- in org.csystem.util.bitwise.BitwiseUtilClearBitLongTest

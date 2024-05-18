@@ -61,6 +61,7 @@ org\csystem\util\collection\CollectionUtilUtilAreAllUniqueTest$1.class
 org\csystem\util\string\StringUtilSplitTest$DataInfo.class
 org\csystem\util\string\StringUtilAreAnagramTest.class
 org\csystem\util\bitwise\BitwiseUtilIsSetIntTest$DataInfo.class
+org\csystem\util\collection\CollectionUtilToModifiableListTests.class
 org\csystem\util\numeric\NumberUtilIsArmstrongTest$DataInfo.class
 org\csystem\util\string\StringUtilPadLeadingForAddedUniqueCharAndLengthIsSmallFromTextTest$DataInfo.class
 org\csystem\util\bitwise\BitwiseUtilToBinaryStrIntTest$DataInfo.class

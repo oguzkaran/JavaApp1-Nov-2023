@@ -4,46 +4,33 @@
 package org.csystem.app;
 
 import com.karandev.io.util.console.Console;
-import org.csystem.util.array.ArrayUtil;
-import org.csystem.util.datasource.generator.random.ObjectArrayGenerator;
-
-import java.util.Arrays;
+import org.csystem.util.collection.CollectionUtil;
+import org.csystem.util.datasource.factory.NameFactory;
 
 import static com.karandev.io.util.console.CommandLineArgs.checkLengthEquals;
 
 class Application {
     public static void run(String[] args)
     {
-        checkLengthEquals(1, args.length, "wrong number of arguments!...");
+        checkLengthEquals(2, args.length, "wrong number of arguments!...");
 
         try {
-            var count = Integer.parseInt(args[0]);
-            var generator = new ObjectArrayGenerator();
-            var objects = Arrays.stream(generator.createObjects(count))
-                    .peek(Console::writeLine)
-                    .filter(o -> !(o instanceof Double))
-                    .toArray();
+            var factory = NameFactory.loadFromTextFile(args[0]);
+            var text = args[1].toLowerCase();
 
-            Console.writeLine("###################################################");
-            ArrayUtil.forEach(objects, Console::writeLine);
+            var names = factory.NAMES.stream()
+                    .map(String::toLowerCase)
+                    .filter(s -> s.contains(text))
+                    .toList();
 
-        }
-        catch (NumberFormatException ignore) {
-            Console.Error.writeLine("Invalid values!...");
+            names.forEach(Console::writeLine);
+            names = CollectionUtil.toModifiableList(names);
+            names.add("ali");
+            names.forEach(Console::writeLine);
         }
         catch (Throwable ex) {
-            Console.Error.writeLine("Problem occurred:%s", ex.getMessage());
+            Console.Error.writeLine("Problem occurred:%s", ex.getClass().getName());
         }
     }
 }
 
-interface MyCollector<T, A, R> {
-    //...
-}
-
-class MyStream<T> {
-    public <R, A> R collect(MyCollector<? super T, A, R> collector)
-    {
-        throw new UnsupportedOperationException();
-    }
-}

@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: CollectionUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 21st April 2024
+	Last UPDATE	: 18th May 2024
 
 	Utility class for collection operations
 
@@ -10,8 +10,11 @@
 -------------------------------------------------------------*/
 package org.csystem.util.collection;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Stream;
 
 public final class CollectionUtil {
     private CollectionUtil()
@@ -51,5 +54,15 @@ public final class CollectionUtil {
     public static <T> Collection<T> unionAll(Iterable<? extends T> a, Iterable<? extends T> b)
     {
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public static <T> List<T> toModifiableList(Stream<T> stream)
+    {
+        return toModifiableList(stream.toList());
+    }
+
+    public static <T> List<T> toModifiableList(List<T> list)
+    {
+        return new ArrayList<>(list);
     }
 }
