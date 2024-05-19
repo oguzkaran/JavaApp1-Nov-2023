@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: ArrayUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 18th May 2024
+	Last UPDATE	: 19th May 2024
 
 	Utility class for array operations
 
@@ -155,16 +155,6 @@ public final class ArrayUtil {
         return counts;
     }
 
-    public static int max(int [] a)
-    {
-        return Arrays.stream(a).max().getAsInt();
-    }
-
-    public static int min(int [] a)
-    {
-        return Arrays.stream(a).min().getAsInt();
-    }
-
     public static void multiplyBy(int [] a, int val)
     {
         IntStream.range(0, a.length).forEach(i -> a[i] *= val);
@@ -173,92 +163,6 @@ public final class ArrayUtil {
     public static void multiplyBy(int [][] a, int val)
     {
         Arrays.stream(a).forEach(array -> multiplyBy(array, val));
-    }
-
-    public static int partitionByThresholdGreater(int [] a, int threshold)
-    {
-        int partitionIndex = 0;
-
-        for (; partitionIndex < a.length && a[partitionIndex] > threshold; ++partitionIndex)
-            ;
-
-        if (partitionIndex == a.length)
-            return partitionIndex;
-
-        for (int i = partitionIndex + 1; i < a.length; ++i)
-            if (a[i] < threshold)
-                swap(a, i, partitionIndex++);
-
-        return partitionIndex;
-    }
-
-    public static int partitionByThresholdLess(int [] a, int threshold)
-    {
-        int partitionIndex = 0;
-
-        for (; partitionIndex < a.length && a[partitionIndex] < threshold; ++partitionIndex)
-            ;
-
-        if (partitionIndex == a.length)
-            return partitionIndex;
-
-        for (int i = partitionIndex + 1; i < a.length; ++i)
-            if (a[i] < threshold)
-                swap(a, i, partitionIndex++);
-
-        return partitionIndex;
-    }
-
-    public static void print(int n, int[] a)
-    {
-        String fmt = String.format("%%0%dd ", n);
-
-        for (int val : a)
-            System.out.printf(fmt, val);
-
-        System.out.println();
-    }
-
-    public static void print(int[] a)
-    {
-        print(a, " ", "\n");
-    }
-
-    public static void print(int [] a, String sep, String end)
-    {
-        Arrays.stream(a).forEach(v -> System.out.printf("%d%s", v, sep));
-        System.out.print(end);
-    }
-
-    public static void print(double [] a)
-    {
-        Arrays.stream(a).forEach(v -> System.out.printf("%f%n", v));
-    }
-
-    public static void print(long [] a)
-    {
-        Arrays.stream(a).forEach(v -> System.out.printf("%d%n", v));
-    }
-
-    public static void print(int [][] a)
-    {
-        print(1, a);
-    }
-
-    public static void print(int n, int [][] a)
-    {
-        Arrays.stream(a).forEach(array -> print(n, array));
-    }
-
-    public static void print(String [] str)
-    {
-        print(str, "\n", "");
-    }
-
-    public static void print(String [] str, String sep, String end)
-    {
-        Arrays.stream(str).forEach(s -> System.out.printf("%s%s", s, sep));
-        System.out.print(end);
     }
 
     public static void reverse(int [] a)

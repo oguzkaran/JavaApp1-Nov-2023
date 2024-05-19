@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.csystem.util.string.StringUtilPadLeading2Test
 -------------------------------------------------------------------------------
-Tests run: 16, Failures: 0, Errors: 0, Skipped: 16, Time elapsed: 0.001 s -- in org.csystem.util.string.StringUtilPadLeading2Test
+Tests run: 16, Failures: 0, Errors: 0, Skipped: 16, Time elapsed: 0.013 s -- in org.csystem.util.string.StringUtilPadLeading2Test

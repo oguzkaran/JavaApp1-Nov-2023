@@ -45,8 +45,18 @@ public final class PersonFactory {
         return result;
     }
 
+    public static PersonFactory loadFromTextFile(String path) throws IOException
+    {
+        return loadFromTextFile(Path.of(path));
+    }
+
     public Person [] getPeopleAsArray()
     {
         return PEOPLE.toArray(new Person[0]);
+    }
+
+    public Iterable<Person> getPeopleAsIterable()
+    {
+        return PEOPLE;
     }
 }

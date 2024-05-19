@@ -1,7 +1,7 @@
 /*-------------------------------------------------------------
 	FILE		: CollectionUtil.java
 	AUTHOR		: Java-Mar-2023 Group
-	Last UPDATE	: 18th May 2024
+	Last UPDATE	: 19th May 2024
 
 	Utility class for collection operations
 
@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public final class CollectionUtil {
     private CollectionUtil()
@@ -85,5 +86,20 @@ public final class CollectionUtil {
     public static <T> Set<T> toModifiableSet(Set<? extends T> set)
     {
         return new HashSet<>(set);
+    }
+
+    public static <T> Stream<T> parallelStream(Iterable<T> iterable)
+    {
+        return stream(iterable, true);
+    }
+
+    public static <T> Stream<T> stream(Iterable<T> iterable)
+    {
+        return stream(iterable, false);
+    }
+
+    public static <T> Stream<T> stream(Iterable<T> iterable, boolean parallel)
+    {
+        return StreamSupport.stream(iterable.spliterator(), parallel);
     }
 }
