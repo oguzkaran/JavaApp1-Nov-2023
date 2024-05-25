@@ -10,10 +10,9 @@
 	</parent>
 
 	<groupId>org.csystem</groupId>
-	<artifactId>Application</artifactId>
+	<artifactId>CoreAnnotationsDemoApp</artifactId>
 	<version>1.0.0</version>
-	<name>Application</name>
-	<description>Generic project for Spring Boot</description>
+	<name>CoreAnnotationsDemoApp</name>
 
 	<repositories>
 		<repository>
