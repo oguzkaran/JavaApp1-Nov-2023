@@ -16,7 +16,6 @@ public class TimeDisplay {
         Console.writeLine("I am a default ctor of TimeDisplay");
     }
 
-    @PostConstruct
     public void displayLocalTime()
     {
         var now = LocalTime.now();
