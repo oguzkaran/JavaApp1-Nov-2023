@@ -40,5 +40,4 @@ public class LocalDateTimeConfig {
     {
         return LocalTime.now();
     }
-
 }

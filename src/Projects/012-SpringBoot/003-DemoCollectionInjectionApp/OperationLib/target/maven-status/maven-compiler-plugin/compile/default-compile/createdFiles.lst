@@ -1,0 +1,5 @@
+com/berkayyilmaz/operation/IIntOperator.class
+com/berkayyilmaz/operation/component/AddOperation.class
+com/berkayyilmaz/operation/component/SubtractOperation.class
+com/berkayyilmaz/operation/component/MultiplyOperation.class
+com/berkayyilmaz/operation/component/AddWithValueOperation.class
