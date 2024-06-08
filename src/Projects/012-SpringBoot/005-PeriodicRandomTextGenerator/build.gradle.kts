@@ -11,11 +11,7 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_21
 }
 
-configurations {
-	compileOnly {
-		extendsFrom(configurations.annotationProcessor.get())
-	}
-}
+
 
 repositories {
 	mavenCentral()
@@ -32,6 +28,9 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("com.karandev:com-karandev-util-console:11.2.0")
+	implementation("org.csystem:org-csystem-util:12.0.0")
+	implementation("org.csystem:org-csystem-scheduler:14.0.1")
+
 	compileOnly("org.projectlombok:lombok:1.18.32")
 	annotationProcessor("org.projectlombok:lombok")
 
