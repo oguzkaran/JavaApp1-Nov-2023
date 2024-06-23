@@ -1,0 +1,3 @@
+org\csystem\generator\password\UserInfoRepositorySaveIfNotExistsSuccessTest.class
+org\csystem\generator\password\UserInfoRepositorySaveIfNotExistsFailTest.class
+org\csystem\generator\password\UserInfoRepositorySaveTest.class

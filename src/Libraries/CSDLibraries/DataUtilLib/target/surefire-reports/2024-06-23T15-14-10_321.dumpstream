@@ -1,4 +1,4 @@
-# Created at 2024-06-22T15:49:52.836
+# Created at 2024-06-23T15:14:12.652
 Boot Manifest-JAR contains absolute paths in classpath 'D:\Repositories\JavaApp1-Nov-2023\src\Libraries\CSDLibraries\DataUtilLib\target\test-classes'
 Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
 'other' has different root

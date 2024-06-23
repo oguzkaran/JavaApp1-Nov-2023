@@ -5,15 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 @Configuration
-public class FileConfig {
+public class DirectoryConfig {
     @Bean
     @Scope("prototype")
-    public File files()
+    public File directoryFile()
     {
         return new File("passwords");
     }
