@@ -15,5 +15,4 @@ public class RandomGeneratorConfig {
     {
         return new Random();
     }
-
 }

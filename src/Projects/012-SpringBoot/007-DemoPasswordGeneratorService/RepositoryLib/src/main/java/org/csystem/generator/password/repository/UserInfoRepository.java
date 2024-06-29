@@ -1,6 +1,7 @@
 package org.csystem.generator.password.repository;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.csystem.data.exception.repository.RepositoryException;
 import org.csystem.generator.password.entity.UserInfo;
 import org.csystem.util.string.StringUtil;
@@ -20,13 +21,23 @@ import java.util.Optional;
 import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
-/* Ignore asynchronous access for demo. That repository will use DBMS and DBMS synchronize the access */
+/* Ignore asynchronous access for demo. That repository will use DBMS, DBMS synchronize the access */
 
 @Component
 @Scope("prototype")
+@Slf4j
 public class UserInfoRepository implements IUserInfoRepository {
     private final File m_directory;
     private final RandomGenerator m_randomGenerator;
+
+    static {
+        try {
+            Files.createDirectories(Path.of("passwords"));
+        }
+        catch (IOException ex) {
+            log.error("Directory creation:{}", ex.getMessage());
+        }
+    }
 
     private void savePasswordCallback(BufferedWriter bw, String password)
     {
