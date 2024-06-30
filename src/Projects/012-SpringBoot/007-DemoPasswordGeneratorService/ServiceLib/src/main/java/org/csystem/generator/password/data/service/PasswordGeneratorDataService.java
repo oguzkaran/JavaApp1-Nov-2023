@@ -8,6 +8,8 @@ import org.csystem.generator.password.data.service.dto.UserInfoSaveDTO;
 import org.csystem.generator.password.data.service.mapper.IUserInfoMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class PasswordGeneratorDataService {
@@ -18,6 +20,11 @@ public class PasswordGeneratorDataService {
     {
         m_passwordGeneratorHelper = passwordGeneratorHelper;
         m_userInfoMapper = userInfoMapper;
+    }
+
+    public List<String> findAllUsernames()
+    {
+        throw new UnsupportedOperationException("Not implemented yet!...");
     }
 
     public boolean saveUserInfo(UserInfoSaveDTO userInfoSaveDTO)

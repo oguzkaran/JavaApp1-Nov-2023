@@ -26,4 +26,9 @@ public class UserInfo {
 
     @Accessors(prefix = "m_")
     private LocalDateTime m_registerTime;
+
+    public UserInfo(String username)
+    {
+        m_username = username;
+    }
 }

@@ -73,6 +73,20 @@ public class UserInfoRepository implements IUserInfoRepository {
     }
 
     @Override
+    public Iterable<UserInfo> findAll()
+    {
+        try {
+            return Files.walk(m_directory.toPath()).map(p -> new UserInfo(p.getFileName().toString())).toList();
+        }
+        catch (IOException ex) {
+            throw new RepositoryException("UserInfoRepository.findAll: IO problem", ex);
+        }
+        catch (Throwable ex) {
+            throw new RepositoryException("UserInfoRepository.findAll: problem", ex);
+        }
+    }
+
+    @Override
     public <S extends UserInfo> S save(S userInfo)
     {
         try {
@@ -129,13 +143,6 @@ public class UserInfoRepository implements IUserInfoRepository {
 
     @Override
     public void deleteById(String s)
-    {
-        throw new UnsupportedOperationException("Not yet implemented!...");
-    }
-
-
-    @Override
-    public Iterable<UserInfo> findAll()
     {
         throw new UnsupportedOperationException("Not yet implemented!...");
     }
