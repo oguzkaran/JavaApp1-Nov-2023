@@ -3,7 +3,6 @@ package org.csystem.generator.password;
 import org.csystem.generator.password.dal.PasswordGeneratorHelper;
 import org.csystem.generator.password.data.service.PasswordGeneratorDataService;
 import org.csystem.generator.password.data.service.dto.UserInfoSaveDTO;
-import org.csystem.generator.password.data.service.mapper.UserInfoMapper;
 import org.csystem.generator.password.repository.UserInfoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

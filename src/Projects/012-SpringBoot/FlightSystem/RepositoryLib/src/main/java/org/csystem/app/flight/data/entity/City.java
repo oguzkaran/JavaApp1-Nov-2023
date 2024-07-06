@@ -1,11 +1,9 @@
 package org.csystem.app.flight.data.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Accessors;
 
+@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode

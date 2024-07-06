@@ -31,7 +31,8 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <org.projectlombok.version>1.18.32</org.projectlombok.version>
+        <org.csystem.data.version>11.0.0</org.csystem.data.version>
     </properties>
 
     <dependencies>
@@ -43,13 +44,13 @@
         <dependency>
             <groupId>org.csystem</groupId>
             <artifactId>org-csystem-data</artifactId>
-            <version>11.0.0</version>
+            <version>${org.csystem.data.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.32</version>
+            <version>${org.projectlombok.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

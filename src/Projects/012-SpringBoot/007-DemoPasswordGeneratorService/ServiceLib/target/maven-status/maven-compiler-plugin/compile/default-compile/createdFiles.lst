@@ -1,4 +1,4 @@
 org\csystem\generator\password\data\service\dto\UserInfoSaveDTO.class
-org\csystem\generator\password\data\service\mapper\UserInfoMapper.class
 org\csystem\generator\password\data\service\mapper\IUserInfoMapper.class
+org\csystem\generator\password\data\service\mapper\UserInfoMapperImpl.class
 org\csystem\generator\password\data\service\PasswordGeneratorDataService.class
