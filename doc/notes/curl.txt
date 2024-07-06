@@ -6,5 +6,5 @@ curl -d '{"region": "Turkey", "west": 26.04, "south": 35.82, "east": 44.79, "nor
 
 //For Windows
 
-curl -d "{\"username\": \"oguz\", \"password\": "csd1993", \"textCount\": 6, \"textLength\": 4}" -H "Content-Type: application/json" -X POST "http://localhost:6767/api/generator/password/generate"
+curl -d "{\"username\": \"oguz\", \"password\": \"csd1993\", \"textCount\": 6, \"textLength\": 4}" -H "Content-Type: application/json" -X POST "http://localhost:6767/api/generator/password/generate"
 
