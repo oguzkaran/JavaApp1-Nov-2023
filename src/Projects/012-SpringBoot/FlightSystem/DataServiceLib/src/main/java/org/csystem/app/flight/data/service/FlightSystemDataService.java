@@ -49,7 +49,7 @@ public class FlightSystemDataService {
         throw new UnsupportedOperationException("TODO");
     }
 
-    public Optional<CityDTO> findCityById(int id)
+    public Optional<CityDTO> findCityById(long id)
     {
         throw new UnsupportedOperationException("TODO");
     }

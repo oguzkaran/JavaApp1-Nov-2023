@@ -8,6 +8,5 @@ import org.mapstruct.Mapper;
 @Mapper(implementationName = "CityMapperImpl")
 public interface ICityMapper {
     City toCity(CitySaveDTO citySaveDTO);
-
     CityDTO toCityDTO(City city);
 }

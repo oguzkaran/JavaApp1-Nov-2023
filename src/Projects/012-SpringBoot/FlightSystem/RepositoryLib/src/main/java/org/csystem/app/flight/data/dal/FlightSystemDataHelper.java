@@ -40,7 +40,7 @@ public class FlightSystemDataHelper {
         }
     }
 
-    public Optional<City> findCityById(int id)
+    public Optional<City> findCityById(long id)
     {
         try {
             log.info("FlightSystemDataHelper.findCityById: id ->{}", id);
