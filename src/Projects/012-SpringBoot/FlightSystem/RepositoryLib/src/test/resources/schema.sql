@@ -9,7 +9,6 @@ create table if not exists airports (
 	city_id bigint references cities(city_id) not null
 );
 
-
 create table if not exists flights (
 	flight_id varchar(20) primary key,
 	departure_airport_id bigint references airports(airport_id) not null,
@@ -24,7 +23,6 @@ truncate table airports restart identity cascade;
 truncate table cities restart identity cascade;
 
 drop procedure if exists sp_delete_city_by_id;
-
 create or replace procedure sp_delete_city_by_id(bigint)
 language plpgsql
 as
@@ -34,6 +32,18 @@ as
     end
 
 ';
+
+drop function if exists insert_city;
+create or replace function insert_city(varchar(250))
+returns bigint
+as
+'    begin
+        insert into cities (name) values ($1);
+
+        return currval($$cities_city_id_seq$$::regclass);
+    end
+' language plpgsql;
+
 
 drop function if exists find_all_cities;
 create or replace function find_all_cities()

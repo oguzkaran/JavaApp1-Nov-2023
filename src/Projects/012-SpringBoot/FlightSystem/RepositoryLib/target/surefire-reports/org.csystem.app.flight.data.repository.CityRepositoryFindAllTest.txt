@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.csystem.app.flight.data.repository.CityRepositoryFindAllTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.403 s -- in org.csystem.app.flight.data.repository.CityRepositoryFindAllTest

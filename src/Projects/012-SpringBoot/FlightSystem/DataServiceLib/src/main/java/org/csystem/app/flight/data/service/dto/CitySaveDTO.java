@@ -6,7 +6,6 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @EqualsAndHashCode
-@AllArgsConstructor
 @ToString
 public class CitySaveDTO {
     @Accessors(prefix = "m_")

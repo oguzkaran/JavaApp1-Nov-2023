@@ -5,7 +5,7 @@ import org.csystem.app.flight.data.service.dto.CityDTO;
 import org.csystem.app.flight.data.service.dto.CitySaveDTO;
 import org.mapstruct.Mapper;
 
-@Mapper(implementationName = "AirportMapperImpl")
+@Mapper(implementationName = "AirportMapperImpl", componentModel = "spring")
 public interface IAirportMapper {
 
 }

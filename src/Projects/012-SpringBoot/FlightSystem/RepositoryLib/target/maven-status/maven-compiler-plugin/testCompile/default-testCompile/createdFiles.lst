@@ -1,5 +1,5 @@
+org\csystem\app\flight\data\repository\CityRepositoryFindByNameTest.class
+org\csystem\app\flight\data\repository\CityRepositorySaveTest.class
 org\csystem\app\flight\data\constant\TestConstant.class
-org\csystem\app\flight\data\CityRepositoryFindByNameTest.class
-org\csystem\app\flight\data\CityRepositorySaveTest.class
-org\csystem\app\flight\data\CityRepositoryFindAllTest.class
-org\csystem\app\flight\data\CityRepositoryFindByIdTest.class
+org\csystem\app\flight\data\repository\CityRepositoryFindAllTest.class
+org\csystem\app\flight\data\repository\CityRepositoryFindByIdTest.class

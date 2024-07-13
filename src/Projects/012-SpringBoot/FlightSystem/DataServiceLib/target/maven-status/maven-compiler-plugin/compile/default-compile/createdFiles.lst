@@ -1,0 +1,10 @@
+org\csystem\app\flight\data\service\mapper\AirportMapperImpl.class
+org\csystem\app\flight\data\service\dto\CityDTO.class
+org\csystem\app\flight\data\service\mapper\IFlightMapper.class
+org\csystem\app\flight\data\service\dto\CitySaveDTO.class
+org\csystem\app\flight\data\service\mapper\IAirportMapper.class
+org\csystem\app\flight\data\service\mapper\MapperInject.class
+org\csystem\app\flight\data\service\mapper\CityMapperImpl.class
+org\csystem\app\flight\data\service\mapper\FlightMapperImpl.class
+org\csystem\app\flight\data\service\mapper\ICityMapper.class
+org\csystem\app\flight\data\service\FlightSystemDataService.class
