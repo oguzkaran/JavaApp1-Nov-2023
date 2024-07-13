@@ -10,17 +10,19 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Optional;
 
 @Repository
 @Lazy
 @Slf4j
 public class CityRepository implements ICityRepository {
+    private static final String DELETE_BY_ID_SQL = "CALL sp_delete_city_by_id(:id)";
+    private static final String FIND_ALL_SQL = "SELECT * FROM find_all_cities()";
+    private static final String FIND_BY_ID_SQL = "SELECT * FROM find_city_by_id(:id)";
+    private static final String FIND_BY_NAME_SQL = "SELECT * FROM find_city_by_name(:name)";
     private static final String SAVE_SQL = "INSERT INTO cities (name) VALUES (:name)";
-    private static final String FIND_ALL_SQL = "SELECT * FROM cities";
-    private static final String FIND_BY_ID_SQL = "SELECT * FROM cities where city_id = :id";
-    private static final String FIND_BY_NAME_SQL = "SELECT * FROM cities where name = :name";
-
 
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
 
@@ -37,6 +39,18 @@ public class CityRepository implements ICityRepository {
     }
 
     @Override
+    public void deleteById(Long id)
+    {
+        log.info("CityRepository.deleteByID -> city_id:{}", id);
+
+        var paramMap = new HashMap<String, Object>();
+
+        paramMap.put("id", id);
+
+        m_namedParameterJdbcTemplate.update(DELETE_BY_ID_SQL, paramMap);
+    }
+
+    @Override
     public Iterable<City> findAll()
     {
         log.info("CityRepository.findAll");
@@ -50,6 +64,7 @@ public class CityRepository implements ICityRepository {
     @Override
     public Optional<City> findById(Long id)
     {
+        log.info("CityRepository.findById -> city_id:{}", id);
         var cities = new ArrayList<City>();
         var paramMap = new HashMap<String, Object>();
 
@@ -63,6 +78,7 @@ public class CityRepository implements ICityRepository {
     @Override
     public Iterable<City> findByName(String name)
     {
+        log.info("CityRepository.findByName -> name:{}", name);
         var cities = new ArrayList<City>();
         var paramMap = new HashMap<String, Object>();
 
@@ -76,6 +92,7 @@ public class CityRepository implements ICityRepository {
     @Override
     public <S extends City> S save(S city)
     {
+        log.info("CityRepository.save -> city:{}", city.toString());
         var parameterSource = new BeanPropertySqlParameterSource(city);
         var keyHolder = new GeneratedKeyHolder();
 
@@ -117,11 +134,7 @@ public class CityRepository implements ICityRepository {
         throw new UnsupportedOperationException("Not implemented yet!...");
     }
 
-    @Override
-    public void deleteById(Long id)
-    {
-        throw new UnsupportedOperationException("Not implemented yet!...");
-    }
+
 
     @Override
     public boolean existsById(Long id)

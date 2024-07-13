@@ -1,7 +1,6 @@
-package org.csystem.app.flight.data;
+package org.csystem.app.flight.data.repository;
 
 import org.csystem.app.flight.data.constant.TestConstant;
-import org.csystem.app.flight.data.repository.ICityRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

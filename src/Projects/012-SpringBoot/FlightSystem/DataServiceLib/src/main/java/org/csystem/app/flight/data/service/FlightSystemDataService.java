@@ -23,6 +23,26 @@ public class FlightSystemDataService {
         m_mapperInject = mapperInject;
     }
 
+    public void deleteCityById(long id)
+    {
+        throw new UnsupportedOperationException("TODO: Buğrahan Kısa, Fatih Karabulut");
+    }
+
+    public Iterable<CityDTO> findAllCities()
+    {
+        throw new UnsupportedOperationException("TODO: Berkay Yılmaz");
+    }
+
+    public Optional<CityDTO> findCityById(long id)
+    {
+        throw new UnsupportedOperationException("TODO: Berkay Yılmaz");
+    }
+
+    public Optional<CityDTO> findCityByName(String name)
+    {
+        throw new UnsupportedOperationException("TODO: Berkay Yılmaz");
+    }
+
     public CitySaveDTO saveCity(CitySaveDTO citySaveDTO)
     {
         try {
@@ -42,16 +62,6 @@ public class FlightSystemDataService {
                     citySaveDTO, ex.getClass().getName(), ex.getMessage());
             throw new DataServiceException("FlightSystemDataService.saveCity: Exception", ex);
         }
-    }
-
-    public Iterable<CityDTO> findAllCities()
-    {
-        throw new UnsupportedOperationException("TODO");
-    }
-
-    public Optional<CityDTO> findCityById(long id)
-    {
-        throw new UnsupportedOperationException("TODO");
     }
 
     //...

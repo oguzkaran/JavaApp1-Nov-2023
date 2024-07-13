@@ -1,7 +1,6 @@
-package org.csystem.app.flight.data;
+package org.csystem.app.flight.data.repository;
 
 import org.csystem.app.flight.data.constant.TestConstant;
-import org.csystem.app.flight.data.repository.ICityRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,18 +12,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @TestPropertySource(locations = TestConstant.UNITTEST_PROPS_FILE)
-public class CityRepositoryFindByNameTest {
+public class CityRepositoryFindAllTest {
     @Autowired
     private ICityRepository m_cityRepository;
 
     @Test
-    public void givenValue_whenName_thenFound()
+    public void test()
     {
-        var name = "Bumba";
-        var expectedCount = 3L;
-        var count = StreamSupport.stream(m_cityRepository.findByName(name).spliterator(), false).count();
+        var expectedCount = 1004L;
+        var count = StreamSupport.stream(m_cityRepository.findAll().spliterator(), false).count();
 
         assertEquals(expectedCount, count);
     }
-
 }
