@@ -42,7 +42,7 @@ public class FlightSystemDataHelper {
 
     public void deleteCityById(long id)
     {
-        throw new UnsupportedOperationException("TODO: Buğrahan Kısa, Fatih Karabulut");
+        throw new UnsupportedOperationException("TODO: Berkay Yılmaz");
     }
 
     public Optional<City> findCityById(long id)
@@ -74,6 +74,11 @@ public class FlightSystemDataHelper {
                     ex.getClass().getSimpleName(), ex.getMessage());
             throw new RepositoryException("FlightSystemDataHelper.saveCity", ex);
         }
+    }
+
+    public City updateCity(City city)
+    {
+        throw new UnsupportedOperationException("TODO: Berkay Yılmaz, Merve Artar");
     }
 
     //...

@@ -6,7 +6,9 @@ create table if not exists cities (
 create table if not exists airports (
 	airport_id bigserial primary key,
 	name varchar(250) not null,
-	city_id bigint references cities(city_id) not null
+	city_id bigint references cities(city_id) not null,
+    open_date date not null,
+    register_date_time timestamp default(current_timestamp) not null
 );
 
 create table if not exists flights (
@@ -29,6 +31,17 @@ as
 '
     begin
         delete from cities where city_id = $1;
+    end
+
+';
+
+drop procedure if exists sp_update_city;
+create or replace procedure sp_update_city(bigint, varchar(250))
+language plpgsql
+as
+'
+    begin
+        update cities set name = $2 where city_id = $1;
     end
 
 ';

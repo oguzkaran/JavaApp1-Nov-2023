@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.flight.data.dal.FlightSystemDataHelper;
 import org.csystem.app.flight.data.service.dto.CityDTO;
 import org.csystem.app.flight.data.service.dto.CitySaveDTO;
+import org.csystem.app.flight.data.service.dto.CityUpdateDTO;
 import org.csystem.app.flight.data.service.mapper.MapperInject;
 import org.csystem.data.exception.repository.RepositoryException;
 import org.csystem.data.exception.service.DataServiceException;
@@ -30,17 +31,17 @@ public class FlightSystemDataService {
 
     public Iterable<CityDTO> findAllCities()
     {
-        throw new UnsupportedOperationException("TODO: Berkay Yılmaz");
+        throw new UnsupportedOperationException("TODO: Buğrahan Kısa, Fatih Karabulut");
     }
 
     public Optional<CityDTO> findCityById(long id)
     {
-        throw new UnsupportedOperationException("TODO: Berkay Yılmaz");
+        throw new UnsupportedOperationException("TODO: Buğrahan Kısa, Fatih Karabulut");
     }
 
     public Optional<CityDTO> findCityByName(String name)
     {
-        throw new UnsupportedOperationException("TODO: Berkay Yılmaz");
+        throw new UnsupportedOperationException("TODO: Buğrahan Kısa, Fatih Karabulut");
     }
 
     public CitySaveDTO saveCity(CitySaveDTO citySaveDTO)
@@ -62,6 +63,11 @@ public class FlightSystemDataService {
                     citySaveDTO, ex.getClass().getName(), ex.getMessage());
             throw new DataServiceException("FlightSystemDataService.saveCity: Exception", ex);
         }
+    }
+
+    public CityUpdateDTO updateCity(CityUpdateDTO cityUpdateDTO)
+    {
+        throw new UnsupportedOperationException("TODO: Buğrahan Kısa, Fatih Karabulut");
     }
 
     //...

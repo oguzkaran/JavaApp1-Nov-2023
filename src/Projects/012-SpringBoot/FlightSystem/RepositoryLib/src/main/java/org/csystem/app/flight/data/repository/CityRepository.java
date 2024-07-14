@@ -18,11 +18,12 @@ import java.util.Optional;
 @Lazy
 @Slf4j
 public class CityRepository implements ICityRepository {
-    private static final String DELETE_BY_ID_SQL = "CALL sp_delete_city_by_id(:id)";
+    private static final String DELETE_BY_ID_SQL = "call sp_delete_city_by_id(:id)";
     private static final String FIND_ALL_SQL = "select * from find_all_cities()";
     private static final String FIND_BY_ID_SQL = "select * from find_city_by_id(:id)";
     private static final String FIND_BY_NAME_SQL = "select * from find_city_by_name(:name)";
     private static final String SAVE_SQL = "select * from insert_city(:name)";
+    private static final String UPDATE_SQl = "call sp_update_city(:id, :name)";
 
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
 
@@ -99,6 +100,12 @@ public class CityRepository implements ICityRepository {
         m_namedParameterJdbcTemplate.query(SAVE_SQL, paramMap, (ResultSet rs) -> city.setId(rs.getLong(1)));
 
         return city;
+    }
+
+    @Override
+    public City updateCity(City city)
+    {
+        throw new UnsupportedOperationException("TODO: Berkay Yılmaz, Merve Artar");
     }
 
     ///////////////////////////////////////////////////////////////////////

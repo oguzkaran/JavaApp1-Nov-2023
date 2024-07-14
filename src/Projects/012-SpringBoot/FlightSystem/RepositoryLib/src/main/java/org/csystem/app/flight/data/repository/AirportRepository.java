@@ -3,18 +3,37 @@ package org.csystem.app.flight.data.repository;
 import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.flight.data.entity.Airport;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Repository
 @Lazy
 @Slf4j
 public class AirportRepository implements IAirportRepository {
-    private static final String SAVE_SQL = "INSERT INTO airports (name, city_id) VALUES (:name, :cityId)";
+    private static final String SAVE_SQL = "insert into airports (name, city_id, open_date) values (:name, :cityId, :openDate)";
     //...
+
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
+
+    private static void fillAirPort(ResultSet rs, ArrayList<Airport> airports) throws SQLException
+    {
+        do {
+            var id = rs.getLong(1);
+            var name = rs.getString(2);
+            var cityId = rs.getLong(3);
+            var openDate = rs.getDate(4).toLocalDate();
+            var registerDateTime = rs.getTimestamp(5).toLocalDateTime();
+
+            airports.add(new Airport(id, name, cityId, openDate, registerDateTime));
+        } while (rs.next());
+    }
 
     public AirportRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate)
     {
@@ -24,7 +43,7 @@ public class AirportRepository implements IAirportRepository {
     @Override
     public Iterable<Airport> findByCityId(long cityId)
     {
-        throw new UnsupportedOperationException("TODO:Berkay Yılmaz");
+        throw new UnsupportedOperationException("TODO:Berkay Yılmaz, Merve Artar");
     }
 
     @Override
@@ -40,9 +59,16 @@ public class AirportRepository implements IAirportRepository {
     }
 
     @Override
-    public <S extends Airport> S save(S entity)
+    public <S extends Airport> S save(S airport)
     {
-        throw new UnsupportedOperationException("TODO:Berkay Yılmaz");
+        var paramSource = new BeanPropertySqlParameterSource(airport);
+
+        paramSource.registerSqlType("openTime", Types.DATE);
+        paramSource.registerSqlType("registerDateTime", Types.TIMESTAMP);
+
+        //TODO:
+
+        return airport;
     }
 
     ///////////////////////////////////////////////////////////////////////

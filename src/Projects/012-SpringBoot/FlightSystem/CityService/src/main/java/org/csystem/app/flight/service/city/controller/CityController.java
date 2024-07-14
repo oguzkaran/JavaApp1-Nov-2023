@@ -3,6 +3,7 @@ package org.csystem.app.flight.service.city.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.flight.data.service.FlightSystemDataService;
 import org.csystem.app.flight.data.service.dto.CitySaveDTO;
+import org.csystem.app.flight.data.service.dto.CityUpdateDTO;
 import org.csystem.app.flight.service.city.error.CityError;
 import org.csystem.data.exception.service.DataServiceException;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,6 +27,7 @@ public class CityController {
     public ResponseEntity<Object> addCity(@RequestBody CitySaveDTO citySaveDTO)
     {
         try {
+            log.info("CityController.addCity -> City:{}", citySaveDTO.toString());
             return ResponseEntity.ok(m_flightSystemDataService.saveCity(citySaveDTO));
         }
         catch (DataServiceException ex) {
@@ -39,25 +41,42 @@ public class CityController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteById(@PathVariable("id") long id)
+    {
+        log.info("CityController.deleteById -> Id:{}", id);
+
+        throw new UnsupportedOperationException("TODO:Bekir Kocadağ");
+    }
+
     @GetMapping("find")
     public ResponseEntity<Object> findByName(@RequestParam String name)
     {
-        log.info("Name:{}", name);
+        log.info("CityController.findByName -> Name:{}", name);
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        throw new UnsupportedOperationException("TODO:Bekir Kocadağ");
     }
 
     @GetMapping("find/{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") long id)
     {
-        log.info("Id:{}", id);
+        log.info("CityController.findById -> Id:{}", id);
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        throw new UnsupportedOperationException("TODO:Bekir Kocadağ");
     }
 
     @GetMapping("find/all")
     public ResponseEntity<Object> findAll()
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        log.info("CityController.findAll");
+        throw new UnsupportedOperationException("TODO:Bekir Kocadağ");
+    }
+
+    @PutMapping("update")
+    public ResponseEntity<Object> update(@RequestBody CityUpdateDTO cityUpdateDTO)
+    {
+        log.info("CityController.update -> City:{}", cityUpdateDTO.toString());
+
+        throw new UnsupportedOperationException("TODO:Bekir Kocadağ, Fatih Karabulut");
     }
 }
