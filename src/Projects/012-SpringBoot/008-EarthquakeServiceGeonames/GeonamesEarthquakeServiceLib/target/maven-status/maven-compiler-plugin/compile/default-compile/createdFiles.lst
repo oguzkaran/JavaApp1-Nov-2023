@@ -1,0 +1,11 @@
+org\csystem\app\service\earthquake\geonames\dto\GeonamesEarthQuake.class
+org\csystem\app\service\earthquake\geonames\service\GeonamesEarthquakeService.class
+org\csystem\app\service\earthquake\geonames\dto\GeonamesAddress.class
+org\csystem\app\service\earthquake\geonames\dto\GeonamesCountryCode.class
+org\csystem\app\service\earthquake\geonames\dto\GeonamesEarthQuakeInfoDetails.class
+org\csystem\app\service\earthquake\geonames\configuration\RestTemplateConfig.class
+org\csystem\app\service\earthquake\geonames\dto\GeonamesEarthQuakeDetails.class
+org\csystem\app\service\earthquake\geonames\dto\GeonamesEarthQuakeInfo.class
+org\csystem\app\service\earthquake\geonames\mapper\GeonamesMapperImpl.class
+org\csystem\app\service\earthquake\geonames\mapper\IGeonamesMapper.class
+org\csystem\app\service\earthquake\geonames\dto\GeonamesAddressInfo.class
