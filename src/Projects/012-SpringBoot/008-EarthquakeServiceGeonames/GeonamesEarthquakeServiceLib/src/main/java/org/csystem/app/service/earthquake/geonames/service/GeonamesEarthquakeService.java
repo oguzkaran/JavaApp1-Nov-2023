@@ -6,6 +6,8 @@ import org.csystem.app.service.earthquake.geonames.mapper.IGeonamesMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -17,12 +19,6 @@ public class GeonamesEarthquakeService {
 
     private final RestTemplate m_restTemplate;
     private final IGeonamesMapper m_geonamesMapper;
-
-    public GeonamesEarthquakeService(RestTemplate restTemplate, IGeonamesMapper geonamesMapper)
-    {
-        m_restTemplate = restTemplate;
-        m_geonamesMapper = geonamesMapper;
-    }
 
     private GeonamesEarthQuakeInfo findEarthquakes(double north, double south, double east, double west)
     {
@@ -50,8 +46,35 @@ public class GeonamesEarthquakeService {
         return m_restTemplate.getForObject(url, GeonamesCountryCode.class);
     }
 
+    private void earthquakeInfoDetailsCallback(GeonamesEarthQuake geonamesEarthQuake, List<GeonamesEarthQuakeDetails> details)
+    {
+        var address = findAddress(geonamesEarthQuake.lat, geonamesEarthQuake.lng);
+        var countryInfo = findCountryCode(geonamesEarthQuake.lat, geonamesEarthQuake.lng);
+
+        details.add(m_geonamesMapper.toGeonamesEarthQuakeDetails(geonamesEarthQuake, address, countryInfo));
+    }
+
+    private GeonamesEarthQuakeInfoDetails toGeonamesEarthQuakeInfoDetails(GeonamesEarthQuakeInfo geonamesEarthQuakeInfo)
+    {
+        var infoDetails = new GeonamesEarthQuakeInfoDetails();
+        
+        infoDetails.earthquakes = new ArrayList<>();
+
+        geonamesEarthQuakeInfo.earthquakes.forEach(e -> earthquakeInfoDetailsCallback(e, infoDetails.earthquakes));
+
+        return infoDetails;
+    }
+
+    public GeonamesEarthquakeService(RestTemplate restTemplate, IGeonamesMapper geonamesMapper)
+    {
+        m_restTemplate = restTemplate;
+        m_geonamesMapper = geonamesMapper;
+    }
+
     public GeonamesEarthQuakeInfoDetails findEarthquakesDetails(double north, double south, double east, double west)
     {
-        throw new UnsupportedOperationException("TODO");
+        var earthquake = findEarthquakes(north, south, east, west);
+
+        return toGeonamesEarthQuakeInfoDetails(earthquake);
     }
 }
