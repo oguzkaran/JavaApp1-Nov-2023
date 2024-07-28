@@ -46,12 +46,25 @@ public class GeonamesEarthquakeService {
         return m_restTemplate.getForObject(url, GeonamesCountryCode.class);
     }
 
+    private GeonamesEarthQuakeDetails toGeonamesEarthQuakeDetails(GeonamesEarthQuake geonamesEarthQuake,
+                                                                  GeonamesAddress geonamesAddress,
+                                                                  GeonamesCountryCode geonamesCountryCode)
+    {
+        var details = new GeonamesEarthQuakeDetails();
+
+        details.geonamesEarthquakeDetailsInfo = m_geonamesMapper.toGeonamesEarthquakeDetailsInfo(geonamesEarthQuake);
+        details.geonamesEarthquakeDetailsAddress = m_geonamesMapper.toGeonamesEarthquakeDetailsAddress(geonamesAddress);
+        details.m_geonamesEarthquakeDetailsCountryInfo = m_geonamesMapper.toGeonamesEarthquakeDetailsCountryInfo(geonamesCountryCode);
+
+        return details;
+    }
+
     private void earthquakeInfoDetailsCallback(GeonamesEarthQuake geonamesEarthQuake, List<GeonamesEarthQuakeDetails> details)
     {
         var address = findAddress(geonamesEarthQuake.lat, geonamesEarthQuake.lng);
         var countryInfo = findCountryCode(geonamesEarthQuake.lat, geonamesEarthQuake.lng);
 
-        details.add(m_geonamesMapper.toGeonamesEarthQuakeDetails(geonamesEarthQuake, address, countryInfo));
+        details.add(toGeonamesEarthQuakeDetails(geonamesEarthQuake, address, countryInfo));
     }
 
     private GeonamesEarthQuakeInfoDetails toGeonamesEarthQuakeInfoDetails(GeonamesEarthQuakeInfo geonamesEarthQuakeInfo)
