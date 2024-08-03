@@ -1,6 +1,7 @@
 package org.csystem.app.earthquake.data.entity;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @EqualsAndHashCode
 public class EarthquakeInfoSave {

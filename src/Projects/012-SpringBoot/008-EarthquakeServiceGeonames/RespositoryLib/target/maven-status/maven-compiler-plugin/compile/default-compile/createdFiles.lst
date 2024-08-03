@@ -1,0 +1,8 @@
+org\csystem\app\earthquake\data\repository\RegionInfoRepository.class
+org\csystem\app\earthquake\data\entity\EarthquakeInfoSave.class
+org\csystem\app\earthquake\data\entity\EarthquakeInfoDetails.class
+org\csystem\app\earthquake\data\entity\EarthquakeAddress.class
+org\csystem\app\earthquake\data\entity\EarthquakeInfo.class
+org\csystem\app\earthquake\data\repository\IRegionInfoRepository.class
+org\csystem\app\earthquake\data\entity\EarthquakeCountryInfo.class
+org\csystem\app\earthquake\data\entity\RegionInfo.class
