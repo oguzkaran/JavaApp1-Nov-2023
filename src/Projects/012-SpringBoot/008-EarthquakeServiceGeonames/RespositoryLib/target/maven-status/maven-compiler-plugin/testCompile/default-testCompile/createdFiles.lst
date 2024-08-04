@@ -1,2 +1,3 @@
+org\csystem\app\earthquake\data\FindByRegionInfoTest.class
 org\csystem\app\earthquake\data\SaveQueryInfoTest.class
 org\csystem\app\earthquake\data\SaveEarthquakeTest.class

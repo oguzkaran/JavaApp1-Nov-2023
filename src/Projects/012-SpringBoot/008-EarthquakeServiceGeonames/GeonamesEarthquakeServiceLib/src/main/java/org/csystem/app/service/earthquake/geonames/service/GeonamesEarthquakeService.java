@@ -20,13 +20,13 @@ public class GeonamesEarthquakeService {
     private final RestTemplate m_restTemplate;
     private final IGeonamesMapper m_geonamesMapper;
 
-    private GeonamesEarthQuakeInfo findEarthquakes(double north, double south, double east, double west)
+    private GeonamesEarthquakeInfo findEarthquakes(double east, double west, double north, double south)
     {
         var url = String.format(EARTHQUAKE_URL_FORMAT, north, south, east, west);
 
         log.info("Earthquake Code url:{}", url);
 
-        return m_restTemplate.getForObject(url, GeonamesEarthQuakeInfo.class);
+        return m_restTemplate.getForObject(url, GeonamesEarthquakeInfo.class);
     }
 
     private GeonamesAddress findAddress(double latitude, double longitude)
@@ -46,11 +46,11 @@ public class GeonamesEarthquakeService {
         return m_restTemplate.getForObject(url, GeonamesCountryCode.class);
     }
 
-    private GeonamesEarthQuakeDetails toGeonamesEarthQuakeDetails(GeonamesEarthQuake geonamesEarthQuake,
+    private GeonamesEarthquakeDetails toGeonamesEarthQuakeDetails(GeonamesEarthquake geonamesEarthQuake,
                                                                   GeonamesAddress geonamesAddress,
                                                                   GeonamesCountryCode geonamesCountryCode)
     {
-        var details = new GeonamesEarthQuakeDetails();
+        var details = new GeonamesEarthquakeDetails();
 
         details.geonamesEarthquakeDetailsInfo = m_geonamesMapper.toGeonamesEarthquakeDetailsInfo(geonamesEarthQuake);
         details.geonamesEarthquakeDetailsAddress = m_geonamesMapper.toGeonamesEarthquakeDetailsAddress(geonamesAddress);
@@ -59,7 +59,7 @@ public class GeonamesEarthquakeService {
         return details;
     }
 
-    private void earthquakeInfoDetailsCallback(GeonamesEarthQuake geonamesEarthQuake, List<GeonamesEarthQuakeDetails> details)
+    private void earthquakeInfoDetailsCallback(GeonamesEarthquake geonamesEarthQuake, List<GeonamesEarthquakeDetails> details)
     {
         var address = findAddress(geonamesEarthQuake.lat, geonamesEarthQuake.lng);
         var countryInfo = findCountryCode(geonamesEarthQuake.lat, geonamesEarthQuake.lng);
@@ -67,9 +67,9 @@ public class GeonamesEarthquakeService {
         details.add(toGeonamesEarthQuakeDetails(geonamesEarthQuake, address, countryInfo));
     }
 
-    private GeonamesEarthQuakeInfoDetails toGeonamesEarthQuakeInfoDetails(GeonamesEarthQuakeInfo geonamesEarthQuakeInfo)
+    private GeonamesEarthquakeInfoDetails toGeonamesEarthQuakeInfoDetails(GeonamesEarthquakeInfo geonamesEarthQuakeInfo)
     {
-        var infoDetails = new GeonamesEarthQuakeInfoDetails();
+        var infoDetails = new GeonamesEarthquakeInfoDetails();
         
         infoDetails.earthquakes = new ArrayList<>();
 
@@ -84,7 +84,7 @@ public class GeonamesEarthquakeService {
         m_geonamesMapper = geonamesMapper;
     }
 
-    public GeonamesEarthQuakeInfoDetails findEarthquakesDetails(double north, double south, double east, double west)
+    public GeonamesEarthquakeInfoDetails findEarthquakesDetails(double east, double west, double north, double south)
     {
         var earthquake = findEarthquakes(north, south, east, west);
 

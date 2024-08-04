@@ -4,7 +4,7 @@ package org.csystem.app.service.earthquake.geonames.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GeonamesEarthQuakeDetails {
+public class GeonamesEarthquakeDetails {
     @JsonProperty("info")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public GeonamesEarthquakeDetailsInfo geonamesEarthquakeDetailsInfo;

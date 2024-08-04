@@ -10,7 +10,7 @@ public interface IGeonamesMapper {
     @Mapping(source = "geonamesEarthquake.lat", target = "latitude")
     @Mapping(source = "geonamesEarthquake.lng", target = "longitude")
     @Mapping(source = "geonamesEarthquake.eqid", target = "earthquakeId")
-    GeonamesEarthquakeDetailsInfo toGeonamesEarthquakeDetailsInfo(GeonamesEarthQuake geonamesEarthquake);
+    GeonamesEarthquakeDetailsInfo toGeonamesEarthquakeDetailsInfo(GeonamesEarthquake geonamesEarthquake);
 
     @Mapping(source = "geonamesAddress.postalcode", target = "postalCode")
     GeonamesEarthquakeDetailsAddress toGeonamesEarthquakeDetailsAddress(GeonamesAddress geonamesAddress);

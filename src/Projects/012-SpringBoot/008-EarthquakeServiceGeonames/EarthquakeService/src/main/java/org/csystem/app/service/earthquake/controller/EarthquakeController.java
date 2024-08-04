@@ -1,7 +1,7 @@
 package org.csystem.app.service.earthquake.controller;
 
-import org.csystem.app.service.earthquake.geonames.dto.GeonamesEarthQuakeInfoDetails;
-import org.csystem.app.service.earthquake.geonames.service.GeonamesEarthquakeService;
+import org.csystem.app.service.earthquake.EarthquakeDataService;
+import org.csystem.app.service.earthquake.dto.EarthquakeDetails;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/earthquake")
 @Scope("prototype")
 public class EarthquakeController {
-    private final GeonamesEarthquakeService m_earthquakeService;
+    private final EarthquakeDataService m_earthquakeService;
 
-    public EarthquakeController(GeonamesEarthquakeService earthquakeService)
+    public EarthquakeController(EarthquakeDataService earthquakeService)
     {
         m_earthquakeService = earthquakeService;
     }
 
     @GetMapping("/json")
-    public GeonamesEarthQuakeInfoDetails findEarthquakeJson(@RequestParam double north,
-                                                            @RequestParam double south,
-                                                            @RequestParam double east,
-                                                            @RequestParam double west)
+    public EarthquakeDetails findEarthquakeJson(@RequestParam double east,
+                                                @RequestParam double west,
+                                                @RequestParam double north,
+                                                @RequestParam double south)
     {
-        return m_earthquakeService.findEarthquakesDetails(north, south, east, west);
+        return m_earthquakeService.findEarthquakesDetails(east, west, north, south);
     }
 }

@@ -10,10 +10,13 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -108,15 +111,79 @@ public class RegionInfoRepository implements IRegionInfoRepository {
         m_namedParameterJdbcTemplate.update(SAVE_EARTHQUAKE_COUNTRY_INFO_SQL, paramMap);
     }
 
+    private EarthquakeInfo createEarthquakeInfo(double latitude, double longitude, double depth,
+                                                String dateTime, double magnitude, String earthquakeId)
+    {
+        return EarthquakeInfo.builder()
+                .latitude(latitude)
+                .longitude(longitude)
+                .depth(depth)
+                .dateTime(dateTime)
+                .magnitude(magnitude)
+                .earthquakeId(earthquakeId)
+                .build();
+    }
+
+    private EarthquakeAddress createEarthquakeAddress(String locality, String street, String postalCode)
+    {
+        return EarthquakeAddress.builder()
+                .locality(locality)
+                .street(street)
+                .postalCode(postalCode)
+                .build();
+    }
+
+    private EarthquakeCountryInfo createEarthquakeCountryInfo(String distance, String countryCode, String countryName)
+    {
+        return EarthquakeCountryInfo.builder()
+                .distance(distance)
+                .countryCode(countryCode)
+                .countryName(countryName)
+                .build();
+    }
+
+    private EarthquakeInfoDetails createEarthquakeDetails(EarthquakeInfo earthquakeInfo,
+                                                          EarthquakeAddress earthquakeAddress,
+                                                          EarthquakeCountryInfo earthquakeCountryInfo)
+    {
+        return EarthquakeInfoDetails.builder()
+                .earthquakeInfo(earthquakeInfo)
+                .earthquakeAddress(earthquakeAddress)
+                .earthquakeCountryInfo(earthquakeCountryInfo)
+                .build();
+    }
+
+    private void fillEarthquakeInfoDetails(ResultSet rs, List<EarthquakeInfoDetails> earthquakes) throws SQLException
+    {
+        do {
+            var earthquakeInfo = createEarthquakeInfo(rs.getDouble(1), rs.getDouble(2), rs.getDouble(3),
+                    rs.getString(4), rs.getDouble(5), rs.getString(6));
+            var earthquakeAddress = createEarthquakeAddress(rs.getString(7), rs.getString(8), rs.getString(9));
+            var earthquakeCountryInfo = createEarthquakeCountryInfo(rs.getString(10), rs.getString(11), rs.getString(12));
+
+            earthquakes.add(createEarthquakeDetails(earthquakeInfo, earthquakeAddress, earthquakeCountryInfo));
+        } while (rs.next());
+    }
+
     public RegionInfoRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate)
     {
         m_namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     @Override
-    public Iterable<EarthquakeInfoDetails> findByRegionInfo(double east, double west, double north, double south)
+    public List<EarthquakeInfoDetails> findByRegionInfo(double east, double west, double north, double south)
     {
-        throw new UnsupportedOperationException("TODO");
+        var earthquakes = new ArrayList<EarthquakeInfoDetails>();
+        var paramMap = new HashMap<String, Object>();
+
+        paramMap.put("east", east);
+        paramMap.put("west", west);
+        paramMap.put("north", north);
+        paramMap.put("south", south);
+
+        m_namedParameterJdbcTemplate.query(FIND_DETAILS_BY_REGION_INFO, paramMap, (ResultSet rs) -> fillEarthquakeInfoDetails(rs, earthquakes));
+
+        return earthquakes;
     }
 
     @Override

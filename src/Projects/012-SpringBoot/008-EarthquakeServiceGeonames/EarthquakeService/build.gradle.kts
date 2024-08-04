@@ -35,7 +35,7 @@ dependencies {
 	compileOnly("org.projectlombok:lombok:1.18.32")
 	annotationProcessor("org.projectlombok:lombok")
 
-	implementation("org.csystem:GeonamesEarthquakeServiceLib:1.0.0")
+	implementation("org.csystem:EarthquakeSystemDataServiceLib:1.0.0")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

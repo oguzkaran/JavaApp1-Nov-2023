@@ -22,18 +22,18 @@ public class SaveEarthquakeTest {
     @Autowired
     private IRegionInfoRepository m_regionInfoRepository;
 
-
     @Test
     @Order(0)
     public void givenValue_whenEarthquake_thenPrivateSaveRegionInfo_generated_id_true() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException
     {
         var earthquake = new EarthquakeInfoSave();
 
-        earthquake.regionInfo = new RegionInfo();
-        earthquake.regionInfo.east = 23.4;
-        earthquake.regionInfo.west = 21.4;
-        earthquake.regionInfo.north = 20.4;
-        earthquake.regionInfo.south = 29.4;
+        earthquake.regionInfo = RegionInfo.builder()
+                .east(23.4)
+                .west(21.4)
+                .north(20.4)
+                .south(29.4)
+                .build();
 
         var method = m_regionInfoRepository.getClass().getDeclaredMethod("saveRegionInfo", RegionInfo.class);
 
@@ -51,23 +51,33 @@ public class SaveEarthquakeTest {
     {
         var earthquake = new EarthquakeInfoSave();
 
-        earthquake.regionInfo = new RegionInfo();
-        earthquake.regionInfo.east = 23.4;
-        earthquake.regionInfo.west = 21.4;
-        earthquake.regionInfo.north = 20.4;
-        earthquake.regionInfo.south = 29.4;
+        earthquake.regionInfo = RegionInfo.builder()
+                .east(23.4)
+                .west(21.4)
+                .north(20.4)
+                .south(29.4)
+                .build();
 
-        earthquake.earthquakeInfo = new EarthquakeInfo();
-        earthquake.earthquakeInfo.dateTime = "2023-02-06 04:00:00";
-        earthquake.earthquakeInfo.depth = 100;
-        earthquake.earthquakeInfo.latitude = 45.67;
-        earthquake.earthquakeInfo.longitude = 40.67;
-        earthquake.earthquakeInfo.earthquakeId = "Test Earthquake";
-        earthquake.earthquakeInfo.magnitude = 7.6;
+        earthquake.earthquakeInfo = EarthquakeInfo.builder()
+                .dateTime("2023-02-06 04:00:00")
+                .depth(100)
+                .latitude(45.67)
+                .longitude(40.67)
+                .earthquakeId("Test earthquake")
+                .magnitude(7.6)
+                .build();
 
-        earthquake.earthquakeAddress = new EarthquakeAddress();
+        earthquake.earthquakeAddress = EarthquakeAddress.builder()
+                .locality("Test locality")
+                .street("Test street")
+                .postalCode("67100")
+                .build();
 
-        earthquake.earthquakeCountryInfo = new EarthquakeCountryInfo();
+        earthquake.earthquakeCountryInfo = EarthquakeCountryInfo.builder()
+                .distance("100")
+                .countryCode("TR")
+                .countryName("Turkey")
+                .build();
 
         assertDoesNotThrow(() -> m_regionInfoRepository.saveEarthquake(earthquake));
     }

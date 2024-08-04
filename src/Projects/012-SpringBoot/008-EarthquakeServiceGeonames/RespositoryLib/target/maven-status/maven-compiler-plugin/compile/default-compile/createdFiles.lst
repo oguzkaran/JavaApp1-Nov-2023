@@ -1,8 +1,14 @@
 org\csystem\app\earthquake\data\repository\RegionInfoRepository.class
+org\csystem\app\earthquake\data\entity\EarthquakeAddress$EarthquakeAddressBuilder.class
+org\csystem\app\earthquake\data\entity\RegionInfo$RegionInfoBuilder.class
 org\csystem\app\earthquake\data\entity\EarthquakeInfoSave.class
 org\csystem\app\earthquake\data\entity\EarthquakeInfoDetails.class
 org\csystem\app\earthquake\data\entity\EarthquakeAddress.class
 org\csystem\app\earthquake\data\entity\EarthquakeInfo.class
+org\csystem\app\earthquake\data\entity\EarthquakeInfo$EarthquakeInfoBuilder.class
+org\csystem\app\earthquake\data\entity\RegionInfo.class
+org\csystem\app\earthquake\data\entity\EarthquakeInfoDetails$EarthquakeInfoDetailsBuilder.class
+org\csystem\app\earthquake\data\dal\EarthquakeAppDataHelper.class
 org\csystem\app\earthquake\data\repository\IRegionInfoRepository.class
 org\csystem\app\earthquake\data\entity\EarthquakeCountryInfo.class
-org\csystem\app\earthquake\data\entity\RegionInfo.class
+org\csystem\app\earthquake\data\entity\EarthquakeCountryInfo$EarthquakeCountryInfoBuilder.class
