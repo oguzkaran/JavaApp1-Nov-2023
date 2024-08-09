@@ -7,30 +7,40 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.3.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>org.csystem</groupId>
-    <artifactId>Application</artifactId>
+    <artifactId>org-csystem-generic</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-
-    <repositories>
-        <repository>
-            <id>javaapp1-nov-2023-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp1-nov-2023-maven-repo/main</url>
-        </repository>
-
-        <repository>
-            <id>javaapp1-nov-2023-karandev-maven-repo</id>
-            <url>https://raw.github.com/oguzkaran/javaapp1-nov-2023-karandev-maven-repo/main</url>
-        </repository>
-    </repositories>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>javaapp1-mar-2023-maven-repo</id>
+            <url>https://raw.github.com/oguzkaran/javaapp1-mar-2023-maven-repo/main</url>
+        </repository>
+
+        <repository>
+            <id>javaapp1-mar-2023-karandev-maven-repo</id>
+            <url>https://raw.github.com/oguzkaran/javaapp1-mar-2023-karandev-maven-repo/main</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
 </project>
