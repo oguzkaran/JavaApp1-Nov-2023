@@ -4,23 +4,20 @@
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
 
-import com.karandev.io.util.console.Console;
+import org.csystem.util.console.Console;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 class Application {
     public static void run(String[] args)
     {
-        Sample.foo(10);
-    }
-}
-
-class Sample {
-    public static void foo(long...a)
-    {
-        Console.writeLine("foo, long...");
-    }
-
-    public static void foo(int...a)
-    {
-        Console.writeLine("foo, int...");
+        try (var br = Files.newBufferedReader(Path.of("countries.csv"))) {
+            br.lines().skip(1).forEach(Console::writeLine);
+        }
+        catch (IOException ex) {
+            Console.writeLine(ex.getMessage());
+        }
     }
 }

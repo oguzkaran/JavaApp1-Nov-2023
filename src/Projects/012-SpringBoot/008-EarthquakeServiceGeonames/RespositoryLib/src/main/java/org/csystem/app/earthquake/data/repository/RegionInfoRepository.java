@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,13 +26,14 @@ public class RegionInfoRepository implements IRegionInfoRepository {
             select\s
             ei.latitude, ei.longitude, ei.depth, ei.datetime, ei.magnitude, ei.earthquake_id,\s
             eai.locality, eai.street, eai.postal_code,\s
-            eci.distance, eci.country_code, eci.country_name\s
+            eci.distance, eci.country_code, eci.country_name,\s
+            ri.region_info_id\s
             from\s
             region_info ri inner join earthquake_info ei on ei.region_info_id = ri.region_info_id\s
             inner join earthquake_address_info eai on eai.region_info_id = ri.region_info_id\s
             inner join earthquake_country_info eci on eci.region_info_id = ri.region_info_id
-            where abs(east - :east) < 0.00001 and abs(west - :west) < 0.00001 and abs(north - :north) < 0.00001\s
-            and abs(south - :south) < 0.00001;
+            where abs(ri.east - :east) < 0.00001 and abs(ri.west - :west) < 0.00001 and abs(ri.north - :north) < 0.00001\s
+            and abs(ri.south - :south) < 0.00001;
             """;
 
     private static final String SAVE_REGION_INFO_SQL = """
@@ -61,7 +61,7 @@ public class RegionInfoRepository implements IRegionInfoRepository {
 
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
 
-    public long saveRegionInfo(RegionInfo regionInfo) throws SQLException
+    private long saveRegionInfo(RegionInfo regionInfo) throws SQLException
     {
         var paramSource = new BeanPropertySqlParameterSource(regionInfo);
         var keyHolder = new GeneratedKeyHolder();
@@ -153,15 +153,17 @@ public class RegionInfoRepository implements IRegionInfoRepository {
                 .build();
     }
 
-    private void fillEarthquakeInfoDetails(ResultSet rs, List<EarthquakeInfoDetails> earthquakes) throws SQLException
+    private void fillEarthquakeInfoDetails(ResultSet rs, EarthquakesInfo earthquakesInfo) throws SQLException
     {
+        earthquakesInfo.regionInfoId = rs.getLong(13);
+
         do {
             var earthquakeInfo = createEarthquakeInfo(rs.getDouble(1), rs.getDouble(2), rs.getDouble(3),
                     rs.getString(4), rs.getDouble(5), rs.getString(6));
             var earthquakeAddress = createEarthquakeAddress(rs.getString(7), rs.getString(8), rs.getString(9));
             var earthquakeCountryInfo = createEarthquakeCountryInfo(rs.getString(10), rs.getString(11), rs.getString(12));
 
-            earthquakes.add(createEarthquakeDetails(earthquakeInfo, earthquakeAddress, earthquakeCountryInfo));
+            earthquakesInfo.earthquakes.add(createEarthquakeDetails(earthquakeInfo, earthquakeAddress, earthquakeCountryInfo));
         } while (rs.next());
     }
 
@@ -171,9 +173,9 @@ public class RegionInfoRepository implements IRegionInfoRepository {
     }
 
     @Override
-    public List<EarthquakeInfoDetails> findByRegionInfo(double east, double west, double north, double south)
+    public EarthquakesInfo findByRegionInfo(double east, double west, double north, double south)
     {
-        var earthquakes = new ArrayList<EarthquakeInfoDetails>();
+        var earthquakesInfo = EarthquakesInfo.builder().earthquakes(new ArrayList<>()).build();
         var paramMap = new HashMap<String, Object>();
 
         paramMap.put("east", east);
@@ -181,9 +183,10 @@ public class RegionInfoRepository implements IRegionInfoRepository {
         paramMap.put("north", north);
         paramMap.put("south", south);
 
-        m_namedParameterJdbcTemplate.query(FIND_DETAILS_BY_REGION_INFO, paramMap, (ResultSet rs) -> fillEarthquakeInfoDetails(rs, earthquakes));
+        m_namedParameterJdbcTemplate.query(FIND_DETAILS_BY_REGION_INFO, paramMap,
+                (ResultSet rs) -> fillEarthquakeInfoDetails(rs, earthquakesInfo));
 
-        return earthquakes;
+        return earthquakesInfo;
     }
 
     @Override

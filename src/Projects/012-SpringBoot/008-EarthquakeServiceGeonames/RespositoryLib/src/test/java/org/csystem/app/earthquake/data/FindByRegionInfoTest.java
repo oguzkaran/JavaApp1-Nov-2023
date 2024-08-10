@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
-import java.util.stream.StreamSupport;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -56,9 +54,10 @@ public class FindByRegionInfoTest {
                 .build();
 
         m_regionInfoRepository.saveEarthquake(earthquake);
-        var earthquakeInfoDetails = m_regionInfoRepository.findByRegionInfo(23.4, 21.4, 20.4, 29.4);
+        var earthquakesInfo = m_regionInfoRepository.findByRegionInfo(23.4, 21.4, 20.4, 29.4);
 
-        assertFalse(earthquakeInfoDetails.isEmpty());
+        assertFalse(earthquakesInfo.earthquakes.isEmpty());
+        assertEquals(1, earthquakesInfo.regionInfoId);
     }
 
     @Test
@@ -96,8 +95,8 @@ public class FindByRegionInfoTest {
                 .build();
 
         m_regionInfoRepository.saveEarthquake(earthquake);
-        var earthquakeInfoDetails = m_regionInfoRepository.findByRegionInfo(26.4, 21.4, 20.4, 29.4);
+        var earthquakesInfo = m_regionInfoRepository.findByRegionInfo(26.4, 21.4, 20.4, 29.4);
 
-        assertTrue(earthquakeInfoDetails.isEmpty());
+        assertTrue(earthquakesInfo.earthquakes.isEmpty());
     }
 }

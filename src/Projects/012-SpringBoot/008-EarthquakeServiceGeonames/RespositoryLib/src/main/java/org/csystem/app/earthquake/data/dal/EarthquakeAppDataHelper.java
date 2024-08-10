@@ -1,13 +1,11 @@
 package org.csystem.app.earthquake.data.dal;
 
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.app.earthquake.data.entity.EarthquakeInfoDetails;
 import org.csystem.app.earthquake.data.entity.EarthquakeInfoSave;
+import org.csystem.app.earthquake.data.entity.EarthquakesInfo;
 import org.csystem.app.earthquake.data.repository.IRegionInfoRepository;
 import org.csystem.data.exception.repository.RepositoryException;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @Slf4j
@@ -19,10 +17,11 @@ public class EarthquakeAppDataHelper {
         m_earthquakeRepository = earthquakeRepository;
     }
 
-    public List<EarthquakeInfoDetails> findByEarthquakesByRegionInfo(double east, double west, double north, double south)
+    public EarthquakesInfo findByEarthquakesByRegionInfo(double east, double west, double north, double south)
     {
         try {
             log.info("EarthquakeAppDataHelper.findByEarthquakesByRegionInfo");
+
             return m_earthquakeRepository.findByRegionInfo(east, west, north, south);
         }
         catch (Throwable ex) {

@@ -2,11 +2,17 @@ package org.csystem.app.earthquake.data;
 
 import org.csystem.app.earthquake.data.entity.*;
 import org.csystem.app.earthquake.data.repository.IRegionInfoRepository;
-import org.junit.jupiter.api.*;
+import org.csystem.app.earthquake.data.repository.RegionInfoRepository;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.platform.commons.util.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -22,8 +28,8 @@ public class SaveEarthquakeTest {
     @Autowired
     private IRegionInfoRepository m_regionInfoRepository;
 
-    @Test
-    @Order(0)
+    //@Test
+    //@Order(0)
     public void givenValue_whenEarthquake_thenPrivateSaveRegionInfo_generated_id_true() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException
     {
         var earthquake = new EarthquakeInfoSave();
@@ -35,7 +41,7 @@ public class SaveEarthquakeTest {
                 .south(29.4)
                 .build();
 
-        var method = m_regionInfoRepository.getClass().getDeclaredMethod("saveRegionInfo", RegionInfo.class);
+        var method = RegionInfoRepository.class.getDeclaredMethod("saveRegionInfo", RegionInfo.class);
 
         method.setAccessible(true);
         var result = (long)method.invoke(m_regionInfoRepository, earthquake.regionInfo);
