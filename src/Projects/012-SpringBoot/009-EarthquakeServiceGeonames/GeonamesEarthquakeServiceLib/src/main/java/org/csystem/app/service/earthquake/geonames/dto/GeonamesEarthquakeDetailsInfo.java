@@ -1,7 +1,9 @@
 package org.csystem.app.service.earthquake.geonames.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.ToString;
 
+@ToString
 public class GeonamesEarthquakeDetailsInfo {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String dateTime;

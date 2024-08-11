@@ -1,5 +1,0 @@
-# Created at 2024-08-04T15:23:49.804
-Boot Manifest-JAR contains absolute paths in classpath 'D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\008-EarthquakeServiceGeonames\GeonamesEarthquakeServiceLib\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-

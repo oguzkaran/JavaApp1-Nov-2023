@@ -1,5 +1,8 @@
 package org.csystem.app.service.earthquake.geonames.dto;
 
+import lombok.ToString;
+
+@ToString
 public class GeonamesAddress {
     public String adminCode2;
     public String sourceId;
