@@ -34,7 +34,11 @@ public class GeonamesEarthquakeService {
         var url = String.format(ADDRESS_URL_FORMAT, latitude, longitude);
         log.info("Address Code url:{}", url);
 
-        return Objects.requireNonNull(m_restTemplate.getForObject(url, GeonamesAddressInfo.class)).address;
+        var result = Objects.requireNonNull(m_restTemplate.getForObject(url, GeonamesAddressInfo.class)).address;
+
+        log.info("Geonames Address:{}", result);
+
+        return result == null ? new GeonamesAddress() : result;
     }
 
     private GeonamesCountryCode findCountryCode(double latitude, double longitude)

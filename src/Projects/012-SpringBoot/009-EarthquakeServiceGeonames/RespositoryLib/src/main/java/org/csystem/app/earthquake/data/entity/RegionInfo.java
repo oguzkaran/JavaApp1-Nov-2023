@@ -1,9 +1,6 @@
 package org.csystem.app.earthquake.data.entity;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +8,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode
 @Builder
+@ToString
 public class RegionInfo {
     public long id;
     @EqualsAndHashCode.Include

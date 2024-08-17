@@ -1,7 +1,7 @@
-D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\008-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakeDetails.java
-D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\008-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakeDetailsAddress.java
-D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\008-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakeDetailsCountryInfo.java
-D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\008-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakeDetailsInfo.java
-D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\008-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakesDetails.java
-D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\008-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\EarthquakeDataService.java
-D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\008-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\mapper\IEarthquakeMapper.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakeDetails.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakeDetailsAddress.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakeDetailsCountryInfo.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakeDetailsInfo.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\dto\EarthquakesDetails.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\EarthquakeDataService.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\EarthquakeDataServiceLib\src\main\java\org\csystem\app\service\earthquake\mapper\IEarthquakeMapper.java

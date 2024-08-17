@@ -3,9 +3,11 @@ package org.csystem.app.earthquake.data.dal;
 import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.earthquake.data.entity.EarthquakeInfoSave;
 import org.csystem.app.earthquake.data.entity.EarthquakesInfo;
+import org.csystem.app.earthquake.data.entity.RegionInfo;
 import org.csystem.app.earthquake.data.repository.IRegionInfoRepository;
 import org.csystem.data.exception.repository.RepositoryException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Slf4j
@@ -30,10 +32,19 @@ public class EarthquakeAppDataHelper {
         }
     }
 
-    public void saveEarthquake(EarthquakeInfoSave earthquakeInfoSave)
+    @Transactional
+    public void saveEarthquake(EarthquakeInfoSave earthquakeInfoSave, RegionInfo regionInfo)
     {
-       log.info("EarthquakeAppDataHelper.saveEarthquake");
-       m_earthquakeRepository.saveEarthquake(earthquakeInfoSave);
+        m_earthquakeRepository.save(regionInfo);
+
+        log.info("regionInfoId:{}", regionInfo.id);
+        log.info("EarthquakeAppDataHelper.saveEarthquake:{}", earthquakeInfoSave.toString());
+
+        earthquakeInfoSave.earthquakeInfo.regionInfoId = regionInfo.id;
+        earthquakeInfoSave.earthquakeAddress.regionInfoId = regionInfo.id;
+        earthquakeInfoSave.earthquakeCountryInfo.regionInfoId = regionInfo.id;
+
+        m_earthquakeRepository.saveEarthquake(earthquakeInfoSave, regionInfo.id);
     }
 
     public void saveQueryInfo(long regionInfoId)

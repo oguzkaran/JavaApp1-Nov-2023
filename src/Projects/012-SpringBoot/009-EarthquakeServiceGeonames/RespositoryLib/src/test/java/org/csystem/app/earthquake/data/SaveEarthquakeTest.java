@@ -32,19 +32,17 @@ public class SaveEarthquakeTest {
     //@Order(0)
     public void givenValue_whenEarthquake_thenPrivateSaveRegionInfo_generated_id_true() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException
     {
-        var earthquake = new EarthquakeInfoSave();
-
-        earthquake.regionInfo = RegionInfo.builder()
+        var regionInfo = RegionInfo.builder()
                 .east(23.4)
                 .west(21.4)
                 .north(20.4)
                 .south(29.4)
                 .build();
 
-        var method = RegionInfoRepository.class.getDeclaredMethod("saveRegionInfo", RegionInfo.class);
+        var method = RegionInfoRepository.class.getDeclaredMethod("save", RegionInfo.class);
 
         method.setAccessible(true);
-        var result = (long)method.invoke(m_regionInfoRepository, earthquake.regionInfo);
+        var result = (long)method.invoke(m_regionInfoRepository, regionInfo);
 
         method.setAccessible(false);
 
@@ -57,12 +55,14 @@ public class SaveEarthquakeTest {
     {
         var earthquake = new EarthquakeInfoSave();
 
-        earthquake.regionInfo = RegionInfo.builder()
+        var regionInfo = RegionInfo.builder()
                 .east(23.4)
                 .west(21.4)
                 .north(20.4)
                 .south(29.4)
                 .build();
+
+        m_regionInfoRepository.save(regionInfo);
 
         earthquake.earthquakeInfo = EarthquakeInfo.builder()
                 .dateTime("2023-02-06 04:00:00")
@@ -71,20 +71,23 @@ public class SaveEarthquakeTest {
                 .longitude(40.67)
                 .earthquakeId("Test earthquake")
                 .magnitude(7.6)
+                .regionInfoId(regionInfo.id)
                 .build();
 
         earthquake.earthquakeAddress = EarthquakeAddress.builder()
                 .locality("Test locality")
                 .street("Test street")
                 .postalCode("67100")
+                .regionInfoId(regionInfo.id)
                 .build();
 
         earthquake.earthquakeCountryInfo = EarthquakeCountryInfo.builder()
                 .distance("100")
                 .countryCode("TR")
                 .countryName("Turkey")
+                .regionInfoId(regionInfo.id)
                 .build();
 
-        assertDoesNotThrow(() -> m_regionInfoRepository.saveEarthquake(earthquake));
+        assertDoesNotThrow(() -> m_regionInfoRepository.saveEarthquake(earthquake, regionInfo.id));
     }
 }

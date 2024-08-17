@@ -25,13 +25,14 @@ public class FindByRegionInfoTest {
     {
         var earthquake = new EarthquakeInfoSave();
 
-        earthquake.regionInfo = RegionInfo.builder()
+        var regionInfo = RegionInfo.builder()
                 .east(23.4)
                 .west(21.4)
                 .north(20.4)
                 .south(29.4)
                 .build();
 
+        m_regionInfoRepository.save(regionInfo);
         earthquake.earthquakeInfo = EarthquakeInfo.builder()
                 .dateTime("2023-02-06 04:00:00")
                 .depth(100)
@@ -39,21 +40,24 @@ public class FindByRegionInfoTest {
                 .longitude(40.67)
                 .earthquakeId("Test earthquake")
                 .magnitude(7.6)
+                .regionInfoId(regionInfo.id)
                 .build();
 
         earthquake.earthquakeAddress = EarthquakeAddress.builder()
                 .locality("Test locality")
                 .street("Test street")
                 .postalCode("67100")
+                .regionInfoId(regionInfo.id)
                 .build();
 
         earthquake.earthquakeCountryInfo = EarthquakeCountryInfo.builder()
                 .distance("100")
                 .countryCode("TR")
                 .countryName("Turkey")
+                .regionInfoId(regionInfo.id)
                 .build();
 
-        m_regionInfoRepository.saveEarthquake(earthquake);
+        m_regionInfoRepository.saveEarthquake(earthquake, regionInfo.id);
         var earthquakesInfo = m_regionInfoRepository.findByRegionInfo(23.4, 21.4, 20.4, 29.4);
 
         assertFalse(earthquakesInfo.earthquakes.isEmpty());
@@ -66,12 +70,14 @@ public class FindByRegionInfoTest {
     {
         var earthquake = new EarthquakeInfoSave();
 
-        earthquake.regionInfo = RegionInfo.builder()
+        var regionInfo = RegionInfo.builder()
                 .east(23.4)
                 .west(21.4)
                 .north(20.4)
                 .south(29.4)
                 .build();
+
+        m_regionInfoRepository.save(regionInfo);
 
         earthquake.earthquakeInfo = EarthquakeInfo.builder()
                 .dateTime("2023-02-06 04:00:00")
@@ -80,21 +86,24 @@ public class FindByRegionInfoTest {
                 .longitude(40.67)
                 .earthquakeId("Test earthquake")
                 .magnitude(7.6)
+                .regionInfoId(regionInfo.id)
                 .build();
 
         earthquake.earthquakeAddress = EarthquakeAddress.builder()
                 .locality("Test locality")
                 .street("Test street")
                 .postalCode("67100")
+                .regionInfoId(regionInfo.id)
                 .build();
 
         earthquake.earthquakeCountryInfo = EarthquakeCountryInfo.builder()
                 .distance("100")
                 .countryCode("TR")
                 .countryName("Turkey")
+                .regionInfoId(regionInfo.id)
                 .build();
 
-        m_regionInfoRepository.saveEarthquake(earthquake);
+        m_regionInfoRepository.saveEarthquake(earthquake, regionInfo.id);
         var earthquakesInfo = m_regionInfoRepository.findByRegionInfo(26.4, 21.4, 20.4, 29.4);
 
         assertTrue(earthquakesInfo.earthquakes.isEmpty());

@@ -61,16 +61,7 @@ public class RegionInfoRepository implements IRegionInfoRepository {
 
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
 
-    private long saveRegionInfo(RegionInfo regionInfo) throws SQLException
-    {
-        var paramSource = new BeanPropertySqlParameterSource(regionInfo);
-        var keyHolder = new GeneratedKeyHolder();
 
-        if (m_namedParameterJdbcTemplate.update(SAVE_REGION_INFO_SQL, paramSource, keyHolder) != 1)
-            throw new SQLException();
-
-        return (long)keyHolder.getKeyList().get(0).get("region_info_id");
-    }
 
     private void saveEarthquakeInfo(EarthquakeInfo earthquakeInfo)
     {
@@ -190,24 +181,36 @@ public class RegionInfoRepository implements IRegionInfoRepository {
     }
 
     @Override
-    @Transactional
-    public void saveEarthquake(EarthquakeInfoSave earthquakeInfoSave)
+    public <S extends RegionInfo> S save(S regionInfo)
     {
         try {
-            var regionInfoId = saveRegionInfo(earthquakeInfoSave.regionInfo);
+            var paramSource = new BeanPropertySqlParameterSource(regionInfo);
+            var keyHolder = new GeneratedKeyHolder();
 
-            log.info("Generated Region info id:{}", regionInfoId);
+            if (m_namedParameterJdbcTemplate.update(SAVE_REGION_INFO_SQL, paramSource, keyHolder) != 1)
+                throw new SQLException();
 
-            earthquakeInfoSave.earthquakeInfo.regionInfoId = regionInfoId;
-            earthquakeInfoSave.earthquakeAddress.regionInfoId = regionInfoId;
-            earthquakeInfoSave.earthquakeCountryInfo.regionInfoId = regionInfoId;
+            regionInfo.id = (long) keyHolder.getKeyList().get(0).get("region_info_id");
 
+            return regionInfo;
+        }
+        catch (SQLException ex) {
+            log.info("EarthquakeAppDataHelper.saveRegionInfo: Message: {}", ex.getMessage());
+            throw new RepositoryException("EarthquakeAppDataHelper.saveRegionInfo", ex);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void saveEarthquake(EarthquakeInfoSave earthquakeInfoSave, long regionInfoId)
+    {
+        try {
             saveEarthquakeInfo(earthquakeInfoSave.earthquakeInfo);
             saveEarthquakeAddress(earthquakeInfoSave.earthquakeAddress);
             saveEarthquakeCountryInfo(earthquakeInfoSave.earthquakeCountryInfo);
             saveEarthquakeQueryInfo(regionInfoId);
         }
-        catch (SQLException ex) {
+        catch (Throwable ex) {
             log.error("RegionInfoRepository.saveEarthQuake -> Message:{}", ex.getMessage());
             throw new RepositoryException("RegionInfoRepository.saveEarthQuake", ex);
         }
@@ -282,12 +285,6 @@ public class RegionInfoRepository implements IRegionInfoRepository {
 
     @Override
     public Optional<RegionInfo> findById(Long aLong)
-    {
-        throw new UnsupportedOperationException("Not yet implemented!...");
-    }
-
-    @Override
-    public <S extends RegionInfo> S save(S entity)
     {
         throw new UnsupportedOperationException("Not yet implemented!...");
     }

@@ -26,12 +26,14 @@ public class SaveQueryInfoTest {
     {
         var earthquake = new EarthquakeInfoSave();
 
-        earthquake.regionInfo = RegionInfo.builder()
+        var regionInfo = RegionInfo.builder()
                 .east(23.4)
                 .west(21.4)
                 .north(20.4)
                 .south(29.4)
                 .build();
+
+        m_regionInfoRepository.save(regionInfo);
 
         earthquake.earthquakeInfo = EarthquakeInfo.builder()
                 .dateTime("2023-02-06 04:00:00")
@@ -40,21 +42,24 @@ public class SaveQueryInfoTest {
                 .longitude(40.67)
                 .earthquakeId("Test earthquake")
                 .magnitude(7.6)
+                .regionInfoId(regionInfo.id)
                 .build();
 
         earthquake.earthquakeAddress = EarthquakeAddress.builder()
                 .locality("Test locality")
                 .street("Test street")
                 .postalCode("67100")
+                .regionInfoId(regionInfo.id)
                 .build();
 
         earthquake.earthquakeCountryInfo = EarthquakeCountryInfo.builder()
                 .distance("100")
                 .countryCode("TR")
                 .countryName("Turkey")
+                .regionInfoId(regionInfo.id)
                 .build();
 
-        m_regionInfoRepository.saveEarthquake(earthquake);
+        m_regionInfoRepository.saveEarthquake(earthquake, regionInfo.id);
 
         assertDoesNotThrow(() -> m_regionInfoRepository.saveEarthquakeQueryInfo(1));
     }
