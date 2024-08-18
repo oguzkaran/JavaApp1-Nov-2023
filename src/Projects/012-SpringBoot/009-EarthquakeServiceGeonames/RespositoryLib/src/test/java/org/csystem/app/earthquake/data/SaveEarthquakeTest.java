@@ -88,6 +88,6 @@ public class SaveEarthquakeTest {
                 .regionInfoId(regionInfo.id)
                 .build();
 
-        assertDoesNotThrow(() -> m_regionInfoRepository.saveEarthquake(earthquake, regionInfo.id));
+        assertDoesNotThrow(() -> m_regionInfoRepository.saveEarthquake(earthquake));
     }
 }

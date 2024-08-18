@@ -7,6 +7,7 @@ import org.csystem.app.earthquake.data.entity.EarthquakeAddress;
 import org.csystem.app.earthquake.data.entity.EarthquakeCountryInfo;
 import org.csystem.app.earthquake.data.entity.EarthquakeInfo;
 import org.csystem.app.earthquake.data.entity.EarthquakeInfoDetails;
+import org.csystem.app.earthquake.data.entity.EarthquakeInfoSave;
 import org.csystem.app.earthquake.data.entity.EarthquakesInfo;
 import org.csystem.app.service.earthquake.dto.EarthquakeDetails;
 import org.csystem.app.service.earthquake.dto.EarthquakeDetailsAddress;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-17T16:55:06+0300",
+    date = "2024-08-18T13:58:41+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -125,6 +126,54 @@ public class EarthquakeMapperImpl implements IEarthquakeMapper {
     }
 
     @Override
+    public EarthquakeDetailsInfo toEarthquakeDetailsInfo(EarthquakeInfo earthquakeInfo) {
+        if ( earthquakeInfo == null ) {
+            return null;
+        }
+
+        EarthquakeDetailsInfo earthquakeDetailsInfo = new EarthquakeDetailsInfo();
+
+        earthquakeDetailsInfo.dateTime = earthquakeInfo.dateTime;
+        earthquakeDetailsInfo.depth = earthquakeInfo.depth;
+        earthquakeDetailsInfo.latitude = earthquakeInfo.latitude;
+        earthquakeDetailsInfo.longitude = earthquakeInfo.longitude;
+        earthquakeDetailsInfo.earthquakeId = earthquakeInfo.earthquakeId;
+        earthquakeDetailsInfo.magnitude = earthquakeInfo.magnitude;
+
+        return earthquakeDetailsInfo;
+    }
+
+    @Override
+    public EarthquakeDetailsAddress toEarthquakeDetailsAddress(EarthquakeAddress earthquakeAddress) {
+        if ( earthquakeAddress == null ) {
+            return null;
+        }
+
+        EarthquakeDetailsAddress earthquakeDetailsAddress = new EarthquakeDetailsAddress();
+
+        earthquakeDetailsAddress.locality = earthquakeAddress.locality;
+        earthquakeDetailsAddress.street = earthquakeAddress.street;
+        earthquakeDetailsAddress.postalCode = earthquakeAddress.postalCode;
+
+        return earthquakeDetailsAddress;
+    }
+
+    @Override
+    public EarthquakeDetailsCountryInfo toEarthquakeDetailsCountryInfo(EarthquakeCountryInfo earthquakeCountryInfo) {
+        if ( earthquakeCountryInfo == null ) {
+            return null;
+        }
+
+        EarthquakeDetailsCountryInfo earthquakeDetailsCountryInfo = new EarthquakeDetailsCountryInfo();
+
+        earthquakeDetailsCountryInfo.distance = earthquakeCountryInfo.distance;
+        earthquakeDetailsCountryInfo.countryCode = earthquakeCountryInfo.countryCode;
+        earthquakeDetailsCountryInfo.countryName = earthquakeCountryInfo.countryName;
+
+        return earthquakeDetailsCountryInfo;
+    }
+
+    @Override
     public EarthquakesDetails toEarthquakesDetails(GeonamesEarthquakeInfoDetails geonamesEarthquakeDetails) {
         if ( geonamesEarthquakeDetails == null ) {
             return null;
@@ -150,6 +199,20 @@ public class EarthquakeMapperImpl implements IEarthquakeMapper {
         return earthquakesDetails;
     }
 
+    @Override
+    public List<EarthquakeInfoSave> toEarthquakesInfoSaves(List<EarthquakeDetails> earthquakeDetails) {
+        if ( earthquakeDetails == null ) {
+            return null;
+        }
+
+        List<EarthquakeInfoSave> list = new ArrayList<EarthquakeInfoSave>( earthquakeDetails.size() );
+        for ( EarthquakeDetails earthquakeDetails1 : earthquakeDetails ) {
+            list.add( toEarthquakeInfoSave( earthquakeDetails1 ) );
+        }
+
+        return list;
+    }
+
     protected List<EarthquakeDetails> geonamesEarthquakeDetailsListToEarthquakeDetailsList(List<GeonamesEarthquakeDetails> list) {
         if ( list == null ) {
             return null;
@@ -163,16 +226,6 @@ public class EarthquakeMapperImpl implements IEarthquakeMapper {
         return list1;
     }
 
-    protected EarthquakeDetails earthquakeInfoDetailsToEarthquakeDetails(EarthquakeInfoDetails earthquakeInfoDetails) {
-        if ( earthquakeInfoDetails == null ) {
-            return null;
-        }
-
-        EarthquakeDetails earthquakeDetails = new EarthquakeDetails();
-
-        return earthquakeDetails;
-    }
-
     protected List<EarthquakeDetails> earthquakeInfoDetailsListToEarthquakeDetailsList(List<EarthquakeInfoDetails> list) {
         if ( list == null ) {
             return null;
@@ -180,7 +233,7 @@ public class EarthquakeMapperImpl implements IEarthquakeMapper {
 
         List<EarthquakeDetails> list1 = new ArrayList<EarthquakeDetails>( list.size() );
         for ( EarthquakeInfoDetails earthquakeInfoDetails : list ) {
-            list1.add( earthquakeInfoDetailsToEarthquakeDetails( earthquakeInfoDetails ) );
+            list1.add( toEarthquakeDetails( earthquakeInfoDetails ) );
         }
 
         return list1;

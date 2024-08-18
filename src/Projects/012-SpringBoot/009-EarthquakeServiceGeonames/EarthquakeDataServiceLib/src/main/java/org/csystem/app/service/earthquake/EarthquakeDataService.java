@@ -28,8 +28,7 @@ public class EarthquakeDataService {
 
         var ri = RegionInfo.builder().east(east).west(west).north(north).south(south).build();
 
-        earthquakes.earthquakes
-                .forEach(e -> m_earthquakeAppDataHelper.saveEarthquake(m_earthquakeMapper.toEarthquakeInfoSave(e), ri));
+        m_earthquakeAppDataHelper.saveEarthquakes(m_earthquakeMapper.toEarthquakesInfoSaves(earthquakes.earthquakes), ri);
 
         return earthquakes;
     }

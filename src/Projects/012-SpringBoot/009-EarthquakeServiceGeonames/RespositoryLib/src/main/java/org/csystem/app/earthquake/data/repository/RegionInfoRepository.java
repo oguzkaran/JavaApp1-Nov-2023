@@ -14,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -22,18 +21,13 @@ import java.util.Optional;
 public class RegionInfoRepository implements IRegionInfoRepository {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm:ss");
 
-    private static final String FIND_DETAILS_BY_REGION_INFO = """            
+    private static final String FIND_BY_REGION = """
             select\s
-            ei.latitude, ei.longitude, ei.depth, ei.datetime, ei.magnitude, ei.earthquake_id,\s
-            eai.locality, eai.street, eai.postal_code,\s
-            eci.distance, eci.country_code, eci.country_name,\s
             ri.region_info_id\s
             from\s
-            region_info ri inner join earthquake_info ei on ei.region_info_id = ri.region_info_id\s
-            inner join earthquake_address_info eai on eai.region_info_id = ri.region_info_id\s
-            inner join earthquake_country_info eci on eci.region_info_id = ri.region_info_id
+            region_info ri\s
             where abs(ri.east - :east) < 0.00001 and abs(ri.west - :west) < 0.00001 and abs(ri.north - :north) < 0.00001\s
-            and abs(ri.south - :south) < 0.00001;
+            and abs(ri.south - :south) < 0.00001;\s
             """;
 
     private static final String SAVE_REGION_INFO_SQL = """
@@ -60,8 +54,6 @@ public class RegionInfoRepository implements IRegionInfoRepository {
     private static final Logger log = LoggerFactory.getLogger(RegionInfoRepository.class);
 
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
-
-
 
     private void saveEarthquakeInfo(EarthquakeInfo earthquakeInfo)
     {
@@ -102,36 +94,7 @@ public class RegionInfoRepository implements IRegionInfoRepository {
         m_namedParameterJdbcTemplate.update(SAVE_EARTHQUAKE_COUNTRY_INFO_SQL, paramMap);
     }
 
-    private EarthquakeInfo createEarthquakeInfo(double latitude, double longitude, double depth,
-                                                String dateTime, double magnitude, String earthquakeId)
-    {
-        return EarthquakeInfo.builder()
-                .latitude(latitude)
-                .longitude(longitude)
-                .depth(depth)
-                .dateTime(dateTime)
-                .magnitude(magnitude)
-                .earthquakeId(earthquakeId)
-                .build();
-    }
 
-    private EarthquakeAddress createEarthquakeAddress(String locality, String street, String postalCode)
-    {
-        return EarthquakeAddress.builder()
-                .locality(locality)
-                .street(street)
-                .postalCode(postalCode)
-                .build();
-    }
-
-    private EarthquakeCountryInfo createEarthquakeCountryInfo(String distance, String countryCode, String countryName)
-    {
-        return EarthquakeCountryInfo.builder()
-                .distance(distance)
-                .countryCode(countryCode)
-                .countryName(countryName)
-                .build();
-    }
 
     private EarthquakeInfoDetails createEarthquakeDetails(EarthquakeInfo earthquakeInfo,
                                                           EarthquakeAddress earthquakeAddress,
@@ -144,18 +107,9 @@ public class RegionInfoRepository implements IRegionInfoRepository {
                 .build();
     }
 
-    private void fillEarthquakeInfoDetails(ResultSet rs, EarthquakesInfo earthquakesInfo) throws SQLException
+    private void fillRegionInfo(ResultSet rs, RegionInfo regionInfo) throws SQLException
     {
-        earthquakesInfo.regionInfoId = rs.getLong(13);
-
-        do {
-            var earthquakeInfo = createEarthquakeInfo(rs.getDouble(1), rs.getDouble(2), rs.getDouble(3),
-                    rs.getString(4), rs.getDouble(5), rs.getString(6));
-            var earthquakeAddress = createEarthquakeAddress(rs.getString(7), rs.getString(8), rs.getString(9));
-            var earthquakeCountryInfo = createEarthquakeCountryInfo(rs.getString(10), rs.getString(11), rs.getString(12));
-
-            earthquakesInfo.earthquakes.add(createEarthquakeDetails(earthquakeInfo, earthquakeAddress, earthquakeCountryInfo));
-        } while (rs.next());
+        regionInfo.id = rs.getLong(1);
     }
 
     public RegionInfoRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate)
@@ -164,9 +118,9 @@ public class RegionInfoRepository implements IRegionInfoRepository {
     }
 
     @Override
-    public EarthquakesInfo findByRegionInfo(double east, double west, double north, double south)
+    public RegionInfo findByRegion(double east, double west, double north, double south)
     {
-        var earthquakesInfo = EarthquakesInfo.builder().earthquakes(new ArrayList<>()).build();
+        var regionInfo = RegionInfo.builder().east(east).west(west).north(north).south(south).build();
         var paramMap = new HashMap<String, Object>();
 
         paramMap.put("east", east);
@@ -174,10 +128,9 @@ public class RegionInfoRepository implements IRegionInfoRepository {
         paramMap.put("north", north);
         paramMap.put("south", south);
 
-        m_namedParameterJdbcTemplate.query(FIND_DETAILS_BY_REGION_INFO, paramMap,
-                (ResultSet rs) -> fillEarthquakeInfoDetails(rs, earthquakesInfo));
+        m_namedParameterJdbcTemplate.query(FIND_BY_REGION, paramMap, (ResultSet rs) -> fillRegionInfo(rs, regionInfo));
 
-        return earthquakesInfo;
+        return regionInfo;
     }
 
     @Override
@@ -202,13 +155,17 @@ public class RegionInfoRepository implements IRegionInfoRepository {
 
     @Override
     @Transactional
-    public void saveEarthquake(EarthquakeInfoSave earthquakeInfoSave, long regionInfoId)
+    public void saveEarthquake(EarthquakeInfoSave earthquakeInfoSave)
     {
         try {
-            saveEarthquakeInfo(earthquakeInfoSave.earthquakeInfo);
-            saveEarthquakeAddress(earthquakeInfoSave.earthquakeAddress);
-            saveEarthquakeCountryInfo(earthquakeInfoSave.earthquakeCountryInfo);
-            saveEarthquakeQueryInfo(regionInfoId);
+            if (earthquakeInfoSave.earthquakeInfo != null)
+                saveEarthquakeInfo(earthquakeInfoSave.earthquakeInfo);
+
+            if (earthquakeInfoSave.earthquakeAddress != null)
+                saveEarthquakeAddress(earthquakeInfoSave.earthquakeAddress);
+
+            if (earthquakeInfoSave.earthquakeCountryInfo != null)
+                saveEarthquakeCountryInfo(earthquakeInfoSave.earthquakeCountryInfo);
         }
         catch (Throwable ex) {
             log.error("RegionInfoRepository.saveEarthQuake -> Message:{}", ex.getMessage());

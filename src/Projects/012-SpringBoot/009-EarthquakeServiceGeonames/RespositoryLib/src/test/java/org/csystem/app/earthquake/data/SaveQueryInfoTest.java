@@ -59,7 +59,7 @@ public class SaveQueryInfoTest {
                 .regionInfoId(regionInfo.id)
                 .build();
 
-        m_regionInfoRepository.saveEarthquake(earthquake, regionInfo.id);
+        m_regionInfoRepository.saveEarthquake(earthquake);
 
         assertDoesNotThrow(() -> m_regionInfoRepository.saveEarthquakeQueryInfo(1));
     }

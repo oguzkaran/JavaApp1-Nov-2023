@@ -57,8 +57,8 @@ public class FindByRegionInfoTest {
                 .regionInfoId(regionInfo.id)
                 .build();
 
-        m_regionInfoRepository.saveEarthquake(earthquake, regionInfo.id);
-        var earthquakesInfo = m_regionInfoRepository.findByRegionInfo(23.4, 21.4, 20.4, 29.4);
+        m_regionInfoRepository.saveEarthquake(earthquake);
+        var earthquakesInfo = m_regionInfoRepository.findByRegion(23.4, 21.4, 20.4, 29.4);
 
         assertFalse(earthquakesInfo.earthquakes.isEmpty());
         assertEquals(1, earthquakesInfo.regionInfoId);
@@ -103,8 +103,8 @@ public class FindByRegionInfoTest {
                 .regionInfoId(regionInfo.id)
                 .build();
 
-        m_regionInfoRepository.saveEarthquake(earthquake, regionInfo.id);
-        var earthquakesInfo = m_regionInfoRepository.findByRegionInfo(26.4, 21.4, 20.4, 29.4);
+        m_regionInfoRepository.saveEarthquake(earthquake);
+        var earthquakesInfo = m_regionInfoRepository.findByRegion(26.4, 21.4, 20.4, 29.4);
 
         assertTrue(earthquakesInfo.earthquakes.isEmpty());
     }
