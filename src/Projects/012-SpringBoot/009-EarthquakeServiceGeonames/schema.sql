@@ -45,3 +45,5 @@ create table earthquake_query_info (
     region_info_id bigint references region_info(region_info_id) not null,
     query_datetime timestamp default(current_timestamp) not null
 );
+
+--
