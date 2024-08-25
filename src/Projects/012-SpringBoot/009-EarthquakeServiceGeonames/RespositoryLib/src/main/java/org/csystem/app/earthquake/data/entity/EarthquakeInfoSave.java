@@ -9,5 +9,4 @@ public class EarthquakeInfoSave {
     public EarthquakeInfo earthquakeInfo;
     public EarthquakeAddress earthquakeAddress;
     public EarthquakeCountryInfo earthquakeCountryInfo;
-
 }
