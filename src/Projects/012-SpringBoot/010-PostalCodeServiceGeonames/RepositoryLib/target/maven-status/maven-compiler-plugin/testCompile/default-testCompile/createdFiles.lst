@@ -1,0 +1,4 @@
+org\csystem\app\postalcode\data\repository\PostalCodeInfoRepositoryFindByCityTest.class
+org\csystem\app\postalcode\data\repository\PostalCodeInfoRepositoryFindByMonthAndYearTest.class
+org\csystem\app\postalcode\data\mapper\PostalCodeMapper.class
+org\csystem\app\postalcode\data\mapper\IPostalCodeMapper.class

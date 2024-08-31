@@ -36,6 +36,12 @@ public class PostalCodeInfo { //POJO (Plain Old Java Object)
 
     public double lat;
 
+    @Column(name = "admin_name3")
+    public String adminName3;
+
+    @Column(name = "admin_code3")
+    public String adminCode3;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postal_code", nullable = false)
     public PostalCode postalCode;

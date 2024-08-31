@@ -7,6 +7,7 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+
 @EqualsAndHashCode
 @ToString
 @Entity
@@ -14,11 +15,11 @@ import java.util.Set;
 public class PostalCode { //POJO (Plain Old Java Object)
     @Id
     @Column(name = "postal_code", length = 128)
-    public long postalCode;
+    public String postalCode;
 
     @Column(name = "first_query_datetime", nullable = false)
     public LocalDateTime firstQueryDateTime = LocalDateTime.now();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "postalCode", cascade = CascadeType.ALL)
-    public Set<PostalCodeInfo> m_postalCodeInfo;
+    public Set<PostalCodeInfo> postalCodeInfo;
 }
