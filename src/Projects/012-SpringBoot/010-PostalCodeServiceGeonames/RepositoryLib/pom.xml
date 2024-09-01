@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>org.csystem</groupId>
-    <artifactId>PostalCodeServiceRepositoryLib</artifactId>
+    <artifactId>PostalCodeRepositoryLib</artifactId>
     <version>1.0.0</version>
     <name>PostalCodeServiceRepositoryLib</name>
 
@@ -68,8 +68,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-
 
         <dependency>
             <groupId>org.csystem</groupId>

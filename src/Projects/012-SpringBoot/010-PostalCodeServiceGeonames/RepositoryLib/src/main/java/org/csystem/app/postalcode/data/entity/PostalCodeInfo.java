@@ -11,6 +11,7 @@ import lombok.ToString;
 public class PostalCodeInfo { //POJO (Plain Old Java Object)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "postal_code_info_id")
     public long id;
 
     @Column(name = "admin_code2")

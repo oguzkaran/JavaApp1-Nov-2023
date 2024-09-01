@@ -2,7 +2,7 @@ package org.csystem.app.postalcode.data.mapper;
 
 
 import org.csystem.app.postalcode.data.entity.PostalCodeInfo;
-import org.csystem.app.service.earthquake.geonames.dto.GeonamesPostalCodeInfo;
+import org.csystem.app.postalcode.geonames.dto.GeonamesPostalCodeInfo;
 
 import java.util.List;
 import java.util.Set;

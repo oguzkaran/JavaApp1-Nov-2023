@@ -1,4 +1,4 @@
-org\csystem\app\service\earthquake\geonames\service\GeonamesPostalCodeService.class
-org\csystem\app\service\earthquake\geonames\configuration\RestTemplateConfig.class
-org\csystem\app\service\earthquake\geonames\dto\GeonamesPostalCodeInfo.class
-org\csystem\app\service\earthquake\geonames\dto\GeonamesPostalCodes.class
+org\csystem\app\postalcode\geonames\dto\GeonamesPostalCodeInfo.class
+org\csystem\app\postalcode\geonames\configuration\RestTemplateConfig.class
+org\csystem\app\postalcode\geonames\service\GeonamesPostalCodeService.class
+org\csystem\app\postalcode\geonames\dto\GeonamesPostalCodes.class

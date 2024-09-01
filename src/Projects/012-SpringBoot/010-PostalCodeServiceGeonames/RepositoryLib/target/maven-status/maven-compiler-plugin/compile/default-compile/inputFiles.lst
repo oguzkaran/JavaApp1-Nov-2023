@@ -1,5 +1,7 @@
 D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\main\java\org\csystem\app\postalcode\data\dal\PostalCodeAppDataHelper.java
 D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\main\java\org\csystem\app\postalcode\data\entity\PostalCode.java
 D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\main\java\org\csystem\app\postalcode\data\entity\PostalCodeInfo.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\main\java\org\csystem\app\postalcode\data\entity\PostalCodeQueryInfo.java
 D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\main\java\org\csystem\app\postalcode\data\repository\IPostalCodeInfoRepository.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\main\java\org\csystem\app\postalcode\data\repository\IPostalCodeQueryInfoRepository.java
 D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\main\java\org\csystem\app\postalcode\data\repository\IPostalCodeRepository.java

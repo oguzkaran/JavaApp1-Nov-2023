@@ -3,7 +3,7 @@ package org.csystem.app.postalcode.data.repository;
 import org.csystem.app.postalcode.data.dal.PostalCodeAppDataHelper;
 import org.csystem.app.postalcode.data.entity.PostalCode;
 import org.csystem.app.postalcode.data.mapper.IPostalCodeMapper;
-import org.csystem.app.service.earthquake.geonames.service.GeonamesPostalCodeService;
+import org.csystem.app.postalcode.geonames.service.GeonamesPostalCodeService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
