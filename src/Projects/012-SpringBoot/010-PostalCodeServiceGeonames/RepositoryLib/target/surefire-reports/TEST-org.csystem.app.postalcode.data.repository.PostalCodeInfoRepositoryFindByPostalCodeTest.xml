@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByCityTest" time="2.871" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByPostalCodeTest" time="2.509" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -47,7 +47,7 @@
     <property name="localRepository" value="C:\Users\Hp\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\Hp\AppData\Local\Temp\"/>
-    <property name="com.zaxxer.hikari.pool_number" value="2"/>
+    <property name="com.zaxxer.hikari.pool_number" value="3"/>
     <property name="java.version" value="21.0.1"/>
     <property name="user.dir" value="D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib"/>
     <property name="os.arch" value="amd64"/>
@@ -64,9 +64,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="test" classname="org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByCityTest" time="0.251">
-    <system-out><![CDATA[2024-09-14T16:16:45.902+03:00  INFO 10628 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByCityTest]: PostalCodeInfoRepositoryFindByCityTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-09-14T16:16:45.959+03:00  INFO 10628 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByPostalCodeTest for test class org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByCityTest
+  <testcase name="test" classname="org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByPostalCodeTest" time="0.152">
+    <system-out><![CDATA[2024-09-14T16:16:49.214+03:00  INFO 10628 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByPostalCodeTest]: PostalCodeInfoRepositoryFindByPostalCodeTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-09-14T16:16:49.220+03:00  INFO 10628 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByPostalCodeTest for test class org.csystem.app.postalcode.data.repository.PostalCodeInfoRepositoryFindByPostalCodeTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -77,21 +77,21 @@
 
  :: Spring Boot ::                (v3.3.2)
 
-2024-09-14T16:16:46.214+03:00  INFO 10628 --- [           main] r.PostalCodeInfoRepositoryFindByCityTest : Starting PostalCodeInfoRepositoryFindByCityTest using Java 21.0.1 with PID 10628 (started by Hp in D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib)
-2024-09-14T16:16:46.216+03:00  INFO 10628 --- [           main] r.PostalCodeInfoRepositoryFindByCityTest : No active profile set, falling back to 1 default profile: "default"
-2024-09-14T16:16:46.894+03:00  INFO 10628 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-09-14T16:16:46.963+03:00  INFO 10628 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68 ms. Found 3 JPA repository interfaces.
-2024-09-14T16:16:47.212+03:00  INFO 10628 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-09-14T16:16:47.219+03:00  INFO 10628 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-09-14T16:16:47.267+03:00  INFO 10628 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-09-14T16:16:47.274+03:00  INFO 10628 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2024-09-14T16:16:47.466+03:00  INFO 10628 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@57ce8f63
-2024-09-14T16:16:47.467+03:00  INFO 10628 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2024-09-14T16:16:47.795+03:00  INFO 10628 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-09-14T16:16:47.878+03:00  INFO 10628 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-09-14T16:16:48.494+03:00  INFO 10628 --- [           main] r.PostalCodeInfoRepositoryFindByCityTest : Started PostalCodeInfoRepositoryFindByCityTest in 2.49 seconds (process running for 20.177)
-2024-09-14T16:16:48.608+03:00  INFO 10628 --- [           main] o.c.a.p.d.dal.PostalCodeAppDataHelper    : PostalCodeAppDataHelper.savePostalCodes
-2024-09-14T16:16:48.615+03:00  INFO 10628 --- [           main] o.c.a.p.d.dal.PostalCodeAppDataHelper    : PostalCodeQueryInfo:PostalCodeQueryInfo(id=0, queryDateTime=2024-09-14T16:16:48.606584200, postalCode=PostalCode(postalCode=67000, firstQueryDateTime=2024-09-14T16:16:48.606584200, postalCodeInfo=null, postalCodeQueryInfo=null))
+2024-09-14T16:16:49.314+03:00  INFO 10628 --- [           main] alCodeInfoRepositoryFindByPostalCodeTest : Starting PostalCodeInfoRepositoryFindByPostalCodeTest using Java 21.0.1 with PID 10628 (started by Hp in D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib)
+2024-09-14T16:16:49.315+03:00  INFO 10628 --- [           main] alCodeInfoRepositoryFindByPostalCodeTest : No active profile set, falling back to 1 default profile: "default"
+2024-09-14T16:16:50.083+03:00  INFO 10628 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-14T16:16:50.117+03:00  INFO 10628 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33 ms. Found 3 JPA repository interfaces.
+2024-09-14T16:16:50.408+03:00  INFO 10628 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-14T16:16:50.444+03:00  INFO 10628 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-14T16:16:50.465+03:00  INFO 10628 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-14T16:16:50.467+03:00  INFO 10628 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2024-09-14T16:16:50.698+03:00  INFO 10628 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@31741bb6
+2024-09-14T16:16:50.699+03:00  INFO 10628 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2024-09-14T16:16:50.939+03:00  INFO 10628 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-14T16:16:51.033+03:00  INFO 10628 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-14T16:16:51.543+03:00  INFO 10628 --- [           main] alCodeInfoRepositoryFindByPostalCodeTest : Started PostalCodeInfoRepositoryFindByPostalCodeTest in 2.316 seconds (process running for 23.226)
+2024-09-14T16:16:51.666+03:00  INFO 10628 --- [           main] o.c.a.p.d.dal.PostalCodeAppDataHelper    : PostalCodeAppDataHelper.savePostalCodes
+2024-09-14T16:16:51.671+03:00  INFO 10628 --- [           main] o.c.a.p.d.dal.PostalCodeAppDataHelper    : PostalCodeQueryInfo:PostalCodeQueryInfo(id=0, queryDateTime=2024-09-14T16:16:51.661500, postalCode=PostalCode(postalCode=67000, firstQueryDateTime=2024-09-14T16:16:51.661500, postalCodeInfo=null, postalCodeQueryInfo=null))
 ]]></system-out>
   </testcase>
 </testsuite>

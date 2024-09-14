@@ -44,6 +44,6 @@ public class PostalCodeInfo { //POJO (Plain Old Java Object)
     public String adminCode3;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postal_code", nullable = false)
+    @JoinColumn(name = "postal_code_id", nullable = false)
     public PostalCode postalCode;
 }

@@ -1,5 +1,6 @@
 org\csystem\app\postalcode\data\entity\PostalCode.class
 org\csystem\app\postalcode\data\dal\PostalCodeAppDataHelper.class
+org\csystem\app\postalcode\data\entity\PostalCodeQueryInfo$PostalCodeQueryInfoBuilder.class
 org\csystem\app\postalcode\data\repository\IPostalCodeRepository.class
 org\csystem\app\postalcode\data\entity\PostalCodeInfo.class
 org\csystem\app\postalcode\data\entity\PostalCodeQueryInfo.class

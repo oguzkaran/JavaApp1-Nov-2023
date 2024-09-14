@@ -1,4 +1,6 @@
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\test\java\org\csystem\app\postalcode\data\dal\PostalCodeInfoDataHelperFindPostalCodeAndSaveQueryByCityTest.java
 D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\test\java\org\csystem\app\postalcode\data\mapper\IPostalCodeMapper.java
 D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\test\java\org\csystem\app\postalcode\data\mapper\PostalCodeMapper.java
 D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\test\java\org\csystem\app\postalcode\data\repository\PostalCodeInfoRepositoryFindByCityTest.java
 D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\test\java\org\csystem\app\postalcode\data\repository\PostalCodeInfoRepositoryFindByMonthAndYearTest.java
+D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\010-PostalCodeServiceGeonames\RepositoryLib\src\test\java\org\csystem\app\postalcode\data\repository\PostalCodeInfoRepositoryFindByPostalCodeTest.java

@@ -11,8 +11,6 @@ import org.csystem.data.exception.repository.RepositoryException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -30,51 +28,12 @@ public class PostalCodeAppDataHelper {
         m_postalCodeQueryInfoRepository = postalCodeQueryInfoRepository;
     }
 
+
     private void savePostalCodeInfoCallback(PostalCodeInfo postalCodeInfo, PostalCode postalCode)
     {
         postalCodeInfo.postalCode = postalCode;
 
         m_postalCodeInfoRepository.save(postalCodeInfo);
-    }
-
-    public void savePostalCodeQueryInfo(String postalCode)
-    {
-        try {
-            log.info("PostalCodeAppDataHelper.savePostalCodeQueryInfo:{}", postalCode);
-
-            var opt = m_postalCodeRepository.findById(postalCode);
-
-            if (opt.isEmpty())
-                throw new SQLException("%s not found".formatted(postalCode));
-
-            var p = opt.get();
-            var postalCodeQueryInfo = new PostalCodeQueryInfo();
-
-            postalCodeQueryInfo.postalCode = p;
-            postalCodeQueryInfo.queryDateTime = p.firstQueryDateTime;
-            m_postalCodeQueryInfoRepository.save(postalCodeQueryInfo);
-        }
-        catch (Throwable ex) {
-            log.error("Exception occurred in PostalCodeAppDataHelper.savePostalCodeQueryInfo:{}", ex.getMessage());
-            throw new RepositoryException("PostalCodeAppDataHelper.savePostalCodeQueryInfo", ex);
-        }
-    }
-
-    public void savePostalCodeQueryInfo(PostalCode postalCode)
-    {
-        try {
-            log.info("PostalCodeAppDataHelper.savePostalCodeQueryInfo:{}", postalCode.toString());
-
-            var postalCodeQueryInfo = new PostalCodeQueryInfo();
-
-            postalCodeQueryInfo.postalCode = postalCode;
-            postalCodeQueryInfo.queryDateTime = postalCode.firstQueryDateTime;
-            m_postalCodeQueryInfoRepository.save(postalCodeQueryInfo);
-        }
-        catch (Throwable ex) {
-            log.error("Exception occurred in PostalCodeAppDataHelper.savePostalCodeQueryInfo:{}", ex.getMessage());
-            throw new RepositoryException("PostalCodeAppDataHelper.savePostalCodeQueryInfo", ex);
-        }
     }
 
     @Transactional
@@ -84,16 +43,53 @@ public class PostalCodeAppDataHelper {
             log.info("PostalCodeAppDataHelper.savePostalCodes");
 
             var pCode = m_postalCodeRepository.save(postalCode);
-            var postalCodeQueryInfo = new PostalCodeQueryInfo();
+            var postalCodeQueryInfo = PostalCodeQueryInfo.builder()
+                    .postalCode(pCode)
+                    .queryDateTime(pCode.firstQueryDateTime)
+                    .build();
 
-            postalCodeQueryInfo.postalCode = pCode;
-            postalCodeQueryInfo.queryDateTime = pCode.firstQueryDateTime;
+            log.info("PostalCodeQueryInfo:{}", postalCodeQueryInfo.toString());
             m_postalCodeQueryInfoRepository.save(postalCodeQueryInfo);
             postalCodeInfo.forEach(p -> savePostalCodeInfoCallback(p, pCode));
-        }
-        catch (Throwable ex) {
+        } catch (Throwable ex) {
             log.error("Exception occurred in PostalCodeAppDataHelper.savePostalCodes:{}", ex.getMessage());
             throw new RepositoryException("PostalCodeAppDataHelper.savePostalCodes", ex);
+        }
+    }
+
+    @Transactional
+    public void savePostalCodeQueryInfo(String postalCode)
+    {
+        try {
+            log.info("PostalCodeAppDataHelper.savePostalCodeQueryInfo");
+
+            m_postalCodeQueryInfoRepository.savePostalQueryInfo(postalCode);
+        } catch (Throwable ex) {
+            log.error("Exception occurred in PostalCodeAppDataHelper.savePostalCodeQueryInfo:{}", ex.getMessage());
+            throw new RepositoryException("PostalCodeAppDataHelper.savePostalCodeQueryInfo", ex);
+        }
+    }
+
+    @Transactional
+    public List<PostalCodeInfo> findPostalCodeAndSaveQueryInfoByCity(String cityName)
+    {
+        try {
+            log.info("PostalCodeAppDataHelper.findAndSavePostalCodeInfoByCity({})", cityName);
+
+            var postalCodes = findPostalCodeInfoByCity(cityName);
+
+            if (!postalCodes.isEmpty())
+                m_postalCodeQueryInfoRepository.savePostalQueryInfo(postalCodes.get(0).postalCodeValue);
+
+            return postalCodes;
+        }
+        catch (RepositoryException ex) {
+            log.error("RepositoryException occurred in PostalCodeAppDataHelper.findAndSavePostalCodeInfoByCity:{}", ex.getMessage());
+            throw new RepositoryException("PostalCodeAppDataHelper.findAndSavePostalCodeInfoByCity", ex.getCause());
+        }
+        catch (Throwable ex) {
+            log.error("Exception occurred in PostalCodeAppDataHelper.findAndSavePostalCodeInfoByCity:{}", ex.getMessage());
+            throw new RepositoryException("PostalCodeAppDataHelper.findAndSavePostalCodeInfoByCity", ex);
         }
     }
 
@@ -108,6 +104,19 @@ public class PostalCodeAppDataHelper {
             throw new RepositoryException("PostalCodeAppDataHelper.findPostalCodeInfoByCity", ex);
         }
     }
+
+    public List<PostalCodeInfo> findByPostalCodeInfoByPostalCode(String postalCode)
+    {
+        try {
+            log.info("PostalCodeAppDataHelper.findByPostalCodeInfoByPostalCode({})", postalCode);
+            return m_postalCodeInfoRepository.findByPostalCode(postalCode);
+        }
+        catch (Throwable ex) {
+            log.error("Exception occurred in PostalCodeAppDataHelper.findByPostalCodeInfoByPostalCode:{}", ex.getMessage());
+            throw new RepositoryException("PostalCodeAppDataHelper.findByPostalCodeInfoByPostalCode", ex);
+        }
+    }
+
 
     //...
 }

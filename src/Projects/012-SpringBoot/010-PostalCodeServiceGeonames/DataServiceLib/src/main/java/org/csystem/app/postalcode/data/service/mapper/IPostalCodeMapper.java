@@ -7,6 +7,4 @@ import org.csystem.app.postalcode.geonames.dto.GeonamesPostalCodeInfo;
 public interface IPostalCodeMapper {
     PostalCode toPostalCode(GeonamesPostalCodeInfo geonamesPostalCodeInfo);
     PostalCode toPostalCode(PostalCodeInfo postalCodeInfo);
-
-    //...
 }

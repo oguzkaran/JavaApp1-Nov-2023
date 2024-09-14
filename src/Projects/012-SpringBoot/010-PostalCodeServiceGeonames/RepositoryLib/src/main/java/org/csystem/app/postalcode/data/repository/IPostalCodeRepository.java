@@ -1,6 +1,7 @@
 package org.csystem.app.postalcode.data.repository;
 
 import org.csystem.app.postalcode.data.entity.PostalCode;
+import org.csystem.app.postalcode.data.entity.PostalCodeInfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

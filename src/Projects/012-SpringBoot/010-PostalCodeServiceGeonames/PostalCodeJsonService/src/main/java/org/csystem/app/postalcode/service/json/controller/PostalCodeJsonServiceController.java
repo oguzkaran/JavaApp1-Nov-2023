@@ -1,10 +1,8 @@
 package org.csystem.app.postalcode.service.json.controller;
 
-
 import org.csystem.app.postalcode.data.service.PostalCodeDataService;
-import org.csystem.app.postalcode.data.service.dto.PostalCode;
 import org.csystem.app.postalcode.data.service.dto.PostalCodes;
-import org.springframework.context.annotation.ComponentScan;
+import org.csystem.data.exception.service.DataServiceException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +22,31 @@ public class PostalCodeJsonServiceController {
     @GetMapping("code")
     public ResponseEntity<PostalCodes> findByPostalCode(@RequestParam(name = "c") String postalCode)
     {
-        throw new UnsupportedOperationException("TODO");
+        ResponseEntity<PostalCodes> result;
+
+        try {
+            result =  ResponseEntity.ok(m_postalCodeDataService.findPostalCodes(postalCode));
+        }
+        catch (DataServiceException ex) {
+            result = ResponseEntity.internalServerError().build();
+        }
+
+        return result;
     }
 
     @GetMapping("city")
     public ResponseEntity<PostalCodes> findByCityName(@RequestParam(name = "name") String cityName)
     {
-        throw new UnsupportedOperationException("TODO");
+        ResponseEntity<PostalCodes> result;
+
+        try {
+            result =  ResponseEntity.ok(m_postalCodeDataService.findPostalCodesByCityName(cityName));
+        }
+        catch (DataServiceException ex) {
+            result = ResponseEntity.internalServerError().build();
+        }
+
+        return result;
     }
 
     //...

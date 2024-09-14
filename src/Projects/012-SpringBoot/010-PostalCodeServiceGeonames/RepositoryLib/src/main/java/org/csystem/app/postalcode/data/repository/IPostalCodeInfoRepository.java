@@ -13,5 +13,8 @@ public interface IPostalCodeInfoRepository extends CrudRepository<PostalCodeInfo
     @Query(value = "select pi from PostalCodeInfo pi where pi.adminName1 = :cityName")
     List<PostalCodeInfo> findByCity(@Param("cityName") String cityName);
 
-    Iterable<PostalCodeInfo> findByAdminCode1Contains(@Param("text") String text);
+    List<PostalCodeInfo> findByAdminName1Contains(@Param("text") String text);
+
+    @Query("from PostalCodeInfo pi where pi.postalCodeValue = :postalCode")
+    List<PostalCodeInfo> findByPostalCode(@Param("postalCode") String postalCode);
 }
