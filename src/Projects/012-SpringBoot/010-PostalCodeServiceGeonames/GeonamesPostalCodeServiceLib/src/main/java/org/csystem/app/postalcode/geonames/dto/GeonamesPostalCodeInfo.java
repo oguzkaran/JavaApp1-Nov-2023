@@ -11,7 +11,7 @@ public class GeonamesPostalCodeInfo {
     public String postalCode;
     public String adminName1;
     @JsonProperty("ISO3166-2")
-    public String iSO3166_2;
+    public String iSO31662;
     public String placeName;
     public double lat;
     public String adminCode3;

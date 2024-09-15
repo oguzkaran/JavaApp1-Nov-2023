@@ -1,0 +1,2 @@
+- Bir scheduler ile belirli zaman ya da zamanlarda (bunu sizler belirleyebilirsiniz) veritabanı içerisindeki posta kodları
+yine geonames'den sorgulanarak güncellenmesi gereken bilgiler güncellenecektir.

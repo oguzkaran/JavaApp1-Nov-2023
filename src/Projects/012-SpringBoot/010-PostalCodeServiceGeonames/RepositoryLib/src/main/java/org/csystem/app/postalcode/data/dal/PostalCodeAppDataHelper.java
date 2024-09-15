@@ -28,7 +28,6 @@ public class PostalCodeAppDataHelper {
         m_postalCodeQueryInfoRepository = postalCodeQueryInfoRepository;
     }
 
-
     private void savePostalCodeInfoCallback(PostalCodeInfo postalCodeInfo, PostalCode postalCode)
     {
         postalCodeInfo.postalCode = postalCode;

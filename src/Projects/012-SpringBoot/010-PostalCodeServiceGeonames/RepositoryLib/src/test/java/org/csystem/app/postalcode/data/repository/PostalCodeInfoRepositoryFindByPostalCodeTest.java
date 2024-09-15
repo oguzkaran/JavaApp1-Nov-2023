@@ -49,7 +49,7 @@ public class PostalCodeInfoRepositoryFindByPostalCodeTest {
     public void test()
     {
         var postalCode = "67000";
-        var expectedCount = 10;
+        var expectedCount = 15;
 
         var postalCodes = m_postalCodeInfoRepository.findByPostalCode(postalCode);
 

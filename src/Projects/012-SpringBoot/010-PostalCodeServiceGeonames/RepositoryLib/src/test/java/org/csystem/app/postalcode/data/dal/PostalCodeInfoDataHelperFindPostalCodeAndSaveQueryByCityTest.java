@@ -45,7 +45,7 @@ public class PostalCodeInfoDataHelperFindPostalCodeAndSaveQueryByCityTest {
     public void test()
     {
         var cityName = "Zonguldak";
-        var expectedCount = 10;
+        var expectedCount = 15;
 
         var postalCodes = m_postalCodeAppDataHelper.findPostalCodeAndSaveQueryInfoByCity(cityName);
 

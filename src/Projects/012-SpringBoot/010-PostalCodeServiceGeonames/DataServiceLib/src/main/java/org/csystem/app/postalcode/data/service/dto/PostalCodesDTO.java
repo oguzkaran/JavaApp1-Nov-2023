@@ -10,6 +10,6 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @Builder
-public class PostalCodes {
-    public List<PostalCode> postalCodes;
+public class PostalCodesDTO {
+    public List<PostalCodeDTO> postalCodes;
 }

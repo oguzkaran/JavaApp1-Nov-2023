@@ -22,7 +22,7 @@ public class PostalCodeMapper implements IPostalCodeMapper {
         postalCodeInfo.countryCode = geonamesPostalCodeInfo.countryCode;
         postalCodeInfo.postalCodeValue = geonamesPostalCodeInfo.postalCode;
         postalCodeInfo.adminName1 = geonamesPostalCodeInfo.adminName1;
-        postalCodeInfo.iSO31662 = geonamesPostalCodeInfo.iSO3166_2;
+        postalCodeInfo.iSO31662 = geonamesPostalCodeInfo.iSO31662;
         postalCodeInfo.placeName = geonamesPostalCodeInfo.placeName;
         postalCodeInfo.lat = geonamesPostalCodeInfo.lat;
         postalCodeInfo.adminCode3 = geonamesPostalCodeInfo.adminCode3;

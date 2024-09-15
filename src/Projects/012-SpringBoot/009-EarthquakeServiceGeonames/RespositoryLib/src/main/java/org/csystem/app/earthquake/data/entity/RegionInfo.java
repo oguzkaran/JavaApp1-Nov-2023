@@ -13,12 +13,16 @@ public class RegionInfo {
     public long id;
     @EqualsAndHashCode.Include
     public double east;
+
     @EqualsAndHashCode.Include
     public double west;
+
     @EqualsAndHashCode.Include
     public double north;
+
     @EqualsAndHashCode.Include
     public double south;
 
+    @EqualsAndHashCode.Include
     public LocalDateTime queryDateTime;
 }

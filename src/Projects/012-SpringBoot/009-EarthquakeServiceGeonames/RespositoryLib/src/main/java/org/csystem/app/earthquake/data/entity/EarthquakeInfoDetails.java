@@ -7,6 +7,4 @@ import lombok.EqualsAndHashCode;
 @Builder
 public class EarthquakeInfoDetails {
     public EarthquakeInfo earthquakeInfo;
-    public EarthquakeAddress earthquakeAddress;
-    public EarthquakeCountryInfo earthquakeCountryInfo;
 }

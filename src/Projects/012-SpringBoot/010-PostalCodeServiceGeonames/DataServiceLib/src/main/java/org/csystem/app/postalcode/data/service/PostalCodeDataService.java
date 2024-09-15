@@ -2,8 +2,9 @@ package org.csystem.app.postalcode.data.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.csystem.app.postalcode.data.dal.PostalCodeAppDataHelper;
+import org.csystem.app.postalcode.data.entity.PostalCode;
 import org.csystem.app.postalcode.data.entity.PostalCodeInfo;
-import org.csystem.app.postalcode.data.service.dto.PostalCodes;
+import org.csystem.app.postalcode.data.service.dto.PostalCodesDTO;
 import org.csystem.app.postalcode.data.service.mapper.IPostalCodeMapper;
 import org.csystem.app.postalcode.geonames.service.GeonamesPostalCodeService;
 import org.csystem.data.exception.repository.RepositoryException;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -20,16 +22,28 @@ public class PostalCodeDataService {
     private final PostalCodeAppDataHelper m_postalCodeAppDataHelper;
     private final IPostalCodeMapper m_postalCodeMapper;
 
-    private PostalCodes postalCodesInDB(List<PostalCodeInfo> postalCodeInfo)
+    private PostalCodesDTO postalCodesInDB(List<PostalCodeInfo> postalCodeInfo)
     {
         m_postalCodeAppDataHelper.savePostalCodeQueryInfo(postalCodeInfo.get(0).postalCodeValue);
-        return PostalCodes.builder().postalCodes(postalCodeInfo.stream().map(m_postalCodeMapper::toPostalCode).toList())
+        return PostalCodesDTO.builder().postalCodes(postalCodeInfo.stream().map(m_postalCodeMapper::toPostalCode).toList())
                 .build();
     }
 
-    private PostalCodes postalCodesNotInDB(String postalCode)
+    private PostalCodesDTO postalCodesNotInDB(String postalCodeValue)
     {
-        throw new UnsupportedOperationException("TODO: fetch from Geonames, save to dbi, return data");
+        var geoPostalCodes = m_geonamesPostalCodeService.findPostalCodes(postalCodeValue);
+        var postalCodeInfo = geoPostalCodes.postalCodes.stream()
+                .map(m_postalCodeMapper::toPostalCode)
+                .collect(Collectors.toSet());
+
+        var postalCode = new PostalCode();
+        postalCode.postalCode = postalCodeValue;
+
+        m_postalCodeAppDataHelper.savePostalCodes(postalCode, postalCodeInfo);
+
+        return PostalCodesDTO.builder().
+                postalCodes(postalCodeInfo.stream().map(m_postalCodeMapper::toPostalCode).toList())
+                .build();
     }
 
     public PostalCodeDataService(GeonamesPostalCodeService geonamesPostalCodeService,
@@ -41,14 +55,14 @@ public class PostalCodeDataService {
         m_postalCodeMapper = postalCodeMapper;
     }
 
-    public PostalCodes findPostalCodesByCityName(String cityName)
+    public PostalCodesDTO findPostalCodesByCityName(String cityName)
     {
         try {
             log.info("PostalCodeDataService.findPostalCodesByCityName:{}", cityName);
 
             var postalCodeInfo = m_postalCodeAppDataHelper.findPostalCodeInfoByCity(cityName);
 
-            return PostalCodes.builder().postalCodes(postalCodeInfo.stream().map(m_postalCodeMapper::toPostalCode).toList())
+            return PostalCodesDTO.builder().postalCodes(postalCodeInfo.stream().map(m_postalCodeMapper::toPostalCode).toList())
                     .build();
         }
         catch (RepositoryException ex) {
@@ -62,7 +76,7 @@ public class PostalCodeDataService {
     }
 
     @Transactional
-    public PostalCodes findPostalCodes(String postalCode)
+    public PostalCodesDTO findPostalCodes(String postalCode)
     {
         try {
             log.info("PostalCodeDataService.findPostalCodes:{}", postalCode);

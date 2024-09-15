@@ -47,7 +47,7 @@ public class PostalCodeInfoRepositoryFindByCityTest {
     public void test()
     {
         var cityName = "Zonguldak";
-        var expectedCount = 10;
+        var expectedCount = 15;
 
         var postalCodes = m_postalCodeInfoRepository.findByCity(cityName);
 

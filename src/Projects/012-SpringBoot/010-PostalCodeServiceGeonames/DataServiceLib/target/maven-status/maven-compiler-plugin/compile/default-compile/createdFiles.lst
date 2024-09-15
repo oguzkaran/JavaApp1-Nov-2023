@@ -1,5 +1,6 @@
-org\csystem\app\postalcode\data\service\dto\PostalCodes.class
+org\csystem\app\postalcode\data\service\dto\PostalCodesDTO$PostalCodesDTOBuilder.class
+org\csystem\app\postalcode\data\service\mapper\PostalCodeMapperImpl.class
 org\csystem\app\postalcode\data\service\PostalCodeDataService.class
-org\csystem\app\postalcode\data\service\dto\PostalCode.class
 org\csystem\app\postalcode\data\service\mapper\IPostalCodeMapper.class
-org\csystem\app\postalcode\data\service\mapper\PostalCodeMapper.class
+org\csystem\app\postalcode\data\service\dto\PostalCodeDTO.class
+org\csystem\app\postalcode\data\service\dto\PostalCodesDTO.class

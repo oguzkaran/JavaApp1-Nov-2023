@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class GeonamesPostalCodeService {
     private static final String POSTAL_CODE_URL_FORMAT = "http://api.geonames.org/postalCodeSearchJSON?postalcode=%s&maxRows=%d&username=csystem&country=tr";
+    private static final int MAX_ROWS = 500;
 
     private final RestTemplate m_restTemplate;
 
@@ -19,6 +20,11 @@ public class GeonamesPostalCodeService {
 
     public GeonamesPostalCodes findPostalCodes(String postalCode)
     {
-        return m_restTemplate.getForObject(POSTAL_CODE_URL_FORMAT.formatted(postalCode, 10), GeonamesPostalCodes.class);
+        return findPostalCodes(postalCode, MAX_ROWS);
+    }
+
+    public GeonamesPostalCodes findPostalCodes(String postalCode, int maxRows)
+    {
+        return m_restTemplate.getForObject(POSTAL_CODE_URL_FORMAT.formatted(postalCode, maxRows), GeonamesPostalCodes.class);
     }
 }

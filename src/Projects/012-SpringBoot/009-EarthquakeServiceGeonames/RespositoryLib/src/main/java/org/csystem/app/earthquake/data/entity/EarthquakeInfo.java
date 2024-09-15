@@ -15,6 +15,12 @@ public class EarthquakeInfo {
     public double longitude;
     public String earthquakeId;
     public double magnitude;
+    public String locality;
+    public String street;
+    public String postalCode;
+    public String distance;
+    public String countryCode;
+    public String countryName;
 
     public long regionInfoId;
 }
