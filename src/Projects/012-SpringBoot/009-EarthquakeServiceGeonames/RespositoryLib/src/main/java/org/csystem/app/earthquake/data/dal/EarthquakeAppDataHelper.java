@@ -1,8 +1,7 @@
 package org.csystem.app.earthquake.data.dal;
 
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.app.earthquake.data.entity.EarthquakeInfoDetails;
-import org.csystem.app.earthquake.data.entity.EarthquakeInfoSave;
+import org.csystem.app.earthquake.data.entity.EarthquakeInfo;
 import org.csystem.app.earthquake.data.entity.EarthquakesInfo;
 import org.csystem.app.earthquake.data.entity.RegionInfo;
 import org.csystem.app.earthquake.data.repository.IEarthquakeInfoRepository;
@@ -11,7 +10,6 @@ import org.csystem.data.exception.repository.RepositoryException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -27,15 +25,13 @@ public class EarthquakeAppDataHelper {
         log.info("RegionInfo Id:{}", regionInfo.id);
     }
 
-    private void saveEarthquake(EarthquakeInfoSave earthquakeInfoSave, long regionInfoId)
+    private void saveEarthquake(EarthquakeInfo earthquakeInfo, long regionInfoId)
     {
-        log.info("EarthquakeAppDataHelper.saveEarthquake:{}", earthquakeInfoSave.toString());
+        log.info("EarthquakeAppDataHelper.saveEarthquake:{}", earthquakeInfo.toString());
 
-        earthquakeInfoSave.earthquakeInfo.regionInfoId = regionInfoId;
-        earthquakeInfoSave.earthquakeAddress.regionInfoId = regionInfoId;
-        earthquakeInfoSave.earthquakeCountryInfo.regionInfoId = regionInfoId;
+        earthquakeInfo.regionInfoId = regionInfoId;
 
-        m_earthquakeRepository.saveEarthquake(earthquakeInfoSave);
+        m_earthquakeRepository.saveEarthquake(earthquakeInfo);
     }
 
     public EarthquakeAppDataHelper(IRegionInfoRepository earthquakeRepository,
@@ -43,7 +39,6 @@ public class EarthquakeAppDataHelper {
     {
         m_earthquakeRepository = earthquakeRepository;
         m_earthquakeInfoRepository = earthquakeInfoRepository;
-
     }
 
     @Transactional
@@ -53,7 +48,7 @@ public class EarthquakeAppDataHelper {
     }
 
     @Transactional
-    public void saveEarthquakes(List<EarthquakeInfoSave> earthquakes, RegionInfo regionInfo)
+    public void saveEarthquakes(List<EarthquakeInfo> earthquakes, RegionInfo regionInfo)
     {
         saveRegionInfo(regionInfo);
         log.info("RegionInfo:{}", regionInfo.toString());
@@ -63,13 +58,9 @@ public class EarthquakeAppDataHelper {
 
     public void saveQueryInfo(long regionInfoId)
     {
-        try {
-            log.info("EarthquakeAppDataHelper.saveQueryInfo");
-            m_earthquakeRepository.saveEarthquakeQueryInfo(regionInfoId);
-        }
-        catch (Throwable ex) {
-            log.info("EarthquakeAppDataHelper.saveQueryInfo: Message: {}", ex.getMessage());
-            throw new RepositoryException("EarthquakeAppDataHelper.saveQueryInfo", ex);
-        }
+        log.info("EarthquakeAppDataHelper.saveQueryInfo");
+        m_earthquakeRepository.saveEarthquakeQueryInfo(regionInfoId);
     }
+
+    //...
 }

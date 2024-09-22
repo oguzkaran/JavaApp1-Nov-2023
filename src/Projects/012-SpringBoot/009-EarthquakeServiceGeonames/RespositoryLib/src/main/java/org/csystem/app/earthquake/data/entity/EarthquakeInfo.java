@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class EarthquakeInfo {
     public long id;
+    public long regionInfoId;
     public String dateTime;
     public double depth;
     public double latitude;
@@ -21,6 +22,4 @@ public class EarthquakeInfo {
     public String distance;
     public String countryCode;
     public String countryName;
-
-    public long regionInfoId;
 }

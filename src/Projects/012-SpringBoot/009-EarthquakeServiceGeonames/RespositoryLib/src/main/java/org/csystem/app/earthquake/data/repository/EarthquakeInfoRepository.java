@@ -13,37 +13,55 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import static org.csystem.app.earthquake.data.constant.FieldNameConstant.*;
+
 @Repository
 @Slf4j
 public class EarthquakeInfoRepository implements IEarthquakeInfoRepository {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private static final String FIND_BY_REGION_INFO_ID = """
+    private static final String FIND_EARTHQUAKES_BY_REGION_INFO_ID = """
             select\s
-            ei.latitude, ei.longitude, ei.depth, ei.datetime, ei.magnitude, ei.earthquake_id\s
+            ei.datetime, ei.depth, ei.latitude, ei.longitude, ei.earthquake_id, ei.magnitude, ei.distance,\s
+            ei.country_code, ei.country_name, ei.locality, ei.street, ei.postal_code
             from\s
             region_info ri inner join earthquake_info ei on ei.region_info_id = ri.region_info_id\s
             where ri.region_info_id = :region_info_id;
             """;
+
+    private static final String FIND_EARTHQUAKES_BY_REGION_INFO = """
+            select\s
+            ei.datetime, ei.depth, ei.latitude, ei.longitude, ei.earthquake_id, ei.magnitude, ei.distance,\s
+            ei.country_code, ei.country_name, ei.locality, ei.street, ei.postal_code
+            from\s
+            region_info ri inner join earthquake_info ei on ei.region_info_id = ri.region_info_id\s
+            where abs(ri.east - :east) < 0.00001 and abs(ri.west - :west) < 0.00001 and abs(ri.north - :north) < 0.00001\s
+            and abs(ri.south - :south) < 0.00001;
+            """;
+
     private final NamedParameterJdbcTemplate m_namedParameterJdbcTemplate;
 
-    private static EarthquakeInfo createEarthquakeInfo(double latitude, double longitude, double depth,
-                                                String dateTime, double magnitude, String earthquakeId)
+    private static EarthquakeInfo createEarthquakeInfo(ResultSet rs) throws SQLException
     {
         return EarthquakeInfo.builder()
-                .latitude(latitude)
-                .longitude(longitude)
-                .depth(depth)
-                .dateTime(dateTime)
-                .magnitude(magnitude)
-                .earthquakeId(earthquakeId)
-                .build();
+            .dateTime(rs.getTimestamp(1).toLocalDateTime().format(DATE_TIME_FORMATTER))
+            .depth(rs.getDouble(2))
+            .latitude(rs.getDouble(3))
+            .longitude(rs.getDouble(4))
+            .earthquakeId(rs.getString(5))
+            .magnitude(rs.getDouble(6))
+            .distance(rs.getString(7))
+            .countryCode(rs.getString(8))
+            .countryName(rs.getString(9))
+            .locality(rs.getString(10))
+            .street(rs.getString(11))
+            .postalCode(rs.getString(12))
+            .build();
     }
 
     private static void fillEarthquakeInfo(ResultSet rs, List<EarthquakeInfo> earthquakeInfo) throws SQLException
     {
         do
-            earthquakeInfo.add(createEarthquakeInfo(rs.getDouble(1), rs.getDouble(2), rs.getDouble(3),
-                    rs.getTimestamp(4).toLocalDateTime().format(DATE_TIME_FORMATTER), rs.getDouble(5), rs.getString(6)));
+            earthquakeInfo.add(createEarthquakeInfo(rs));
         while (rs.next());
     }
 
@@ -53,21 +71,37 @@ public class EarthquakeInfoRepository implements IEarthquakeInfoRepository {
     }
 
     @Override
-    public Iterable<EarthquakeInfo> findByRegionInfoId(long regionInfoId)
+    public List<EarthquakeInfo> findEarthquakesByRegionInfoId(long regionInfoId)
     {
         var earthquakeInfoList = new ArrayList<EarthquakeInfo>();
         var paramMap = new HashMap<String, Object>();
 
         paramMap.put("region_info_id", regionInfoId);
 
-        m_namedParameterJdbcTemplate.query(FIND_BY_REGION_INFO_ID, paramMap,
+        m_namedParameterJdbcTemplate.query(FIND_EARTHQUAKES_BY_REGION_INFO_ID, paramMap,
+                (ResultSet rs) -> fillEarthquakeInfo(rs, earthquakeInfoList));
+
+        return earthquakeInfoList;
+    }
+
+    @Override
+    public List<EarthquakeInfo> findEarthquakesByRegion(double east, double west, double north, double south)
+    {
+        var earthquakeInfoList = new ArrayList<EarthquakeInfo>();
+        var paramMap = new HashMap<String, Object>();
+
+        paramMap.put(EAST, east);
+        paramMap.put(WEST, west);
+        paramMap.put(NORTH, north);
+        paramMap.put(SOUTH, south);
+
+        m_namedParameterJdbcTemplate.query(FIND_EARTHQUAKES_BY_REGION_INFO, paramMap,
                 (ResultSet rs) -> fillEarthquakeInfo(rs, earthquakeInfoList));
 
         return earthquakeInfoList;
     }
 
     ////////////////////////////////////////////////////////////////////////
-
 
     @Override
     public long count()

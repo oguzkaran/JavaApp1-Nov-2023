@@ -9,5 +9,5 @@ import java.util.List;
 @Builder
 public class EarthquakesInfo {
     public long regionInfoId;
-    public List<EarthquakeInfoDetails> earthquakes;
+    public List<EarthquakeInfo> earthquakes;
 }

@@ -1,18 +1,14 @@
 package org.csystem.app.earthquake.data;
 
-import org.csystem.app.earthquake.data.entity.*;
+import org.csystem.app.earthquake.data.entity.EarthquakeInfo;
+import org.csystem.app.earthquake.data.entity.RegionInfo;
 import org.csystem.app.earthquake.data.repository.IRegionInfoRepository;
 import org.csystem.app.earthquake.data.repository.RegionInfoRepository;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.platform.commons.util.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -23,13 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootApplication
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-unittest.properties")
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SaveEarthquakeTest {
     @Autowired
     private IRegionInfoRepository m_regionInfoRepository;
 
-    //@Test
-    //@Order(0)
+    @Test
     public void givenValue_whenEarthquake_thenPrivateSaveRegionInfo_generated_id_true() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException
     {
         var regionInfo = RegionInfo.builder()
@@ -39,22 +33,48 @@ public class SaveEarthquakeTest {
                 .south(29.4)
                 .build();
 
-        var method = RegionInfoRepository.class.getDeclaredMethod("save", RegionInfo.class);
+        regionInfo = m_regionInfoRepository.save(regionInfo);
+
+        assertEquals(1, regionInfo.id);
+    }
+
+    //@Test
+    public void givenValue_whenEarthquakeInfo_thenPrivateSaveEarthquakeInfo_DoesNotThrowException() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, SQLException
+    {
+        var regionInfo = RegionInfo.builder()
+                .east(25.4)
+                .west(45.4)
+                .north(30.4)
+                .south(23.4)
+                .build();
+
+        regionInfo = m_regionInfoRepository.save(regionInfo);
+
+        var earthquakeInfo = EarthquakeInfo.builder()
+                .regionInfoId(regionInfo.id)
+                .dateTime("2023-02-06 04:00:00")
+                .depth(100)
+                .latitude(45.67)
+                .longitude(40.67)
+                .earthquakeId("Test earthquake1")
+                .magnitude(7.6)
+                .locality("Test locality")
+                .street("Test street")
+                .postalCode("67100")
+                .distance("100")
+                .countryCode("TR")
+                .countryName("Turkey")
+                .build();
+
+        var method = RegionInfoRepository.class.getDeclaredMethod("saveEarthquakeInfo", EarthquakeInfo.class);
 
         method.setAccessible(true);
-        var result = (long)method.invoke(m_regionInfoRepository, regionInfo);
-
-        method.setAccessible(false);
-
-        assertEquals(1, result);
+        assertDoesNotThrow(() -> method.invoke(m_regionInfoRepository, earthquakeInfo));
     }
 
     @Test
-    @Order(1)
-    public void givenValue_whenEarthquake_thenSaveNotThrowsSQLException()
+    public void givenValue_whenEarthquake_thenSaveDoesNotThrowException()
     {
-        var earthquake = new EarthquakeInfoSave();
-
         var regionInfo = RegionInfo.builder()
                 .east(23.4)
                 .west(21.4)
@@ -64,30 +84,22 @@ public class SaveEarthquakeTest {
 
         m_regionInfoRepository.save(regionInfo);
 
-        earthquake.earthquakeInfo = EarthquakeInfo.builder()
+        var earthquakeInfo = EarthquakeInfo.builder()
+                .regionInfoId(regionInfo.id)
                 .dateTime("2023-02-06 04:00:00")
                 .depth(100)
                 .latitude(45.67)
                 .longitude(40.67)
                 .earthquakeId("Test earthquake")
                 .magnitude(7.6)
-                .regionInfoId(regionInfo.id)
-                .build();
-
-        earthquake.earthquakeAddress = EarthquakeAddress.builder()
                 .locality("Test locality")
                 .street("Test street")
                 .postalCode("67100")
-                .regionInfoId(regionInfo.id)
-                .build();
-
-        earthquake.earthquakeCountryInfo = EarthquakeCountryInfo.builder()
                 .distance("100")
                 .countryCode("TR")
                 .countryName("Turkey")
-                .regionInfoId(regionInfo.id)
                 .build();
 
-        assertDoesNotThrow(() -> m_regionInfoRepository.saveEarthquake(earthquake));
+        assertDoesNotThrow(() -> m_regionInfoRepository.saveEarthquake(earthquakeInfo));
     }
 }

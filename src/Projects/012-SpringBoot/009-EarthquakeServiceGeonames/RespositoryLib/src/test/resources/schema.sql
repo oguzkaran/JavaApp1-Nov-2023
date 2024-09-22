@@ -1,3 +1,4 @@
+drop table if exists earthquake_info;
 drop table if exists earthquake_query_info;
 drop table if exists region_info;
 

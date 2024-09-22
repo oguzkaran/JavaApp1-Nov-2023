@@ -1,3 +1,5 @@
-org\csystem\app\earthquake\data\FindByRegionInfoTest.class
-org\csystem\app\earthquake\data\SaveQueryInfoTest.class
+org\csystem\app\earthquake\data\FindTest$FindEarthQuakesTest.class
+org\csystem\app\earthquake\data\FindTest$FindByRegionTest.class
 org\csystem\app\earthquake\data\SaveEarthquakeTest.class
+org\csystem\app\earthquake\data\FindTest.class
+org\csystem\app\earthquake\data\SaveQueryInfoTest.class

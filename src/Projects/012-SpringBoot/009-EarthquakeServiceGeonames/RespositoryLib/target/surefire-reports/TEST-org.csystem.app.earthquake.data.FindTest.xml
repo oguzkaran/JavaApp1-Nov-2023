@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.csystem.app.earthquake.data.SaveEarthquakeTest" time="2.249" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.csystem.app.earthquake.data.FindTest" time="8.5" tests="0" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -46,7 +46,7 @@
     <property name="localRepository" value="C:\Users\Hp\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\Hp\AppData\Local\Temp\"/>
-    <property name="com.zaxxer.hikari.pool_number" value="2"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="21.0.1"/>
     <property name="user.dir" value="D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\RespositoryLib"/>
     <property name="os.arch" value="amd64"/>
@@ -63,33 +63,4 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="givenValue_whenEarthquake_thenPrivateSaveRegionInfo_generated_id_true" classname="org.csystem.app.earthquake.data.SaveEarthquakeTest" time="0.016">
-    <system-out><![CDATA[2024-09-22T16:48:59.964+03:00  INFO 236 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.csystem.app.earthquake.data.SaveEarthquakeTest]: SaveEarthquakeTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-09-22T16:48:59.987+03:00  INFO 236 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.csystem.app.earthquake.data.SaveEarthquakeTest for test class org.csystem.app.earthquake.data.SaveEarthquakeTest
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
-
- :: Spring Boot ::                (v3.3.1)
-
-2024-09-22T16:49:00.161+03:00  INFO 236 --- [           main] o.c.a.e.data.SaveEarthquakeTest          : Starting SaveEarthquakeTest using Java 21.0.1 with PID 236 (started by Hp in D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\RespositoryLib)
-2024-09-22T16:49:00.161+03:00  INFO 236 --- [           main] o.c.a.e.data.SaveEarthquakeTest          : No active profile set, falling back to 1 default profile: "default"
-2024-09-22T16:49:01.282+03:00  INFO 236 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
-2024-09-22T16:49:01.310+03:00  INFO 236 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 0 JDBC repository interfaces.
-2024-09-22T16:49:01.611+03:00  INFO 236 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2024-09-22T16:49:01.822+03:00  INFO 236 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@58739e5e
-2024-09-22T16:49:01.823+03:00  INFO 236 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2024-09-22T16:49:02.137+03:00  INFO 236 --- [           main] o.c.a.e.data.SaveEarthquakeTest          : Started SaveEarthquakeTest in 2.12 seconds (process running for 12.474)
-2024-09-22T16:49:02.182+03:00  INFO 236 --- [           main] o.c.a.e.d.r.RegionInfoRepository         : EarthquakeAppDataHelper.save -> Generated id:1
-]]></system-out>
-  </testcase>
-  <testcase name="givenValue_whenEarthquake_thenSaveDoesNotThrowException" classname="org.csystem.app.earthquake.data.SaveEarthquakeTest" time="0.016">
-    <system-out><![CDATA[2024-09-22T16:49:02.195+03:00  INFO 236 --- [           main] o.c.a.e.d.r.RegionInfoRepository         : EarthquakeAppDataHelper.save -> Generated id:2
-2024-09-22T16:49:02.199+03:00  INFO 236 --- [           main] o.c.a.e.d.r.RegionInfoRepository         : RegionInfoRepository.saveEarthQuake -> EarthquakeInfo(id=0, regionInfoId=2, dateTime=2023-02-06 04:00:00, depth=100.0, latitude=45.67, longitude=40.67, earthquakeId=Test earthquake, magnitude=7.6, locality=Test locality, street=Test street, postalCode=67100, distance=100, countryCode=TR, countryName=Turkey)
-]]></system-out>
-  </testcase>
 </testsuite>
