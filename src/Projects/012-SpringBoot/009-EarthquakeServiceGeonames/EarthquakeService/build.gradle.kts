@@ -34,9 +34,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	compileOnly("org.projectlombok:lombok:1.18.32")
 	annotationProcessor("org.projectlombok:lombok")
-
 	implementation("org.csystem:EarthquakeSystemDataServiceLib:1.0.0")
-
 	implementation("org.postgresql:postgresql:42.7.3")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

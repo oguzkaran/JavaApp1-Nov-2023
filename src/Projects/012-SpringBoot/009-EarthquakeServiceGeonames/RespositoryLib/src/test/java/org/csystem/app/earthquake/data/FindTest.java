@@ -170,13 +170,12 @@ public class FindTest {
 
         @Test
         @Order(2)
-        public void givenValuesFindEarthquakesByRegionInfoId_whenLocation_thenCountTrue()
+        public void givenValues_WhenRegionInfpo_thenCountTrue()
         {
             var earthquakes = m_earthquakeInfoRepository.findEarthquakesByRegionInfoId(saveEarthquakes());
 
             assertEquals(2, earthquakes.size());
         }
+
     }
-
-
 }

@@ -6,21 +6,22 @@ import org.csystem.app.earthquake.data.entity.EarthquakesInfo;
 import org.csystem.app.earthquake.data.entity.RegionInfo;
 import org.csystem.app.earthquake.data.repository.IEarthquakeInfoRepository;
 import org.csystem.app.earthquake.data.repository.IRegionInfoRepository;
-import org.csystem.data.exception.repository.RepositoryException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Component
 @Slf4j
 public class EarthquakeAppDataHelper {
-    private final IRegionInfoRepository m_earthquakeRepository;
+    private final IRegionInfoRepository m_regionInfoRepository;
     private final IEarthquakeInfoRepository m_earthquakeInfoRepository;
 
     private void saveRegionInfo(RegionInfo regionInfo)
     {
-        m_earthquakeRepository.save(regionInfo);
+        m_regionInfoRepository.save(regionInfo);
 
         log.info("RegionInfo Id:{}", regionInfo.id);
     }
@@ -31,20 +32,29 @@ public class EarthquakeAppDataHelper {
 
         earthquakeInfo.regionInfoId = regionInfoId;
 
-        m_earthquakeRepository.saveEarthquake(earthquakeInfo);
+        m_regionInfoRepository.saveEarthquake(earthquakeInfo);
     }
 
-    public EarthquakeAppDataHelper(IRegionInfoRepository earthquakeRepository,
+    public EarthquakeAppDataHelper(IRegionInfoRepository regionInfoRepository,
                                    IEarthquakeInfoRepository earthquakeInfoRepository)
     {
-        m_earthquakeRepository = earthquakeRepository;
+        m_regionInfoRepository = regionInfoRepository;
         m_earthquakeInfoRepository = earthquakeInfoRepository;
     }
 
-    @Transactional
-    public EarthquakesInfo findByEarthquakesByRegionInfo(double east, double west, double north, double south)
+    public Optional<EarthquakesInfo> findByEarthquakesByRegionInfo(double east, double west, double north, double south)
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        var earthQuakes = m_earthquakeInfoRepository.findEarthquakesByRegion(east, west, north, south);
+
+        return earthQuakes.isEmpty() ? Optional.empty() : Optional.of(EarthquakesInfo.builder()
+                .earthquakes(earthQuakes)
+                .regionInfoId(earthQuakes.get(0).regionInfoId)
+                .build());
+    }
+
+    public Iterable<RegionInfo> findAllRegions()
+    {
+        return m_regionInfoRepository.findAll();
     }
 
     @Transactional
@@ -53,13 +63,13 @@ public class EarthquakeAppDataHelper {
         saveRegionInfo(regionInfo);
         log.info("RegionInfo:{}", regionInfo.toString());
         earthquakes.forEach(e -> saveEarthquake(e, regionInfo.id));
-        m_earthquakeRepository.saveEarthquakeQueryInfo(regionInfo.id);
+        m_regionInfoRepository.saveEarthquakeQueryInfo(regionInfo.id);
     }
 
     public void saveQueryInfo(long regionInfoId)
     {
         log.info("EarthquakeAppDataHelper.saveQueryInfo");
-        m_earthquakeRepository.saveEarthquakeQueryInfo(regionInfoId);
+        m_regionInfoRepository.saveEarthquakeQueryInfo(regionInfoId);
     }
 
     //...

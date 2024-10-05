@@ -1,4 +1,4 @@
-# Created at 2024-09-22T16:48:49.464
+# Created at 2024-10-05T15:44:30.430
 Boot Manifest-JAR contains absolute paths in classpath 'D:\Repositories\JavaApp1-Nov-2023\src\Projects\012-SpringBoot\009-EarthquakeServiceGeonames\RespositoryLib\target\test-classes'
 Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
 'other' has different root

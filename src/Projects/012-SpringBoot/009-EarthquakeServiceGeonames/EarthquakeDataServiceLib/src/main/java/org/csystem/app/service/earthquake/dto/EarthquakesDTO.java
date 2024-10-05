@@ -6,6 +6,6 @@ import lombok.ToString;
 import java.util.List;
 
 @ToString
-public class EarthquakesDetails {
-    public List<EarthquakeDetails> earthquakes;
+public class EarthquakesDTO {
+    public List<EarthquakeInfoDTO> earthquakes;
 }

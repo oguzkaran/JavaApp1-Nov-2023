@@ -85,6 +85,12 @@ public class RegionInfoRepository implements IRegionInfoRepository {
     }
 
     @Override
+    public Iterable<RegionInfo> findAll()
+    {
+        throw new UnsupportedOperationException("Not yet implemented!...");
+    }
+
+    @Override
     public Optional<RegionInfo> findByRegion(double east, double west, double north, double south)
     {
         var regionInfo = RegionInfo.builder().east(east).west(west).north(north).south(south).build();
@@ -190,12 +196,6 @@ public class RegionInfoRepository implements IRegionInfoRepository {
 
     @Override
     public boolean existsById(Long aLong)
-    {
-        throw new UnsupportedOperationException("Not yet implemented!...");
-    }
-
-    @Override
-    public Iterable<RegionInfo> findAll()
     {
         throw new UnsupportedOperationException("Not yet implemented!...");
     }

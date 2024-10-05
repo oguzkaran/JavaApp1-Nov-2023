@@ -1,8 +1,6 @@
+org\csystem\app\service\earthquake\dto\RegionInfoDTO.class
 org\csystem\app\service\earthquake\mapper\EarthquakeMapperImpl.class
+org\csystem\app\service\earthquake\dto\EarthquakeInfoDTO.class
 org\csystem\app\service\earthquake\EarthquakeDataService.class
-org\csystem\app\service\earthquake\dto\EarthquakesDetails.class
+org\csystem\app\service\earthquake\dto\EarthquakesDTO.class
 org\csystem\app\service\earthquake\mapper\IEarthquakeMapper.class
-org\csystem\app\service\earthquake\dto\EarthquakeDetails.class
-org\csystem\app\service\earthquake\dto\EarthquakeDetailsAddress.class
-org\csystem\app\service\earthquake\dto\EarthquakeDetailsInfo.class
-org\csystem\app\service\earthquake\dto\EarthquakeDetailsCountryInfo.class
