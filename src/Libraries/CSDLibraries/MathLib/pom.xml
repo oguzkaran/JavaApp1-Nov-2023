@@ -13,7 +13,7 @@
 
     <groupId>org.csystem</groupId>
     <artifactId>org-csystem-math</artifactId>
-    <version>11.0.0</version>
+    <version>12.0.0</version>
     <name>org-csystem-math</name>
 
     <properties>

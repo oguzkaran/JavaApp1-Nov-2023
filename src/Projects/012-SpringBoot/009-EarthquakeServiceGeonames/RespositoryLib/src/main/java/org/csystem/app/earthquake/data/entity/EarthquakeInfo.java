@@ -3,6 +3,7 @@ package org.csystem.app.earthquake.data.entity;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @EqualsAndHashCode
 @Builder

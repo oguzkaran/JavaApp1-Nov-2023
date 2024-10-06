@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @ToString
 public class RegionInfoDTO {
+    public long id;
     public double east;
     public double west;
     public double north;

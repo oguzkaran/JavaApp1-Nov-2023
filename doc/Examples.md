@@ -2,6 +2,7 @@
 ### Java ile Uygulama Geliştirme 1
 ### Eğitmen: Oğuz KARAN
 #### Düzenleyen: Bartu Çankaya
+##### Maven ile Kütüphane Kullanımı
 
 >*Genel olarak bir kütüphane maven içerisinden aşağıdaki durumlardan biri ya da birkaçından kullanılabilir:*
 >1. Uygulama geliştirilirken kullanılan host makinenin içerisindeki maven local repository'den kullanılabilir. Bu repository maven programı geçerli veya geçersiz ilk kez çalıştırıldığında genel olarak `.m2` isimli bir directory biçiminde yartılır. Bu directory'nin aslında default ismi ve default yeri değiştirilebilir. Ancak pratikte özel durumlar dışında ismi ve yeri değiştirilmez. mvn programı install seçeneği ile doğrudan çalıştırıldığında konfigürasyona göre ilgili kütüphane maven local repository'ye yüklenir.
@@ -16,7 +17,9 @@
 >
 >*Eğer maven central'da veya maven remote repository'de bulursa yine maven local repository'ye indirir. Yani sonuçta maven 2. kullanım hariç kütüphaneyi maven local repository'den kullanır.*
 
->**_Test İşlemleri:_** *Yazılımda test süreçleri ürün geliştirmenin önemli bir aşamasını oluşturmaktadır. Bazı yazılımlarda, ürünün herşeyiyle doğru olması kritik öneme sahip olabilmektedir. Bazı yazılımlarda hata toleransları olabilir. Gerektiğinde düzeltilebilir.*
+##### Yazılımda Test Süreçleri
+
+>Yazılımda test süreçleri ürün geliştirmenin önemli bir aşamasını oluşturmaktadır. Bazı yazılımlarda, ürünün herşeyiyle doğru olması kritik öneme sahip olabilmektedir. Bazı yazılımlarda hata toleransları olabilir. Gerektiğinde düzeltilebilir.*
 >
 >*Eskiden yazılım geliştirmede test süreçleri lüks olarak değerlendiriliyordu. Bu nedenle yalnızca büyük firmalar test bölümleri barındırıyorlardı. Ancak günümüzde yazılımda kalite (software quality) bilinci daha fazla artmış ve test süreçleri daha bilinir ve kullanılır hale gelmiştir.*
 >
@@ -36,6 +39,8 @@
 >       setup, teardown, input, expected, actual vb.
 
 **_Anahtar Notlar:_** Test işlemlerinde karşılaştığımız önemli iki terim vardır: Verification & Validation (V&V). Verification, yazılmış olan kodun doğru çalışmasıdır. Validation kodun doğru işi yapmasıdır.
+
+### Kodun Çalışma Süresinin Ölçülmesi
 
 >*Bazen program içerisinde bir kod parçasının (code snippet) ne kadar sürede tamamlandığını hesaplamak isteyebiliriz. Bu işlem, kod parçasının başında o an ki zaman bilgisi alınıp, kodun bitiminde de tekrar zaman bilgisi alınarak hesaplanabilir. Bu zaman, takvim zamanı (calendar time) çok hassas işlemlerde kullanılaamaz. Bu durumda daha hassas ölçümler yapabilen yine zamana bağlı olarak hesaplanabilen değerler kullanılmalıdır. Bu işlemi yapmanın Java'da birden fazla yolu bulunmaktadır. Ayrıca 3. parti olarak yazılmış kütüphanelerin çeşitli sınıfları da kullanılabilmektedir. Hatta programcı isterse kendisi de böyle bir işlem için sınıf ya da sınıflar yazabilir. Bu 3. parti olarak yazılmış kütüphaneler içerisinde popüler olarak kullanılan iki tanesinde StopWatch isimli sınıflar bu işlem için tasarlanmışlardır. Bu popüler kütüphaneler tipik olarak Google guave ve Apache commons kütüphaneleridir. Aslında bu kütüphanelerde pek çok yardımcı sınıf ve metot da bulunmaktadır*
 
@@ -178,7 +183,8 @@ class Application {
 }
 ```
 
->**var değişkenler:** *var sözcüğü Java 10 ile birikte dile eklenmiştir. var sonradan eklenen bir sözcük olduğundan kullanıldığı yere göre değişken ismi veya tür belirten bir sözcük olarak derleyici tarafından ele alınır. Bu tarz sözcüklere programlamada **"contextual keyword"** de denilmektedir. var yalnızca yerel değişkenlerde ve Java 11 ile birlikte ileride ele alacağımız lambda ifadelerinde kullanılabilmektedir.*
+##### var Değişkenler
+>var sözcüğü Java 10 ile birikte dile eklenmiştir. var sonradan eklenen bir sözcük olduğundan kullanıldığı yere göre değişken ismi veya tür belirten bir sözcük olarak derleyici tarafından ele alınır. Bu tarz sözcüklere programlamada **contextual keyword** de denilmektedir. var yalnızca yerel değişkenlerde ve Java 11 ile birlikte ileride ele alacağımız lambda ifadelerinde kullanılabilmektedir.*
 
 >*var değişkenlere ilk değer verilmesi (initialization) zorunludur. Derleyici ilk değer olarak verilen ifadenin türüne göre değişkeninin türünü tespit eder **(type inference/deduction)**. var değişkenlerin çalışma zamanında türleri değişmez. Java'da bir değişkenin türü hiç bir zaman değişmez*
 
@@ -271,7 +277,10 @@ class Application {
 }
 ```
 
+
 >*var değişkenler mümkün olduğunca kullanılmalıdır. Bu anlamda bazı programcılar temel türler dışında mümkün olduğunca kullanmayı tercih edeler. Biz, tür ne olursa kullanılabildiği her yerde kullanmayı tercih edeceğiz (always applicable).*
+
+##### BigDecimal ve BigInteger sınıfları
 
 >*Anımsanacağı gibi* `IEEE754` *formatında yuvarlama hataları (rounding errors) söz konusu olabilmektedir. Aşağıdaki örneği çeşitli değerler ile çalıştırıp sonucu gözlemleyiniz*
 
@@ -762,9 +771,7 @@ class Application {
     }
 }
 ```
-
->**Linux işletim sisteminin dizin yapısı:**
->
+##### Linux işletim sisteminin dizin yapısı
 >*Linux Foundation grubu* `UNIX` *sistemlerindeki dizin yapısını standardize etmeye çalışmıştır. Bu standarda "File System Hierarchy Standard" denir. Buna göre bazı dizinler ve anlamları şunlardır:*
 >
 >`/bin:` *Burada kabuk (shell) komutlarına ilişkin executable dosyalar ve çeşitli utility programlar bulunur.*
@@ -795,8 +802,7 @@ class Application {
 >
 >`/tmp:` *Geçici dosyalar için bulundurulan bir dizindir. Genellikle sistem kapatılırken silinmektedir*
 
->**Sisteme Giriş (login):**
->
+##### Sisteme Giriş (login)
 >`UNIX` *sistemlerinde her kullanıcıya bir username ve bir passowrd verilir. Bir kullanıcı username ve password ile sisteme giriş yapar. Sisteme giriş yapmak genellikle 3 yoldan yapılabilir:*
 >1. **Text tabanlı bir terminal program ile:** Eğer sistemde bir Graphical User Interface (GUI) (tipik olarak Xwindow) yoksa bu yoldan giriş yapılır. Genellikle sunucu (server) sistemlere bu şekilde erişilr.
 >2. **GUI ile:** Eğer sistemde bir GUI varsa bunlarla giriş yapılabilir.
@@ -804,9 +810,8 @@ class Application {
 >
 >        ssh oguz@192.168.1.123
 >Burada tipik olarak `oguz` kullanıcı ismi ve `@` işaretinden sonra yazılan bilgi ise uzak makinenin adres bilgisidir.
->
->**UNIX/Linux Sistemlerinde Yeni Kullanıcıların ve Grupların Yaratılması:**
->
+
+##### UNIX/Linux Sistemlerinde Yeni Kullanıcıların ve Grupların Yaratılması:
 >*UNIX sistemlerinin çoğunda kullanıcılara ilişkin bilgiler text dosalarda tutulur. Bu text dosyanın her satırı bir kullanıcıya ilişkin bilgilerden oluşur.* `Linux` ve `BSD` *sistemlerinde* `/etc/passwd` *dosyası kullanıcı bilgilerini tutan bir dosyadır. Her kullanıcının bilgisi burada tutulur. Bu dosya normal kullanıcılar için **read only** durumdadır. Yani bu dosyanın içeriğini normal kullanıcılar görüntüleyebilir ancak dosyada değişiklik yapamaz. Bir kullanıcıya ilişkin bilgiler* `:` *ile ayrılır ve toplam 7 tane sütun bulunur:*
 >
 >       csystem:x:1000:1000:JavaApp1-Mar-2023 Group,,,:/home/csystem:/bin/bash
@@ -820,20 +825,17 @@ class Application {
 >7. Kullanıcının sisteme ilk giriş yaptığında çalıştırılacak terminal program belirtilir. Buradaki program default olarak çalıştırılır. Linux sistemlerinde default olarak `bash` (Bourne Again Shell) kullanılır.
 >
 >*Öyleyse kullanıcı eklemek için tipik olarak* `/etc/passwd` *dosyasına uygun satırı eklemek gerekir. Tabi bu durumda kullanıcı dizini, password ve grup id gibi bilgilerin de oluşturulması gerekir. Bu işlemleri manuel olarak yapmak oldukça zahmetli olabilmektedir. Bu sebeple adduser isimli bir komut vardır. Ancak bu komut pek user friendly değildir. Bu sebeple daha user friendly olan useradd isimli ayrı bir komut vardır. User oluşturabilmek için root yetkisine sahip olmak gerekir. root yetkisine sahip olan bir user'a* `sudoer` *denir. sudoer olan bir user ile login olunduğunda* `sudo` *(super user do) isimli komut ile root şifresi de girilerek root yetkisi elde edilebilir. Eğer user sudoer değilse kesinlikle root yetkisine sahip işlemleri yapamaz.*
-
-**_Anahtar Notlar:_** Bazı lightweight sistemlerde kurulum sırasında root kullanıcısına ilişkin bilgiler sorulmaz. Tipik olarak `Ubuntu` ve `Mint` dağıtımları bu şekildedir. Bu sistemler kurulurken belirlenen ilk user sudoer yapılır ve parolası aynı zamanda root kullanıcısının da parolası olur.
-
->*Benzer şekilde bu sistemlerde grup da oluşturlabilir. Bunun için de addgroup ve daha user friendly olan groupadd programları kullanılabilir. Grup oluşturma ve kullanıcıların gruplara eklenmesi gibi kavramlar projeler içerisinde
-kullanılacaktır.*
 >
->**İşletim Sistemlerinin Dosya Sistemleri:** 
+>**_Anahtar Notlar:_** Bazı lightweight sistemlerde kurulum sırasında root kullanıcısına ilişkin bilgiler sorulmaz. Tipik olarak `Ubuntu` ve `Mint` dağıtımları bu şekildedir. Bu sistemler kurulurken belirlenen ilk user sudoer yapılır ve parolası aynı zamanda root kullanıcısının da parolası olur.
 >
+>*Benzer şekilde bu sistemlerde grup da oluşturlabilir. Bunun için de addgroup ve daha user friendly olan groupadd programları kullanılabilir. Grup oluşturma ve kullanıcıların gruplara eklenmesi gibi kavramlar projeler içerisinde kullanılacaktır.
+##### İşletim Sistemlerinin Dosya Sistemleri
 >*İçerisinde bilgilerin bulunduğu ikincil belleklerdeki (secondary memory) alanlara dosya (file) denir. Bu bilgiler sektör (sector) denilen okunabilen ve yazılabilen en küçük birimlerde tutulur. İşletim sistemleri bu organize edilmiş bilgileri dışarıya dosya kavramı gösterirler. Aslında dosya mantıksal bir kavramdır. İşletim sistemlerinin bu orgaznisyonu yapan alt birimine dosya sistemi (file system) denir. Dosya sistemi Unix/Linux sistemlerinin adeta kalbi biçimindedir. Bu sistemlerde pek çok kavram dosya gib ele alınır. Örneğin klasik dosyalar, diziler (directories), borular (pipes), soketler (sockets) vb.*
 >
 >*Bu sistemlerde bir çeşit `polymorphism` uygulanmıştır. Örneğin bir dosyaya yazma yaptığımızda dosyanın türüne göre yazma işlemi gerçekleşir. Yani gerçek anlamda bir dosyaya yazma olmayabilir. Polymorphic yaklaşım dolayısıyla Linux sistemlerinin dosya sistemine **"Sanal dosya sistemi (virtual file system)"** de denilmektedir.*
 >
->**Unix/Linux Sistemlerinde Dosya Erişim Hakları:**
->
+##### Unix/Linux Sistemlerinde Dosya Erişim Hakları
+
 >Bir dosya ile işlem yapmak genel olarak iki gruba ayrılır:
 >   - Dosyanın **_bütünü_** üzerinde işlem yapmak
 >   - Dosya **_içerisindeki veriler_** ile işlem yapmak.
@@ -859,10 +861,9 @@ kullanılacaktır.*
 >*Bir dosyanın erişim hakları tipik olarak* `chmod` *isimli bir program kullanılarak değiştirilebilir. Bu program kullanıcıya ait olmayan bir dosya için* `root` *olarak çalıştırılmalıdır.* `chmod` *komutu oldukça kapsamlıdır.* `+w`, `+r`, `+x` *seçenekleri ile ilgili erişim hakları tüm 3'erli gruplara verilebilir. Benzer şekilde* `-w`, `-r`, `-x` *seçeneği ile haklar alınabilir. Bu komutun önemli bir kullanımı da ilgili hakların octal sistemde değer verilerek kullanılmasıdır. Her bir 3'lü octal sistemde bir değer ile belirlenir.* `chmod` *komutuna sıfır ile birlikte 3 tane octal digit yazılarak erişim hakları belirlenir. Örneğin* `test` *isimli dosyanın erişim hakkının* `rwxr-x--x` *şekilde olması için* `chmod` *komutu şu şekilde kullanılabilir:*
 >
 >       chmod 0751 test
-
-**_Anahtar Notlar:_** Burada anlatılanların dışında pek çok detay bulunmaktadır. Java programcısı açısından gerekenler genel
-olarak anlatılmıştır
-
+>       
+>**_Anahtar Notlar:_** Burada anlatılanların dışında pek çok detay bulunmaktadır. Java programcısı açısından gerekenler genel olarak anlatılmıştır.
+>
 >*Bir program çalıştırıldığında 3 tane dosya açılır:*
 >
 >       Standard input  (stdin)
@@ -884,7 +885,7 @@ olarak anlatılmıştır
 >
 >`004-DemoRedirectionApplications` içerisindeki demo uygulamaları inceleyiniz
 
->**Recursion, Recursive algoritmalar ve Recursive Metotlar:**
+##### Recursion, Recursive algoritmalar ve Recursive Metotlar:
 >
 >*Bir olgunun kendisine çok benzer bir olguyu içermesi durumuna `recursion` denir. Örneğin bir dizin (directory) ağacını dolaşmak için dizin içerisindeki bir girişin bir dizin belirtmesi duurmunda tekrar o dizin için de aynı işlemlerin yapılması gerekir. Yani karşımıza aynı durum çıkmıştır. Bu durumda bu algoritma recursion içermektedir.*
 >
@@ -998,8 +999,8 @@ class Sample {
 >       writeReverse            -> recursion olmayan görece daha efektif
 >       fibonacciNumber         -> recursion olmayan görece daha efektif
 >       writeNumber             -> recursion olan görece daha efektif
->       writeCollatz            ->
->       findStandardDeviation   ->
+>       writeCollatz            -> recursion olmayan görece daha efektif
+>       findStandardDeviation   -> recursion olmayan görece daha efektif
 >
 >**_Soru:_** Yalnızca bir tane karakteri ekrana yazan S`ystem.out.write` metodunu kullanarak ve bir dizi kullanarak int türden bir sayıyı ekrana **(stdout)** bastıran `writeNumber` isimli metodu hem recursive hem de recursive olmayan şekilde yazınız.
 >
@@ -1109,8 +1110,9 @@ class Util {
     }
 }
 ```
+##### Değişken Sayıda Argüman Alan Metotlar
 
->*Java'da değişken sayıda argüman alabilen metotlar yazılabilir. Bu metotlara **"variable length argument methods"** ya da kısaca* `vararg methods` *denir. Bir metodun vararg parametresi **ellipsis** `...` atomu kullanılarak yazılır. Ellipsis parametresi metot açısından (yani metodun kodları açısından) bir dizi referansıdır. Çağıran açısından vararg parametreye ya aynı türden bir dizi referansı ya da istenilen sayıda **aynı türden** argüman geçilebilir. Aşağıdaki demo örneği inceleyiniz*
+>*Java'da değişken sayıda argüman alabilen metotlar yazılabilir. Bu metotlara **variable length argument methods** ya da kısaca **vararg methods** *denir. Bir metodun vararg parametresi **ellipsis** `...` atomu kullanılarak yazılır. Ellipsis parametresi metot açısından (yani metodun kodları açısından) bir dizi referansıdır. Çağıran açısından vararg parametreye ya aynı türden bir dizi referansı ya da istenilen sayıda **aynı türden** argüman geçilebilir. Aşağıdaki demo örneği inceleyiniz*
 
 ```java
 package org.csystem.app;
@@ -1143,7 +1145,7 @@ class Util {
 }
 ```
 
->*Aynı türden hem dizi parametreli hem de vararg parametreli bir metot overload edilemez. Yani aşağıdaki iki metot da aynı imzaya **(signature)** sahiptir.*
+>Aynı türden hem dizi parametreli hem de vararg parametreli bir metot overload edilemez. Yani aşağıdaki iki metot da aynı imzaya *(signature)* sahiptir.*
 
 ```java
 package org.csystem.app;
@@ -1171,7 +1173,7 @@ class Util {
 }
 ```
 
->`vararg` *parametre metodun **son** parametresi olmak zorundadır. Aksi durumda error oluşur. Aşağıdaki demo örneği inceleyiniz*
+>`vararg` *parametre metodun son parametresi olmak zorundadır. Aksi durumda error oluşur. Aşağıdaki demo örneği inceleyiniz*
 
 ```java
 package org.csystem.app;
@@ -1340,7 +1342,7 @@ class Sample {
 }
 ```
 
->`Java 8` *ile birlikte* `Integer` ve `Long` *sarmalayan sınıflarına **(wrapper classes)** işaretsiz olarak işlemler yapan bazı metotlar eklenmiştir. Örneğin bu sınfların* `compare` *static metotları karşılaştırma işlemini işaretli olarak yaparken,* `compareUnsigned` *metotları karşılaştırma işlemini işaretsiz olarak yapar. Yani işaretsiz olarak işlem yapan metotlar için işaret bitinin **(sign bit/the most significant bit)** önemi yoktur*
+>`Java 8` *ile birlikte* `Integer` ve `Long` sarmalayan sınıflarına (wrapper classes) işaretsiz olarak işlemler yapan bazı metotlar eklenmiştir. Örneğin bu sınfların* `compare` *static metotları karşılaştırma işlemini işaretli olarak yaparken,* `compareUnsigned` *metotları karşılaştırma işlemini işaretsiz olarak yapar. Yani işaretsiz olarak işlem yapan metotlar için işaret bitinin **(sign bit/the most significant bit)** önemi yoktur*
 >
 >**_Anahtar Notlar:_** Java dünyasında iki kavramın karşılaştırılması **(comparison)** için kullanılan metotlar şu şekilde bir convention'a göre çalışırlar:
 >
@@ -12204,3 +12206,171 @@ class Application {
 }
 ```
 
+##### Records
+
+>Java 14 ile birlikte preview olarak Java 16 ile birlikte de release olarak **record** eklenmiştir. Bu durumda LTS olarak en az 17 sürümü ile kullanılabilmektedir. Bir record da referans türüdür. Bu anlamda aslında belirli özelliklere sahip sınıflardır. Bir record immutable olarak bildirilmiş final bir sınıf, equals, hashCode ve toString metotlarının override edilmiş biçimde bildirilmiş olur. equals ve hashCode metotları tüm veri elemanlaro kullanılarak yazılmış olur. İstenirse programcı record içerisinde bu metotları override edebilir. record içerisinde veri elemanlarında sınıf isminde bildirilen değişken isimleri ile erişilebilir. Bir record herhangi sınıftan türetilemez ancak istediği kadar interface'i destekleyebilir.
+
+>Aşağıdaki Device sınıfını ve record karşılığını inceleyiniz
+```java
+final class Device {  
+    private final String m_name;  
+    private final String m_host;  
+    private final int m_port;  
+  
+    public Device(String name, String host, int port)  
+    {  
+        m_name = name;  
+        m_host = host;  
+        m_port = port;  
+    }  
+  
+    public String name()  
+    {  
+        return m_name;  
+    }  
+  
+    public String host()  
+    {  
+        return m_host;  
+    }  
+  
+    public int port()  
+    {  
+        return m_port;  
+    }  
+  
+    @Override  
+    public int hashCode()  
+    {  
+        return Objects.hash(m_name, m_host, m_port);  
+    }  
+  
+    @Override  
+    public boolean equals(Object other)  
+    {  
+        return other instanceof Device d && d.m_name.equals(m_name) && d.m_host.equals(m_host) && d.m_port == m_port;  
+    }  
+  
+    @Override  
+    public String toString()  
+    {  
+        return "Device[name=%s, host=%s, port=%d]".formatted(m_name, m_host, m_port);  
+    }  
+}
+```
+
+```java
+package org.csystem.app;  
+  
+import com.karandev.io.util.console.Console;  
+  
+class Application {  
+    public static void run(String[] args)  
+    {  
+        var dev1 = new Device("Rain sensor", "192.168.124", 3030);  
+        var dev2 = new Device("Rain sensor", "192.168.124", 3030);  
+  
+        Console.writeLine(dev1);  
+        Console.writeLine(dev2);  
+        Console.writeLine(dev1.equals(dev2));  
+        Console.writeLine(dev1.hashCode());  
+        Console.writeLine(dev2.hashCode());  
+        Console.writeLine("%s, %s %d", dev1.name(), dev1.host(), dev1.port());  
+        Console.writeLine("%s, %s %d", dev2.name(), dev2.host(), dev2.port());  
+    }  
+}  
+  
+record Device(String name, String host, int port) {  
+}
+```
+
+>Aşağıdaki örnekte record'un toString metodu override edilmiştir
+
+```java
+package org.csystem.app;  
+  
+import com.karandev.io.util.console.Console; 
+  
+class Application {  
+    public static void run(String[] args)  
+    {  
+        var dev1 = new Device("Rain sensor", "192.168.124", 3030);  
+        var dev2 = new Device("Rain sensor", "192.168.124", 3030);  
+  
+        Console.writeLine(dev1);  
+        Console.writeLine(dev2);  
+        Console.writeLine(dev1.equals(dev2));  
+        Console.writeLine(dev1.hashCode());  
+        Console.writeLine(dev2.hashCode());  
+        Console.writeLine("%s, %s %d", dev1.name(), dev1.host(), dev1.port());  
+        Console.writeLine("%s, %s %d", dev2.name(), dev2.host(), dev2.port());  
+    }  
+}  
+  
+record Device(String name, String host, int port) {  
+    @Override  
+    public String toString()  
+    {  
+        return "%s, %s, %d".formatted(name, host, port);  
+    }  
+}
+```
+
+>Bir record için şu ctor'ları yazılabilir:
+>1. Tüm veri elemanların parametre olarak alan ctor: Bu ctor'un parametre değişkenleri ile aynı isimde getter/accessor ve setter/mutator metotlar otomatik olarak yazılır. Bu ctor'a bazı kaynaklarda primary ctor da denilmektedir
+>2. Canonical ctor: Bu ctor sınıf içerisinde { ve } olarak yazılır. Bu non-static initializer'a benzetilebilir ancak sentaks olarak record ismi de kullanılmalıdır. Ayrıca non-static initializer'dan farklı olarak arka planda yaratılan veri elemanları (back field) değerlerin ctor ile almış olur. Halbuki non-static initializer ctor'dan önce çağrılır. Burada tipik olarak ctor'a geçilen argümanlara ilişkin kontrol gibi işlemler yapılabilir
+>3. Herhangi bir parametrik yapıda ctor: Bu ctor'lar içerisinde tüm elemanlara değer verilmelidir. Bu işlem `this ctor sentaksı` ile yapılmalıdır.
+
+>Aşağıdaki örneği inceleyiniz
+
+```java
+package org.csystem.app;  
+  
+import com.karandev.io.util.console.Console;  
+  
+import java.io.Closeable;  
+import java.io.Serializable;  
+  
+class Application {  
+    public static void run(String[] args)  
+    {  
+        try (var dev1 = new Device("Rain sensor", "192.168.124", 3030);  
+             var dev2 = new Device("Rain sensor", "192.168.124");  
+             var dev3 = new Device("Rain sensor")) {  
+  
+            Console.writeLine(dev1);  
+            Console.writeLine(dev2);  
+            Console.writeLine(dev3);  
+        }  
+    }  
+}  
+  
+record Device(String name, String host, int port) implements Closeable, Serializable {  
+    Device {  
+        if (port <= 0 || port > 65535)  
+            throw new IllegalArgumentException("port number must in (0, 65536)");  
+    }  
+  
+    public Device(String name, String host)  
+    {  
+        this(name, host, 6767);  
+    }  
+  
+    public Device(String name)  
+    {  
+        this(name, "localhost");  
+    }  
+  
+    @Override  
+    public String toString()  
+    {  
+        return "%s, %s, %d".formatted(name, host, port);  
+    }  
+  
+    @Override  
+    public void close()  
+    {  
+        System.out.println("Close");  
+    }  
+}
+```

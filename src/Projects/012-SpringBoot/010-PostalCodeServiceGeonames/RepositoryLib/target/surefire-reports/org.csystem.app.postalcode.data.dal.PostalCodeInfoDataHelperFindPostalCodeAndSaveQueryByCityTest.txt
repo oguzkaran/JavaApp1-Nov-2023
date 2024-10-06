@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.csystem.app.postalcode.data.dal.PostalCodeInfoDataHelperFindPostalCodeAndSaveQueryByCityTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.63 s -- in org.csystem.app.postalcode.data.dal.PostalCodeInfoDataHelperFindPostalCodeAndSaveQueryByCityTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.56 s -- in org.csystem.app.postalcode.data.dal.PostalCodeInfoDataHelperFindPostalCodeAndSaveQueryByCityTest

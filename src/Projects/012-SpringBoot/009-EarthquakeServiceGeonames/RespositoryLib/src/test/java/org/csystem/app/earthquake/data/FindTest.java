@@ -163,7 +163,7 @@ public class FindTest {
         public void givenValuesFindEarthquakesByRegion_whenLocation_thenCountTrue()
         {
             saveEarthquakes();
-            var earthquakes = m_earthquakeInfoRepository.findEarthquakesByRegion(23.4, 21.4, 20.4, 29.4);
+            var earthquakes = m_earthquakeInfoRepository.findByRegion(23.4, 21.4, 20.4, 29.4);
 
             assertEquals(2, earthquakes.size());
         }
@@ -172,7 +172,7 @@ public class FindTest {
         @Order(2)
         public void givenValues_WhenRegionInfpo_thenCountTrue()
         {
-            var earthquakes = m_earthquakeInfoRepository.findEarthquakesByRegionInfoId(saveEarthquakes());
+            var earthquakes = m_earthquakeInfoRepository.findByRegionInfoId(saveEarthquakes());
 
             assertEquals(2, earthquakes.size());
         }

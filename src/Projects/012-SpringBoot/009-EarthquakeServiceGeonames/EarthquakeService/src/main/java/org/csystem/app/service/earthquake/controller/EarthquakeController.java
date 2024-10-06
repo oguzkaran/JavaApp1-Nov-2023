@@ -25,6 +25,6 @@ public class EarthquakeController {
                                              @RequestParam double north,
                                              @RequestParam double south)
     {
-        return m_earthquakeService.findEarthquakes(east, west, north, south);
+        return m_earthquakeService.findEarthquakesByRegion(east, west, north, south);
     }
 }

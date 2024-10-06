@@ -1,7 +1,6 @@
 package org.csystem.app.service.earthquake.scheduler.update;
 
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.app.earthquake.data.entity.RegionInfo;
 import org.csystem.app.service.earthquake.EarthquakeDataService;
 import org.csystem.app.service.earthquake.dto.RegionInfoDTO;
 import org.csystem.app.service.earthquake.geonames.service.GeonamesEarthquakeService;
@@ -18,9 +17,13 @@ public class UpdateScheduler {
 
     private void regionInfoCallBack(RegionInfoDTO regionInfo)
     {
-        var earthquakes = m_earthquakeService.findEarthquakesDetails(regionInfo.east, regionInfo.west, regionInfo.north, regionInfo.south);
+        var geoEarthquakes = m_earthquakeService.findEarthquakesDetails(regionInfo.east, regionInfo.west, regionInfo.north, regionInfo.south);
+        var earthquakes = m_earthquakeDataService.findEarthquakesByRegionInfoId(regionInfo.id);
 
-        log.info("{}", earthquakes.toString());
+        log.info("Earthquakes:{}", earthquakes.toString());
+        log.info("Geonames Earthquakes:{}", geoEarthquakes.toString());
+
+        //update data if new earthquake exists
     }
 
     public UpdateScheduler(GeonamesEarthquakeService earthquakeService, EarthquakeDataService earthquakeDataService)
@@ -29,11 +32,12 @@ public class UpdateScheduler {
         m_earthquakeDataService = earthquakeDataService;
     }
 
-    //@Scheduled(cron = "0 0,30,36,41 9,10,13,14,15,17,19,22,23 * * * ")
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "0 0,30,36,41 9,10,13,14,15,17,19,22,23 * * * ")
     public void schedule()
     {
         var regions = m_earthquakeDataService.findAllRegions();
+
+        log.info("schedule");
         regions.forEach(this::regionInfoCallBack);
     }
 }

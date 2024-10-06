@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -23,13 +24,19 @@ import static org.csystem.app.earthquake.data.constant.FieldNameConstant.*;
 public class RegionInfoRepository implements IRegionInfoRepository {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm:ss");
 
-    private static final String FIND_BY_REGION = """
+    private static final String FIND_BY_REGION_SQL = """
             select\s
             ri.region_info_id\s
             from\s
             region_info ri\s
             where abs(ri.east - :east) < 0.00001 and abs(ri.west - :west) < 0.00001 and abs(ri.north - :north) < 0.00001\s
             and abs(ri.south - :south) < 0.00001;
+            """;
+
+    private static final String FIND_ALL_SQL = """
+            select region_info_id, east, west, south, north, query_datetime\s
+            from\s
+            region_info;
             """;
 
     private static final String SAVE_REGION_INFO_SQL = """
@@ -79,6 +86,21 @@ public class RegionInfoRepository implements IRegionInfoRepository {
         return flag ? Optional.of(regionInfo) : Optional.empty();
     }
 
+    private void fillRegions(ResultSet rs, ArrayList<RegionInfo> regions) throws SQLException
+    {
+        do {
+            var region = RegionInfo.builder()
+                    .id(rs.getLong(1))
+                    .east(rs.getDouble(2))
+                    .west(rs.getDouble(3))
+                    .south(rs.getDouble(4))
+                    .north(rs.getDouble(5))
+                    .queryDateTime(rs.getTimestamp(6).toLocalDateTime())
+                    .build();
+            regions.add(region);
+        } while (rs.next());
+    }
+
     public RegionInfoRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate)
     {
         m_namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -87,7 +109,11 @@ public class RegionInfoRepository implements IRegionInfoRepository {
     @Override
     public Iterable<RegionInfo> findAll()
     {
-        throw new UnsupportedOperationException("Not yet implemented!...");
+        var regions = new ArrayList<RegionInfo>();
+
+        m_namedParameterJdbcTemplate.query(FIND_ALL_SQL, (ResultSet rs) -> fillRegions(rs, regions));
+
+        return regions;
     }
 
     @Override
@@ -101,7 +127,7 @@ public class RegionInfoRepository implements IRegionInfoRepository {
         paramMap.put(NORTH, north);
         paramMap.put(SOUTH, south);
 
-        return m_namedParameterJdbcTemplate.query(FIND_BY_REGION, paramMap, (ResultSet rs) -> fillRegionInfo(rs, regionInfo));
+        return m_namedParameterJdbcTemplate.query(FIND_BY_REGION_SQL, paramMap, (ResultSet rs) -> fillRegionInfo(rs, regionInfo));
     }
 
     @Override

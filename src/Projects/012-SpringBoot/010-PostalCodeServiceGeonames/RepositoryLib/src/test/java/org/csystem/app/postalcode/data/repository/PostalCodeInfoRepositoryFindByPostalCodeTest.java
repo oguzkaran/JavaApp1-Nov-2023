@@ -16,7 +16,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootApplication
 @SpringBootTest
-@TestPropertySource(locations = "classpath:application-unittest.properties")
+@TestPropertySource(locations = "classpath:application-unittest-h2.properties")
 @EntityScan("org.csystem")
 @ComponentScan(basePackages = "org.csystem")
 public class PostalCodeInfoRepositoryFindByPostalCodeTest {

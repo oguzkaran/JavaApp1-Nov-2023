@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 
 @Component
 @Slf4j
@@ -44,7 +43,17 @@ public class EarthquakeAppDataHelper {
 
     public Optional<EarthquakesInfo> findByEarthquakesByRegionInfo(double east, double west, double north, double south)
     {
-        var earthQuakes = m_earthquakeInfoRepository.findEarthquakesByRegion(east, west, north, south);
+        var earthQuakes = m_earthquakeInfoRepository.findByRegion(east, west, north, south);
+
+        return earthQuakes.isEmpty() ? Optional.empty() : Optional.of(EarthquakesInfo.builder()
+                .earthquakes(earthQuakes)
+                .regionInfoId(earthQuakes.get(0).regionInfoId)
+                .build());
+    }
+
+    public Optional<EarthquakesInfo> findByEarthquakesByRegionInfoId(long regionInfoId)
+    {
+        var earthQuakes = m_earthquakeInfoRepository.findByRegionInfoId(regionInfoId);
 
         return earthQuakes.isEmpty() ? Optional.empty() : Optional.of(EarthquakesInfo.builder()
                 .earthquakes(earthQuakes)

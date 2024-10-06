@@ -11,6 +11,7 @@ import org.csystem.app.service.earthquake.mapper.IEarthquakeMapper;
 import org.csystem.data.exception.service.DataServiceException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -34,6 +35,15 @@ public class EarthquakeDataService {
         var ri = RegionInfo.builder().east(east).west(west).north(north).south(south).build();
 
         m_earthquakeAppDataHelper.saveEarthquakes(m_earthquakeMapper.toEarthquakesInfo(earthquakes).earthquakes, ri);
+
+        return earthquakes;
+    }
+
+    private EarthquakesDTO notInDatabaseCallback()
+    {
+        var earthquakes = new EarthquakesDTO();
+
+        earthquakes.earthquakes = new ArrayList<>();
 
         return earthquakes;
     }
@@ -64,7 +74,7 @@ public class EarthquakeDataService {
         }
     }
     
-    public EarthquakesDTO findEarthquakes(double east, double west, double north, double south)
+    public EarthquakesDTO findEarthquakesByRegion(double east, double west, double north, double south)
     {
         try {
             var earthquakesInfo = m_earthquakeAppDataHelper.findByEarthquakesByRegionInfo(east, west, north, south);
@@ -73,8 +83,22 @@ public class EarthquakeDataService {
                     : inDatabaseCallback(earthquakesInfo.get(), earthquakesInfo.get().regionInfoId);
         }
         catch (Throwable ex) {
-            log.error("Exception occurred in EarthquakeDataService.findEarthquakes:{}", ex.getMessage());
-            throw new DataServiceException("EarthquakeDataService.findEarthquakes", ex);
+            log.error("Exception occurred in EarthquakeDataService.findEarthquakesByRegion:{}", ex.getMessage());
+            throw new DataServiceException("EarthquakeDataService.findEarthquakesByRegion", ex);
+        }
+    }
+
+    public EarthquakesDTO findEarthquakesByRegionInfoId(long regionInfoId)
+    {
+        try {
+            var earthquakesInfo = m_earthquakeAppDataHelper.findByEarthquakesByRegionInfoId(regionInfoId);
+
+            return earthquakesInfo.isEmpty() ? notInDatabaseCallback()
+                    : m_earthquakeMapper.toEarthquakesDTO(earthquakesInfo.get());
+        }
+        catch (Throwable ex) {
+            log.error("Exception occurred in EarthquakeDataService.findEarthquakesByRegionInfoId:{}", ex.getMessage());
+            throw new DataServiceException("EarthquakeDataService.findEarthquakesByRegionInfoId", ex);
         }
     }
 }

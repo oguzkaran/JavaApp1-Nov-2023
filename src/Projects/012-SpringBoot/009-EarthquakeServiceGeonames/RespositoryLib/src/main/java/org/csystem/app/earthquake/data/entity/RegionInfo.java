@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @ToString
 public class RegionInfo {
     public long id;
+
     @EqualsAndHashCode.Include
     public double east;
 

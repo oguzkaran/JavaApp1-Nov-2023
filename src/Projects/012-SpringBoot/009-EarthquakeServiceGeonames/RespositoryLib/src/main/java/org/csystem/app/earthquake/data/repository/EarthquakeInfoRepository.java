@@ -98,7 +98,7 @@ public class EarthquakeInfoRepository implements IEarthquakeInfoRepository {
     }
 
     @Override
-    public List<EarthquakeInfo> findEarthquakesByRegionInfoId(long regionInfoId)
+    public List<EarthquakeInfo> findByRegionInfoId(long regionInfoId)
     {
         var earthquakeInfoList = new ArrayList<EarthquakeInfo>();
         var paramMap = new HashMap<String, Object>();
@@ -112,7 +112,7 @@ public class EarthquakeInfoRepository implements IEarthquakeInfoRepository {
     }
 
     @Override
-    public List<EarthquakeInfo> findEarthquakesByRegion(double east, double west, double north, double south)
+    public List<EarthquakeInfo> findByRegion(double east, double west, double north, double south)
     {
         var earthquakeInfoList = new ArrayList<EarthquakeInfo>();
         var paramMap = new HashMap<String, Object>();
