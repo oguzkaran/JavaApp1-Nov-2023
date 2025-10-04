@@ -592,7 +592,6 @@ import java.math.BigInteger;
 class Application {
     public static void run(String[] args)
     {
-
         while (true) {
             var a = new BigInteger(Console.read("Input first number"));
             var b = new BigInteger(Console.read("Input second number"));
